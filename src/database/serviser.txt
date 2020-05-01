@@ -1,0 +1,2 @@
+0|Bojan|Zarkovic|0312999800094|true|Marka Zarka 35|032122223|marko1|1234567|automehanicar|23000
+1|Dejan|Zarkovic|0312999800094|true|Bojana Stojavljevica 23|032122223|marko2|1234567|automehanicar|23000
