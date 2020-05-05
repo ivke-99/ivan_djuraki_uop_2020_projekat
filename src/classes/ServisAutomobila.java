@@ -115,42 +115,75 @@ public class ServisAutomobila extends Identifiable {
 	}
 	
 	public static Date ConvertStringToDate(String stringDate) throws ParseException {
+		try {
 		String pattern = "dd/MM/yyyy HH:mm";
 		DateFormat df = new SimpleDateFormat(pattern);
 		Date date = df.parse(stringDate);
 		return date;
+		}catch(Exception none) {
+			return null;
+		}
 	}
 	
 	
 	@Override
 	public String WriteToString() {
 		var line = new StringJoiner("|");
-		line.add(this.automobil.getId()+"").add(this.serviser.getId()+"").add(this.getTermin()+"").add(this.getOpis());/*(this.ListToString(this.getDeoZaServis()));*/
+		line.add(this.getId()+"");
+		line.add(this.automobil.getId()+"");
+		try {
+		line.add(this.serviser.getId()+"");
+		}catch(Exception e1) {
+			line.add("null");
+		}
+		try {
+		line.add(this.getTermin()+"");
+		}catch(Exception e2) {
+			line.add("null");
+		}
+		line.add(this.getOpis());
 		/*ovo ce ovako dok ne bude bolje*/
+		try {
 		line.add(this.isStatusServisa()+"");
 		for(ServisniDeo s: this.getDeoZaServis()) {
 			line.add(s.getId()+"");
+		}
+		}catch(Exception e4) {
+			line.add("null");
 		}
 		return line.toString();
 	}
 	
 	
 	public static Automobil NadjiAutomobil (int id) throws Exception {
+		try {
 		var auto = LoadDatabase.sviAutomobili.get(id);
 		return auto;
+		}catch(Exception e) {
+			return null;
+		}
 		
 	}
 	
 	public static Serviser NadjiServisera (int id) throws Exception {
+		try {
 		var serviser = LoadDatabase.sviServiseri.get(id);
 		return serviser;
+		}catch(Exception e) {
+			return null;
+		}
+		
 		
 	}
 	
 	
-	public static ServisniDeo AppendDeo(int id) throws Exception {		
+	public static ServisniDeo AppendDeo(int id) throws Exception {
+		try {
 		var deo = LoadDatabase.sviDelovi.get(id);
 		return deo;
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	
@@ -163,16 +196,30 @@ public class ServisAutomobila extends Identifiable {
 		
 		servis.setIdFromFile(sc.nextInt());
 		servis.setAutomobil(NadjiAutomobil(sc.nextInt()));
+		try {
 		servis.setServiser(NadjiServisera(sc.nextInt()));
+		}catch(Exception e5) {
+			servis.setServiser(null);
+			sc.skip("null");
+		}
+		try {
 		servis.setTermin(ConvertStringToDate(sc.next()));
+		}catch(Exception e6) {
+			servis.setTermin(null);
+			sc.skip("null");
+		}
 		servis.setOpis(sc.next());
 		servis.setStatusServisa(sc.nextBoolean());
+		try {
 		ArrayList<ServisniDeo> delovi = new ArrayList<>();
 		while (sc.hasNextInt()) {
 			delovi.add(AppendDeo(sc.nextInt()));
 		}
 		servis.setDeoZaServis(delovi);
 		/* set lista delova */
+		}catch(Exception e6) {
+			servis.setDeoZaServis(null);
+		}
 		sc.close();
 		
 		return servis;

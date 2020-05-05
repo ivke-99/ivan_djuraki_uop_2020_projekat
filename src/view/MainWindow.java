@@ -8,16 +8,20 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import controller.LoginHandling;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class MainWindow {
 
 	public JFrame LoginPage;
 	private JTextField txtUser;
-	private JTextField txtPass;
+	private JPasswordField txtPass;
 
 	/**
 	 * Launch the application.
@@ -73,29 +77,31 @@ public class MainWindow {
 		LoginPage.getContentPane().add(txtUser);
 		txtUser.setColumns(10);
 		
-		txtPass = new JTextField();
-		txtPass.setBounds(134, 115, 113, 20);
-		LoginPage.getContentPane().add(txtPass);
-		txtPass.setColumns(10);
-		
 		JButton btnUlogujMe = new JButton("Uloguj me");
 		btnUlogujMe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
+				
+				
 				String username=txtUser.getText();
 				String password=txtPass.getText();
 				try {
-					controller.LoginHandling.CheckLogin(username,password);
-					LoginPage.dispose();
-				} catch (Exception e1) {
+					controller.LoginHandling.CheckLogin(username, password);
 					
-					e1.printStackTrace();
+				} catch (Exception input) {
+					
 				}
 				
-				
+				if (LoginHandling.trenutniKorisnik != null) {
+				LoginPage.dispose();
+				}
 			}
 		});
 		btnUlogujMe.setBounds(86, 208, 118, 39);
 		LoginPage.getContentPane().add(btnUlogujMe);
+		
+		txtPass = new JPasswordField();
+		txtPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtPass.setBounds(135, 115, 112, 19);
+		LoginPage.getContentPane().add(txtPass);
 	}
 }

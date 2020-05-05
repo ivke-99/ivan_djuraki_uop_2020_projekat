@@ -75,7 +75,7 @@ public class ServiserPregledajPage extends JDialog {
 		phoneMask.setValidCharacters("0123456789");
 		phoneMask.setPlaceholderCharacter('_');
 		
-		setTitle("Prikaz svih servisera page");
+		setTitle("Vasi servisi");
 		setBounds(100, 100, 871, 580);
 		
 		try {
@@ -87,7 +87,7 @@ public class ServiserPregledajPage extends JDialog {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JTable t= new JTable(toTableModel(LoadDatabase.sviServisi));
-		getContentPane().add(t, BorderLayout.NORTH);
+		getContentPane().add(t, BorderLayout.CENTER);
 		
 		JScrollPane scrollPane = new JScrollPane(t);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -140,7 +140,7 @@ public class ServiserPregledajPage extends JDialog {
 		
 		JLabel lblNewLabel = new JLabel("ID");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(240, 68, 46, 14);
+		lblNewLabel.setBounds(240, 68, 46, 15);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblIme = new JLabel("Ime");

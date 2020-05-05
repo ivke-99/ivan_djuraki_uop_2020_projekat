@@ -39,7 +39,6 @@ public class ServiserMain extends JDialog {
 	 */
 	public ServiserMain() {
 		
-		System.out.println(LoginHandling.trenutniKorisnik.getId());
 		setBounds(100, 100, 450, 300);
 		
 		JMenuBar menuBar = new JMenuBar();

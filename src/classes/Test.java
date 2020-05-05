@@ -115,15 +115,15 @@ public class Test {
 		String nekistring=servis1.ConvertDateToString(servis1.getTermin());
 		System.out.println(nekistring);
 		*/
-		
+		/*
 		String nekiString="22/05/2020 15:30";
 		System.out.println(servis1.ConvertDateToString(servis1.getTermin()));
 		System.out.println(servis1.ConvertStringToDate(nekiString));
 		
 		
-		
+		*/
 		LoadDatabase.UcitajCeluBazu();
-		System.out.println(LoadDatabase.sveKnjizice);
+		
 		
 		
 		/**

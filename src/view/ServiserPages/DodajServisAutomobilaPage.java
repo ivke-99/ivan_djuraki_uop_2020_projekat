@@ -15,10 +15,14 @@ import javax.swing.JOptionPane;
 import classes.Automobil;
 import classes.ServisAutomobila;
 import classes.Serviser;
+import classes.ServisnaKnjizica;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.LoginHandling;
+import controller.SpecificObjectCreation;
 import dao.LoadDatabase;
+import view.ServiserMain;
+
 import javax.swing.JScrollBar;
 import javax.swing.text.MaskFormatter;
 
@@ -56,6 +60,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 	 * @throws ParseException 
 	 */
 	public DodajServisAutomobilaPage() throws ParseException {
+		setTitle("Dodaj Servis Automobila");
 		try {
 			LoadDatabase.UcitajCeluBazu();
 		} catch (Exception e) {
@@ -67,7 +72,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		dateMask.setValidCharacters("0123456789");
 		dateMask.setPlaceholderCharacter('_');
 		
-		setBounds(100, 100, 568, 428);
+		setBounds(100, 100, 365, 368);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Automobil : ");
@@ -77,7 +82,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		JComboBox<Automobil> cbAuto = new JComboBox<Automobil>();
 		
 		
-		cbAuto.setBounds(86, 20, 250, 22);
+		cbAuto.setBounds(86, 20, 197, 22);
 		getContentPane().add(cbAuto);
 		
 		JLabel lblNewLabel_1 = new JLabel("Izaberi delove:");
@@ -86,7 +91,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		
 		DefaultListModel<ServisniDeo> listModel=new DefaultListModel<ServisniDeo>();
 		JList<ServisniDeo> list = new JList<ServisniDeo>(listModel);
-		list.setBounds(92, 151, 138, 67);
+		list.setBounds(92, 151, 191, 67);
 		getContentPane().add(list);
 		
 		PopuniComboBoxAuto(cbAuto);
@@ -105,68 +110,76 @@ public class DodajServisAutomobilaPage extends JDialog {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Kratak opis:");
-		lblNewLabel_3.setBounds(10, 103, 46, 14);
+		lblNewLabel_3.setBounds(10, 103, 84, 14);
 		getContentPane().add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Dodaj");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int opcija=JOptionPane.showConfirmDialog(null, "Da li ste sigurni?","Izaberite opciju",JOptionPane.YES_NO_OPTION);
+				
+				if (opcija != 1) {
+				if (cbAuto.getSelectedIndex() == -1 || !(formattedTextField.getText().length() == 16 ) 
+						|| textField.getText().equals("") || list.getSelectedIndex() == -1 ) {
+					JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena. Probajte ponovo.");
+				}
+				
+				else {
 				
 				try {
 					LoadDatabase.UcitajCeluBazu();
-				} catch (Exception e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
-				}
-				
-				try {
-				ServisAutomobila s = new ServisAutomobila();
-				try {
-					s.setId(FileHandling.servisAutomobilaPath);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				
+				try {
+				ServisAutomobila s = new ServisAutomobila();
+				
+				s.setId(FileHandling.servisAutomobilaPath);
 				s.setServiser((Serviser) LoginHandling.trenutniKorisnik);
 				s.setOpis(textField.getText());
 				s.setStatusServisa(true);
-				try {
-					s.setTermin(ServisAutomobila.ConvertStringToDate(formattedTextField.getText()));
-				} catch (ParseException e1) {
-					JOptionPane.showMessageDialog(null, "Date nije dobro unesen.");
-				}
+				s.setTermin(ServisAutomobila.ConvertStringToDate(formattedTextField.getText()));
 				s.setAutomobil((Automobil) cbAuto.getSelectedItem());
-				
-				
 				ArrayList<ServisniDeo> delovi = null;
 				delovi=(ArrayList<ServisniDeo>) list.getSelectedValuesList();
 				s.setDeoZaServis(delovi);
 				
-				var line=new StringJoiner("|");
-				line.add(s.getId()+"");
-				line.add(s.getAutomobil().getId()+"");
-				line.add(s.getServiser().getId()+"");
-				line.add(ServisAutomobila.ConvertDateToString(s.getTermin()));
-				line.add(s.getOpis());
-				line.add(s.isStatusServisa()+"");
-				for(ServisniDeo sa : s.getDeoZaServis()) {
-					line.add(sa.getId()+"");
-				}
+				SpecificObjectCreation.CreateServisFromUserInput(s);
 				
-				FileHandling.WriteToFile("\n"+line.toString(), FileHandling.servisAutomobilaPath);
 				
+					JOptionPane.showMessageDialog(null, "Uspesan upis ! ");
 				}catch(Exception e2) {
 					JOptionPane.showMessageDialog(null, "Nesto nije uredu.Pokusajte opet.");
 				}
 				
+				
 			}
 			
 			
-			
+			}
+			}
 			
 		});
-		btnNewButton.setBounds(46, 294, 89, 23);
+		btnNewButton.setBounds(10, 281, 89, 23);
 		getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Reset");
+		
+		btnNewButton_1.setBounds(123, 281, 89, 23);
+		getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Main Page");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new ServiserMain().setVisible(true);
+			}
+		});
+		btnNewButton_2.setBounds(250, 281, 89, 23);
+		getContentPane().add(btnNewButton_2);
 		
 		
 		
@@ -177,12 +190,23 @@ public class DodajServisAutomobilaPage extends JDialog {
 			}
 		});
 		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				formattedTextField.setText("");
+				textField.setText("");
+				cbAuto.setSelectedIndex(-1);
+				list.setSelectedIndex(-1);
+				}catch (Exception n) {
+					/*bacace gresku koja nije greska ako nema ovog 
+					 * try catcha
+					 */
+				}
+			}
+		});
 		
 	}
 	
-	public void ResetFields() {
-		
-	}
 	
 	public void PopuniComboBoxAuto(JComboBox<Automobil> combo) {
 		

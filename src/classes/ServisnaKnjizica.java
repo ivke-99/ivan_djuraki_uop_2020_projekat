@@ -1,10 +1,16 @@
 package classes;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
+import controller.FileHandling;
 import dao.LoadDatabase;
 
 public class ServisnaKnjizica extends Identifiable {
@@ -55,11 +61,89 @@ public class ServisnaKnjizica extends Identifiable {
 		return auto;
 	}
 	
-	public static ServisAutomobila AppendDeo(int id) throws Exception {
+	public static ServisAutomobila NadjiServisAutomobila(int id) throws Exception {
 		var servis = LoadDatabase.sviServisi.get(id);
 		return servis;
 	}
 	
+	public static ServisnaKnjizica AddServis(ServisnaKnjizica serv,ServisAutomobila s) {
+		var servisi=serv.getServisi();
+		servisi.add(s);
+		serv.setServisi(servisi);
+		return serv;
+	}
+	
+	
+	public static void UpdateKnjizica(ServisAutomobila s) throws Exception {
+		
+		/*prilikom dodavanja novog servisa automobila automatski se u knjizicu upisuje 
+		 * isti servis, ideja je da se servisna knjizica ne moze dirati, ne moze se u nju direktno dodavati
+		 * vec se moze samo obrisati
+		 */
+		
+		LoadDatabase.UcitajCeluBazu();
+		ServisnaKnjizica knjiz = null;
+		
+		/*trazimo knjizicu u hash mapi */
+		
+		knjiz = (ServisnaKnjizica) LoadDatabase.sveKnjizice.entrySet().stream().filter(f-> 
+		f.getValue().getAuto().getId() == s.getAutomobil().getId())
+				.map(g -> (ServisnaKnjizica)g.getValue()).findFirst().get();
+		
+		
+		/*stara linija*/
+		String oldLine= knjiz.WriteToString();
+		
+		/*zameni staru knjizicu sa novom u hashmapi*/
+		if(knjiz.getAuto().getId() == s.getAutomobil().getId()) {
+			knjiz.AddServis(knjiz, s);
+			LoadDatabase.sveKnjizice.replace(knjiz.getId(), knjiz);
+			String objekat= knjiz.WriteToString();
+			
+			/*upisi updateovanu u fajl*/
+			String lines = LoadDatabase.LoadLinesFromFile(FileHandling.servisnaKnjizicaPath);
+			
+			String[] NewLines = lines.split("\n");
+			for( String line : NewLines) {
+	
+				if(line.equals(oldLine)) {
+					line = line + "|" + s.getId()+"";
+					lines = lines.replace(oldLine, line);
+				}
+				
+			}
+			/*za sada cemo da overwritujemo ceo fajl
+			 * medjutim bi bilo mnogo bolje kad bi tacno dirali tu liniju zbog
+			 * brzeg rada programa, no polako
+			 */
+			FileHandling.OverWriteFile(lines, FileHandling.servisnaKnjizicaPath);
+			
+			}
+		
+		
+		else {
+			/*ovo ne bi trebalo nikad da se dogodi, ali cemo ga ostaviti za sada 
+			 * radi debugginga
+			 */
+			System.out.println("Relacije izmedju klasa ne valjaju.");
+		}
+	
+	}
+	
+	public static void NewKnjizicaForAutomobil(Automobil a) throws Exception {
+		
+			/*prilikom kreiranja automobila on automatski dobija svoju servisnu knjizicu
+			 * u kojoj su servisi postavljeni na vrednost null
+			 */
+			ServisnaKnjizica newk = new ServisnaKnjizica();
+			newk.setId(FileHandling.servisnaKnjizicaPath);
+			newk.setAuto(a);
+			newk.setServisi(null);
+			String write2=newk.WriteToString();
+			FileHandling.WriteToFile(write2, FileHandling.servisnaKnjizicaPath);
+		
+		
+	}
 	
 	
 	
@@ -73,11 +157,15 @@ public class ServisnaKnjizica extends Identifiable {
 		knjizica.setIdFromFile(sc.nextInt());
 		knjizica.setAuto(ServisAutomobila.NadjiAutomobil(sc.nextInt()));
 		
+		try {
 		ArrayList<ServisAutomobila> servisi = new ArrayList<>();
 		while (sc.hasNextInt()) {
-			servisi.add(AppendDeo(sc.nextInt()));
+			servisi.add(NadjiServisAutomobila(sc.nextInt()));
 		}
 		knjizica.setServisi(servisi);
+		}catch(Exception e1) {
+			knjizica.setServisi(null);
+		}
 		sc.close();
 		
 		return knjizica;

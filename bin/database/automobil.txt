@@ -1,3 +1,4 @@
 0|1|2002|benzin|1300|bmw_e39|55
 1|0|2005|dizel|1250|mercedes_cla|63
 2|2|2003|benzin|1000|bmw_e39|66
+3|1|2007|dizel|1400|bmw_e39|67

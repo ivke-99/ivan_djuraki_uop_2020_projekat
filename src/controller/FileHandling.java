@@ -7,6 +7,8 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+import dao.LoadDatabase;
+
 public class FileHandling {
 	
 	public static String defaultPath= ".\\src\\database\\";
@@ -22,7 +24,15 @@ public class FileHandling {
 		Writer wr;
 		try {
 			wr = new FileWriter(filePath, true);
-			wr.append(object);
+			boolean vr = CheckIfFirstLine(filePath);
+			System.out.println(vr);
+			if( vr == false) {
+			wr.append("\n"+object);
+			}
+			
+			else {
+				wr.append(object);
+			}
 			wr.flush();
 			wr.close();
 		} catch (IOException e) {
@@ -30,6 +40,35 @@ public class FileHandling {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static boolean CheckIfFirstLine(String filePath) throws IOException {
+		
+		
+		String line = LoadDatabase.LoadLinesFromFile(filePath);
+		System.out.println(line);
+		System.out.println(line.length());
+		if(line.equals(null)) {
+			
+			return true;
+		}
+		else {
+			
+			return false;
+		}
+	}
+	
+	public static void OverWriteFile(String object,String filePath) {
+		Writer wr;
+		try {
+			wr = new FileWriter(filePath);
+			wr.write(object);
+			wr.flush();
+			wr.close();
+		} catch (IOException e) {
+			/**/
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -109,6 +109,7 @@ public class AddMusterijaPage extends JDialog {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"musko", "zensko"}));
 		comboBox.setBounds(83, 106, 124, 22);
 		getContentPane().add(comboBox);
+		comboBox.setSelectedIndex(-1);
 		
 		JLabel lblNewLabel_4 = new JLabel("Adresa:");
 		lblNewLabel_4.setBounds(10, 142, 46, 14);
@@ -155,13 +156,28 @@ public class AddMusterijaPage extends JDialog {
 		btnNewButton.setBounds(43, 310, 89, 23);
 		getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Reset");
-		btnNewButton_1.setBounds(154, 310, 89, 23);
-		getContentPane().add(btnNewButton_1);
-		
 		JFormattedTextField txtPhone = new JFormattedTextField(phoneMask);
 		txtPhone.setBounds(83, 169, 124, 20);
 		getContentPane().add(txtPhone);
+		
+		JButton btnNewButton_1 = new JButton("Reset");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_5.setText("");
+				textField_6.setText("");
+				textField_7.setText("");
+				comboBox.setSelectedIndex(-1);
+				txtPhone.setText("");
+			}
+		});
+		btnNewButton_1.setBounds(154, 310, 89, 23);
+		getContentPane().add(btnNewButton_1);
+		
+		
 		
 		JButton btnNewButton_2 = new JButton("Pocetna Stranica");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -176,6 +192,8 @@ public class AddMusterijaPage extends JDialog {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int opcija=JOptionPane.showConfirmDialog(null, "Da li ste sigurni?","Izaberite opciju",JOptionPane.YES_NO_OPTION);
+				if (opcija != 1 ) {
 				if(textField.getText().isEmpty() || textField_1.getText().isEmpty()
 						|| textField_2.getText().isEmpty() || textField_3.getText().isEmpty()
 						|| !(txtPhone.getText().length() == 18) || textField_5.getText().isEmpty()
@@ -197,6 +215,7 @@ public class AddMusterijaPage extends JDialog {
 					}
 					
 				}
+			}
 			}
 		});
 		
@@ -227,7 +246,7 @@ public class AddMusterijaPage extends JDialog {
 		mus.setLozinka(textField_6.getText());
 		mus.setBrojBodova(Integer.parseInt(textField_7.getText()));
 		mus.setTipkorisnika(TipoviKorisnika.musterija);
-		wrt = "\n"+mus.WriteToString();
+		wrt = mus.WriteToString();
 		FileHandling.WriteToFile(wrt,FileHandling.musterijaPath);
 		LoadDatabase.sveMusterije.put(mus.getId(), mus);
 		

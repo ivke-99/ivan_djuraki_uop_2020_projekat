@@ -1,3 +1,4 @@
 0|0|0|22/05/2020 15:30|nesto mu ne valja|true|0|1|2
 1|1|1|22/03/2019 15:30|sad|true|1|2
 2|1|0|23/05/2020 15:30|ne valja nista|true|1|2
+3|0|null|null|asdadsadasdas|true|null
