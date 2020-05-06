@@ -75,8 +75,10 @@ public class ServisniDeo extends Identifiable {
 
 	@Override
 	public String toString() {
-		return nazivDela;
-	} 
+		return "" + nazivDela + "";
+	}
+
+	
 	
 	
 }

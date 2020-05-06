@@ -24,6 +24,7 @@ public class ServisAutomobila extends Identifiable {
 	protected Date termin;
 	protected String opis;
 	protected ArrayList<ServisniDeo> deoZaServis;
+	protected double cena;
 	protected boolean statusServisa;
 	
 	public ServisAutomobila() {
@@ -32,17 +33,19 @@ public class ServisAutomobila extends Identifiable {
 		this.serviser=new Serviser();
 		this.termin=new Date();
 		this.opis="";
+		this.cena=0;
 		this.deoZaServis=new ArrayList<ServisniDeo>();
 		this.statusServisa=false;
 	}
 
 	public ServisAutomobila(int id, Automobil automobil, Serviser serviser, Date termin, String opis,
-			boolean statusServisa  ,ArrayList<ServisniDeo> deoZaServis) {
+			boolean statusServisa  ,ArrayList<ServisniDeo> deoZaServis, double cena) {
 		super(id);
 		this.automobil = automobil;
 		this.serviser = serviser;
 		this.termin = termin;
 		this.opis = opis;
+		this.cena = cena;
 		this.statusServisa = statusServisa;
 		this.deoZaServis = deoZaServis;
 	}
@@ -50,9 +53,19 @@ public class ServisAutomobila extends Identifiable {
 	public Automobil getAutomobil() {
 		return automobil;
 	}
-
+	
+	
+	
 	public void setAutomobil(Automobil automobil) {
 		this.automobil = automobil;
+	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
 	}
 
 	public Serviser getServiser() {
@@ -137,14 +150,16 @@ public class ServisAutomobila extends Identifiable {
 			line.add("null");
 		}
 		try {
-		line.add(this.getTermin()+"");
+		line.add(ConvertDateToString(this.getTermin()));
 		}catch(Exception e2) {
 			line.add("null");
 		}
 		line.add(this.getOpis());
-		/*ovo ce ovako dok ne bude bolje*/
-		try {
+		line.add(this.getCena()+"");
 		line.add(this.isStatusServisa()+"");
+		
+		try {
+		
 		for(ServisniDeo s: this.getDeoZaServis()) {
 			line.add(s.getId()+"");
 		}
@@ -209,6 +224,7 @@ public class ServisAutomobila extends Identifiable {
 			sc.skip("null");
 		}
 		servis.setOpis(sc.next());
+		servis.setCena(sc.nextDouble());
 		servis.setStatusServisa(sc.nextBoolean());
 		try {
 		ArrayList<ServisniDeo> delovi = new ArrayList<>();
@@ -223,7 +239,15 @@ public class ServisAutomobila extends Identifiable {
 		sc.close();
 		
 		return servis;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", marka=" + this.automobil.getMarka() + "";
+	}
+	
+	
+	
 	
 	
 }

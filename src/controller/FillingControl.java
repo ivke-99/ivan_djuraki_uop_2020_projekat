@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 
 import classes.Automobil;
 import classes.Musterija;
+import classes.ServisAutomobila;
 import dao.LoadDatabase;
 
 public class FillingControl {
@@ -20,4 +21,19 @@ public class FillingControl {
 			cbAuto.addItem(automobil);
 		}
 	}
+	
+	public static void PopuniServiseZaServisera (JComboBox<ServisAutomobila> cbServis ) {
+		
+		
+		
+		
+		ArrayList<ServisAutomobila> servisi = (ArrayList<ServisAutomobila>)LoadDatabase.sviServisi.entrySet().stream().filter(f -> f.getValue().getServiser() != null 
+				&& f.getValue().getServiser().getId() == 
+				LoginHandling.trenutniKorisnik.getId()).map(g -> (ServisAutomobila)g.getValue()).collect(Collectors.toList());
+		
+		for (ServisAutomobila servis : servisi) {
+			cbServis.addItem(servis);
+		}
+	}
+	
 }

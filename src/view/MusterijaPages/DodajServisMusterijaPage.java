@@ -97,6 +97,7 @@ public class DodajServisMusterijaPage extends JDialog {
 						s.setTermin(null);
 						s.setDeoZaServis(null);
 						s.setServiser(null);
+						s.setCena(0);
 						
 						LoadDatabase.sviServisi.put(s.getId(), s);
 						

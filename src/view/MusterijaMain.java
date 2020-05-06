@@ -8,6 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import controller.LoginHandling;
+import view.MusterijaPages.MusterijaPregledajKnjizicuPage;
 import view.MusterijaPages.MusterijaPregledajServisePage;
 import view.ServiserPages.DodajServisAutomobilaPage;
 
@@ -43,6 +44,7 @@ public class MusterijaMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public MusterijaMain() {
+		setTitle("Main Menu");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -89,10 +91,13 @@ public class MusterijaMain extends JDialog {
 		JMenu mnNewMenu_1 = new JMenu("Servisna Knjizica");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Dodaj servis");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Pregledaj servise");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Pregledaj knjizice");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new MusterijaPregledajKnjizicuPage().setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
 
 	}

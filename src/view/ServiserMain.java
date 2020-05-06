@@ -9,11 +9,15 @@ import javax.swing.JMenuItem;
 
 import controller.LoginHandling;
 import view.ServiserPages.DodajServisAutomobilaPage;
-import view.ServiserPages.ServiserPregledajPage;
+import view.ServiserPages.ServiserIzmeniServisPage;
+import view.ServiserPages.ServiserPregledajServisePage;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Font;
 
 public class ServiserMain extends JDialog {
 
@@ -47,21 +51,22 @@ public class ServiserMain extends JDialog {
 		JMenu mnNewMenu = new JMenu("Servis Automobila");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Pregledaj");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Izmeni");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					new ServiserPregledajPage().setVisible(true);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				new ServiserIzmeniServisPage().setVisible(true);
 				dispose();
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Izmeni");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ServiserPregledajServisePage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Dodaj");
@@ -78,6 +83,11 @@ public class ServiserMain extends JDialog {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		JLabel lblNewLabel = new JLabel("Dobrodosli" + " "+LoginHandling.trenutniKorisnik.getIme()+" "+
+				LoginHandling.trenutniKorisnik.getPrezime()+"!");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		getContentPane().add(lblNewLabel, BorderLayout.NORTH);
 
 	}
 
