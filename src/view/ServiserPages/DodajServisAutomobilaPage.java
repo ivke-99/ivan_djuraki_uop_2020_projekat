@@ -143,6 +143,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 				s.setStatusServisa(true);
 				s.setTermin(ServisAutomobila.ConvertStringToDate(formattedTextField.getText()));
 				s.setAutomobil((Automobil) cbAuto.getSelectedItem());
+				s.setCena(0);
 				ArrayList<ServisniDeo> delovi = null;
 				delovi=(ArrayList<ServisniDeo>) list.getSelectedValuesList();
 				s.setDeoZaServis(delovi);

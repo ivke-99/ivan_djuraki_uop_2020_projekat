@@ -28,6 +28,7 @@ public class SpecificObjectCreation {
 			line.add(s.getServiser().getId()+"");
 			line.add(ServisAutomobila.ConvertDateToString(s.getTermin()));
 			line.add(s.getOpis());
+			line.add(s.getCena()+"");
 			line.add(s.isStatusServisa()+"");
 			for(ServisniDeo sa : s.getDeoZaServis()) {
 				line.add(sa.getId()+"");
