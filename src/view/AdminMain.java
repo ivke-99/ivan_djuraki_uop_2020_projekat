@@ -14,8 +14,9 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-import view.AdminPages.AddMusterijaPage;
-import view.AdminPages.PregledajMusterijePage;
+import view.AdminPages.MusterijaTools.AddMusterijaPage;
+import view.AdminPages.MusterijaTools.IzmeniMusterijuPage;
+import view.AdminPages.MusterijaTools.PregledajMusterijePage;
 
 public class AdminMain extends JDialog {
 
@@ -65,20 +66,38 @@ public class AdminMain extends JDialog {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Izmeni");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniMusterijuPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Obrisi");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				try {
+					new IzmeniMusterijuPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Pregledaj");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					new PregledajMusterijePage().setVisible(true);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				new view.AdminPages.MusterijaTools.PregledajMusterijePage().setVisible(true);
 				dispose();
 			}
 		});

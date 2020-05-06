@@ -72,13 +72,27 @@ public class FileHandling {
 	}
 	
 	
-	public static void CreateFile(String fileName) {
-		File file=new File(defaultPath+fileName);
-	}
-	
-	public static void CheckExistence(String fileName) {
-		/* check file existence*/
+	public static boolean ReplaceLineInFile(String oldLine,String newLine,String filePath) {
+		String lines="";
+		try {
+			lines = LoadDatabase.LoadLinesFromFile(filePath);
+		} catch (IOException e1) {
+			return false;
+		}
 		
+		try {
+			String[] NewLines = lines.split("\n");
+			for( String line : NewLines) {
+				if(line.equals(oldLine)) 
+					lines = lines.replace(oldLine, newLine);	
+			}
+			FileHandling.OverWriteFile(lines, filePath);
+		
+		}catch(Exception e2) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

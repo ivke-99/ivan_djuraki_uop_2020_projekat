@@ -183,7 +183,6 @@ public class ServiserIzmeniServisPage extends JDialog {
 		getContentPane().add(btnNewButton_1);
 		
 		JComboBox<ServisAutomobila> cbServis = new JComboBox<ServisAutomobila>();
-		/*ostar debugging potreban ovde */
 		
 		FillingControl.PopuniServiseZaServisera(cbServis);
 		cbServis.setBounds(150, 69, 199, 22);

@@ -1,4 +1,4 @@
-package view.AdminPages;
+package view.AdminPages.MusterijaTools;
 
 import java.awt.EventQueue;
 
@@ -223,7 +223,6 @@ public class AddMusterijaPage extends JDialog {
 	}
 	
 	public void KreirajMusteriju(String pol,JFormattedTextField txtPhone) throws Exception {
-		LoadDatabase.LoadAllMusterija();
 		String wrt="";
 		Musterija mus = new Musterija();
 		mus.setId(FileHandling.musterijaPath);

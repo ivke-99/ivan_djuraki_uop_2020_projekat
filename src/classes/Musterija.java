@@ -64,5 +64,11 @@ public class Musterija extends Osoba {
 		
 		return musterija;
 	}
+
+	@Override
+	public String toString() {
+		return "" + korisnickoIme + ", id=" + id + "";
+	}
+	
 	
 }

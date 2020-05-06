@@ -35,12 +35,7 @@ public class SpecificObjectCreation {
 			}
 			FileHandling.WriteToFile(line.toString(), FileHandling.servisAutomobilaPath);
 			
-			try {
-				ServisnaKnjizica.UpdateKnjizica(s);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 	}
 	
 }

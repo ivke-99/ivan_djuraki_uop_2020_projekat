@@ -141,9 +141,15 @@ public abstract class Osoba extends Identifiable {
 			}
 			
 		}
+		
 		else {
 			throw new Exception("Korisnicko ime ili vec postoji, ili nije pravilno uneseno.");
 		}
+	}
+	
+	/*mora postojati zbog izmene, mislice da pokusavam da dodam novo korisnicko ime i odma ce ga odbiti*/
+	public void setKorisnickoImeUnique(String korisnickoIme) {
+		this.korisnickoIme = korisnickoIme;
 	}
 	
 	public String getLozinka() {

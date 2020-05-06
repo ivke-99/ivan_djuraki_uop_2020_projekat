@@ -1,2 +1,2 @@
-0|Ivan|Djuraki|0312999800094|true|Kis Ferenca 16|+381621756295|ivke0|Ivancar123.|50000
+0|Ivan|Djuraki|0312999800094|true|Kis Ferenca 16|+381621756295|ivi|123|50000
 1|Ivan|Djuraki|0312999800094|true|Kis Ferenca 16|+381621756295|ivke1|Ivancar123.|50000

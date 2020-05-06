@@ -36,4 +36,10 @@ public class FillingControl {
 		}
 	}
 	
+	public static void PopuniComboBoxMusterija (JComboBox<Musterija> cbMusterija)  {
+		ArrayList<Musterija> musterije = (ArrayList<Musterija>) LoadDatabase.sveMusterije.entrySet().stream().map(f -> (Musterija)f.getValue()).collect(Collectors.toList());
+		for(Musterija musterija : musterije) {
+			cbMusterija.addItem(musterija);
+		}
+	}
 }
