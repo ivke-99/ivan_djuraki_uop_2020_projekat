@@ -45,7 +45,7 @@ public class Admin extends Osoba {
 		admin.setIme(sc.next());
 		admin.setPrezime(sc.next());
 		admin.setJmbg(sc.next());
-		admin.setPol(sc.nextBoolean());
+		admin.setPol(Boolean.parseBoolean(sc.next()));
 		admin.setAdresa(sc.next());
 		admin.setBrtel(sc.next());
 		admin.setKorisnickoIme(sc.next());

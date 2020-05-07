@@ -7,7 +7,7 @@ import classes.Osoba.TipoviKorisnika;
 
 public class Serviser extends Osoba {
 	
-	enum Specijalizacija {
+	public enum Specijalizacija {
 		automehanicar,
 		autoelektricar,
 		vulkanizer,

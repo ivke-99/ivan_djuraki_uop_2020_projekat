@@ -4,7 +4,7 @@
 3|0|null|null|asdadsadasdas|4000.0|true|null
 4|0|0|06/05/2020 15:30|brr|3000.0|true|0
 5|1|0|22/03/2020 15:30|asdasda|0|true|1|2
-6|0|0|12/03/2020 15:30|asdsada|0.0|true|0
+6|0|0|12/03/2020 15:30|asasdas|0.0|true|0
 7|0|0|06/06/2020 12:56|havarija|0.0|true|0
 8|1|0|05/06/2016 05:22|Crko lezaj|0.0|true|1
 9|1|0|05/06/2016 05:22|Crko lezaj|0.0|true|1

@@ -14,9 +14,16 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+import view.AdminPages.AdminTools.AddAdminPage;
+import view.AdminPages.AdminTools.IzmeniAdminePage;
+import view.AdminPages.AdminTools.PregledajAdminePage;
+import view.AdminPages.AutomobilTools.AddAutomobilPage;
 import view.AdminPages.MusterijaTools.AddMusterijaPage;
 import view.AdminPages.MusterijaTools.IzmeniMusterijuPage;
 import view.AdminPages.MusterijaTools.PregledajMusterijePage;
+import view.AdminPages.ServiserTools.AddServiserPage;
+import view.AdminPages.ServiserTools.IzmeniServiserPage;
+import view.AdminPages.ServiserTools.PregledajServiserPage;
 
 public class AdminMain extends JDialog {
 
@@ -107,36 +114,125 @@ public class AdminMain extends JDialog {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Kreiraj");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new AddServiserPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Izmeni");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniServiserPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_5);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Obrisi");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniServiserPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajServiserPage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_7);
 		
 		JMenu mnNewMenu_2 = new JMenu("Admin");
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Kreiraj");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new AddAdminPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_8);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Izmeni");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniAdminePage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Obrisi");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniAdminePage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_10);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajAdminePage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_11);
 		
 		JMenu mnNewMenu_3 = new JMenu("Automobil");
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Kreiraj");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new AddAutomobilPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_12);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Izmeni");

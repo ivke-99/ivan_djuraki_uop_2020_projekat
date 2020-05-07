@@ -17,6 +17,7 @@ import dao.WriteToStringInterface;
 
 public abstract class Identifiable implements WriteToStringInterface {
 	protected int id;
+	protected boolean deleted;
 	/*takodje potpuno bespotrebno svi regexi i cik pogodi jos necu da ih obrisem*/
 	/*ime moze imati izmedju 1 i 25 chareva, moze poceti sa[a ili z] i tako se zavrsiti,nema spec karaktera i nema brojeva*/
 	public static final String STRING_PATTERN = "(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$";	
@@ -56,8 +57,7 @@ public abstract class Identifiable implements WriteToStringInterface {
 		    try {
 		      lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
 		    } catch (IOException e) {
-		      System.out.println("Internal error.File does not exist, or is fucked up.");
-		      e.printStackTrace();
+		      System.out.println("Error 404: File does not exist.");
 		    }
 		    
 		    

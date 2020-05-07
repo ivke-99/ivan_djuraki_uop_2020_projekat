@@ -100,6 +100,15 @@ public abstract class Osoba extends Identifiable {
 			return "zensko";
 		}
 	}
+	/*temp setter*/
+	public String isPolTemp() {
+		if (pol == true) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+	}
 
 	public void setPol(boolean pol) {
 		this.pol = pol;
@@ -180,13 +189,16 @@ public abstract class Osoba extends Identifiable {
 	public String WriteToString() {
 		
 		var line = new StringJoiner("|");
-		line.add(this.getId()+"").add(this.getIme()).add(this.getPrezime()).add(this.getJmbg()).add(this.isPol()).add(this.getAdresa()).add(this.getBrtel());
+		line.add(this.getId()+"").add(this.getIme()).add(this.getPrezime()).add(this.getJmbg()).add(this.isPolTemp()).add(this.getAdresa()).add(this.getBrtel());
 		line.add(this.getKorisnickoIme()).add(this.getLozinka());
 		return line.toString();
 		
 	}
 
-	
+	@Override
+	public String toString() {
+		return "" + korisnickoIme + ", id=" + id + "";
+	}
 }
 
 

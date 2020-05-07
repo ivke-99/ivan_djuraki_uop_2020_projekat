@@ -230,10 +230,13 @@ public class IzmeniMusterijuPage extends JDialog {
 						JOptionPane.showMessageDialog(null,"Neka polja nisu dobro unesena. Pokusajte ponovo.");
 						} else
 						try {
+							
+							if (!(currentMusterija.getKorisnickoIme().equals(txtkorIme.getText()))) {
+								
 							if (Validator.CheckForIme(txtkorIme.getText()) == false) {
 								JOptionPane.showMessageDialog(null, "Korisnicko ime vec postoji.");
 							}
-							
+							}
 							else {
 								try {
 									IzmeniMusteriju(currentMusterija,txtBrojTelefona,cbPol);
@@ -241,6 +244,7 @@ public class IzmeniMusterijuPage extends JDialog {
 									int opcija2=JOptionPane.showConfirmDialog(null, "Da li zelite jos neku operaciju?","Izaberite Opciju",JOptionPane.YES_NO_OPTION);
 									if (opcija2 == 1) {
 										dispose();
+										new AdminMain().setVisible(true);
 									}
 									
 									if(opcija2 == 0) {

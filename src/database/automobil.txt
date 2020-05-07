@@ -2,3 +2,4 @@
 1|0|2005|dizel|1250|mercedes_cla|63
 2|2|2003|benzin|1000|bmw_e39|66
 3|1|2007|dizel|1400|bmw_e39|67
+4|3|2019|dizel|1400|fiat_punto|68

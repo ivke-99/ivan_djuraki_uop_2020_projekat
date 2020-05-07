@@ -88,7 +88,7 @@ public class MainWindow {
 					controller.LoginHandling.CheckLogin(username, password);
 					
 				} catch (Exception input) {
-					
+					input.printStackTrace();
 				}
 				
 				if (LoginHandling.trenutniKorisnik != null) {
