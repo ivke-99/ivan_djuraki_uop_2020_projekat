@@ -40,8 +40,8 @@ public abstract class Osoba extends Identifiable {
 	}
 
 	public Osoba(int id, String ime, String prezime, String jmbg, boolean pol, String adresa, String brtel,
-			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika) {
-		super(id);
+			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, boolean deleted) {
+		super(id,deleted);
 		this.ime = ime;
 		this.prezime = prezime;
 		this.jmbg = jmbg;
@@ -191,6 +191,7 @@ public abstract class Osoba extends Identifiable {
 		var line = new StringJoiner("|");
 		line.add(this.getId()+"").add(this.getIme()).add(this.getPrezime()).add(this.getJmbg()).add(this.isPolTemp()).add(this.getAdresa()).add(this.getBrtel());
 		line.add(this.getKorisnickoIme()).add(this.getLozinka());
+		line.add(this.isDeleted()+"");
 		return line.toString();
 		
 	}

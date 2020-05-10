@@ -30,11 +30,22 @@ public abstract class Identifiable implements WriteToStringInterface {
 	
 	public Identifiable() {
 		this.id=0;
+		this.deleted=false;
 	}
 
-	public Identifiable(int id) {
+	public Identifiable(int id,boolean deleted) {
 		super();
 		this.id = id;
+		this.deleted = deleted;
+	}
+	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public int getId() {

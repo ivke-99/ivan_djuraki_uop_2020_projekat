@@ -19,6 +19,7 @@ import classes.Osoba.TipoviKorisnika;
 import controller.FileHandling;
 import controller.FillingControl;
 import controller.Validator;
+import dao.DeleteDAO;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -280,9 +281,15 @@ public class IzmeniMusterijuPage extends JDialog {
 					}
 					
 					try {
-						var brisanje = cbMusterija.getSelectedItem();
+						var brisanje = (Musterija) cbMusterija.getSelectedItem();
+						/*String oldLine = brisanje.WriteToString();
 						ResetFields(txtBrojTelefona,cbPol);
-						LoadDatabase.sveMusterije.remove(((Identifiable) brisanje).getId());
+						brisanje.setDeleted(true);
+						String newLine = brisanje.WriteToString();
+						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.musterijaPath);
+						LoadDatabase.sveMusterije.remove(((Identifiable) brisanje).getId());*/
+						DeleteDAO.DeleteMusterija(brisanje);
+						ResetFields(txtBrojTelefona,cbPol);
 						cbMusterija.setSelectedIndex(-1);
 						cbMusterija.removeItem(brisanje);
 						cbMusterija.setSelectedIndex(-1);

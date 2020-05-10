@@ -18,6 +18,8 @@ import view.AdminPages.AdminTools.AddAdminPage;
 import view.AdminPages.AdminTools.IzmeniAdminePage;
 import view.AdminPages.AdminTools.PregledajAdminePage;
 import view.AdminPages.AutomobilTools.AddAutomobilPage;
+import view.AdminPages.AutomobilTools.IzmeniAutomobilPage;
+import view.AdminPages.AutomobilTools.PregledajAllAutomobilPage;
 import view.AdminPages.MusterijaTools.AddMusterijaPage;
 import view.AdminPages.MusterijaTools.IzmeniMusterijuPage;
 import view.AdminPages.MusterijaTools.PregledajMusterijePage;
@@ -236,12 +238,28 @@ public class AdminMain extends JDialog {
 		mnNewMenu_3.add(mntmNewMenuItem_12);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Izmeni");
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniAutomobilPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_13);
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Obrisi");
 		mnNewMenu_3.add(mntmNewMenuItem_14);
 		
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajAllAutomobilPage().setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_15);
 		
 		JMenu mnNewMenu_4 = new JMenu("Servis Automobila");
@@ -258,21 +276,6 @@ public class AdminMain extends JDialog {
 		
 		JMenuItem mntmNewMenuItem_19 = new JMenuItem("Pregledaj");
 		mnNewMenu_4.add(mntmNewMenuItem_19);
-		
-		JMenu mnNewMenu_5 = new JMenu("Serviser");
-		menuBar.add(mnNewMenu_5);
-		
-		JMenuItem mntmNewMenuItem_20 = new JMenuItem("Dodaj");
-		mnNewMenu_5.add(mntmNewMenuItem_20);
-		
-		JMenuItem mntmNewMenuItem_21 = new JMenuItem("Izmeni");
-		mnNewMenu_5.add(mntmNewMenuItem_21);
-		
-		JMenuItem mntmNewMenuItem_22 = new JMenuItem("Obrisi");
-		mnNewMenu_5.add(mntmNewMenuItem_22);
-		
-		JMenuItem mntmNewMenuItem_23 = new JMenuItem("Pregledaj");
-		mnNewMenu_5.add(mntmNewMenuItem_23);
 		
 		JMenu mnNewMenu_6 = new JMenu("Servisna Knjizica");
 		menuBar.add(mnNewMenu_6);

@@ -28,6 +28,15 @@ public class FillingControl {
 		}
 	}
 	
+	public static void PopuniComboBoxSviAutomobili(JComboBox<Automobil> cbAuto) {
+		/*koristi se za ispis svih automobila sto su u sistemu*/
+		ArrayList<Automobil> sviAuti = (ArrayList<Automobil>)LoadDatabase.sviAutomobili.entrySet().stream().map(g -> (Automobil)g.getValue()).collect(Collectors.toList());
+		
+		for (Automobil automobil : sviAuti) {
+			cbAuto.addItem(automobil);
+		}
+	}
+	
 	public static void PopuniComboBoxMarkaiModel(JComboBox<Automobil.MarkaiModel> cbMarkaiModel) {
 		for (MarkaiModel a : Automobil.MarkaiModel.values()) 
 			if (!(a.equals(MarkaiModel.none))) {

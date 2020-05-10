@@ -39,8 +39,8 @@ public class ServisAutomobila extends Identifiable {
 	}
 
 	public ServisAutomobila(int id, Automobil automobil, Serviser serviser, Date termin, String opis,
-			boolean statusServisa  ,ArrayList<ServisniDeo> deoZaServis, double cena) {
-		super(id);
+			boolean statusServisa  ,ArrayList<ServisniDeo> deoZaServis, double cena, boolean deleted) {
+		super(id, deleted);
 		this.automobil = automobil;
 		this.serviser = serviser;
 		this.termin = termin;
@@ -157,7 +157,7 @@ public class ServisAutomobila extends Identifiable {
 		line.add(this.getOpis());
 		line.add(this.getCena()+"");
 		line.add(this.isStatusServisa()+"");
-		
+		line.add(this.isDeleted()+"");
 		try {
 		
 		for(ServisniDeo s: this.getDeoZaServis()) {
@@ -226,6 +226,7 @@ public class ServisAutomobila extends Identifiable {
 		servis.setOpis(sc.next());
 		servis.setCena(sc.nextDouble());
 		servis.setStatusServisa(sc.nextBoolean());
+		servis.setDeleted(sc.nextBoolean());
 		try {
 		ArrayList<ServisniDeo> delovi = new ArrayList<>();
 		while (sc.hasNextInt()) {

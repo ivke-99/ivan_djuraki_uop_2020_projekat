@@ -19,8 +19,8 @@ public class ServisniDeo extends Identifiable {
 		this.marka=marka.none;
 	}
 
-	public ServisniDeo(int id, String nazivDela, double cena, MarkaiModel marka) {
-		super(id);
+	public ServisniDeo(int id, String nazivDela, double cena, MarkaiModel marka, boolean deleted) {
+		super(id, deleted);
 		this.nazivDela = nazivDela;
 		this.cena = cena;
 		this.marka = marka;
@@ -54,6 +54,7 @@ public class ServisniDeo extends Identifiable {
 	public String WriteToString() {
 		var line = new StringJoiner("|");
 		line.add(this.getId()+"").add(this.getNazivDela()).add(this.getCena()+"");
+		line.add(this.isDeleted()+"");
 		line.add(this.getMarka()+"");
 		return line.toString();
 	}
@@ -68,6 +69,7 @@ public class ServisniDeo extends Identifiable {
 		servisnideo.setNazivDela(sc.next());
 		servisnideo.setCena(sc.nextDouble());
 		servisnideo.setMarka(MarkaiModel.valueOf(sc.next()));
+		servisnideo.setDeleted(sc.nextBoolean());
 		sc.close();
 		
 		return servisnideo;

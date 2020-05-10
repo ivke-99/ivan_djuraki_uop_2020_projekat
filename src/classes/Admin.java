@@ -14,8 +14,8 @@ public class Admin extends Osoba {
 	}
 
 	public Admin(int id, String ime, String prezime, String jmbg, boolean pol, String adresa, String brtel,
-			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, int plata) {
-		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika);
+			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, int plata, boolean deleted) {
+		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika, deleted);
 		this.plata=plata;
 	}
 
@@ -51,6 +51,7 @@ public class Admin extends Osoba {
 		admin.setKorisnickoIme(sc.next());
 		admin.setLozinka(sc.next());
 		admin.setTipkorisnika(TipoviKorisnika.admin);
+		admin.setDeleted(sc.nextBoolean());
 		admin.setPlata(sc.nextInt());
 		
 		sc.close();

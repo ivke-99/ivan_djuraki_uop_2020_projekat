@@ -50,8 +50,8 @@ public class Automobil extends Identifiable {
 	}
 
 	public Automobil(int id, Musterija vlasnik, int godinaProizvodnje, int kubikazaMotora, int snagaMotora,
-			VrstaGoriva gorivo, MarkaiModel marka) {
-		super(id);
+			VrstaGoriva gorivo, MarkaiModel marka,boolean deleted) {
+		super(id,deleted);
 		this.vlasnik = vlasnik;
 		this.godinaProizvodnje = godinaProizvodnje;
 		this.kubikazaMotora = kubikazaMotora;
@@ -128,6 +128,7 @@ public class Automobil extends Identifiable {
 		var line = new StringJoiner("|");
 		line.add(this.getId()+"").add(this.srediVlasnika()).add(this.getGodinaProizvodnje()+"").add(this.getGorivo()+"");
 		line.add(this.getKubikazaMotora()+"").add(this.getMarka()+"").add(this.getSnagaMotora()+"");
+		line.add(this.isDeleted()+"");
 		return line.toString();
 	}
 	
@@ -156,7 +157,7 @@ public class Automobil extends Identifiable {
 		auto.setKubikazaMotora(sc.nextInt());
 		auto.setMarka(MarkaiModel.valueOf(sc.next()));
 		auto.setSnagaMotora(sc.nextInt());
-		
+		auto.setDeleted(sc.nextBoolean());
 		
 		sc.close();
 		
@@ -165,6 +166,6 @@ public class Automobil extends Identifiable {
 	
 	@Override
 	public String toString() {
-		return "[marka=" + marka + ", id=" + id + "]";
+		return "[" + marka + ", id=" + id + "]";
 	}
 }

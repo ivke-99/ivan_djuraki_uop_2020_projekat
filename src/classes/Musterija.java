@@ -16,8 +16,8 @@ public class Musterija extends Osoba {
 	}
 
 	public Musterija(int id, String ime, String prezime, String jmbg, boolean pol, String adresa, String brtel,
-			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, int brojBodova) {
-		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika);
+			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, int brojBodova, boolean deleted) {
+		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika, deleted);
 		this.brojBodova=brojBodova;
 	}
 
@@ -47,7 +47,7 @@ public class Musterija extends Osoba {
 		musterija.setIme(sc.next());
 		musterija.setPrezime(sc.next());
 		musterija.setJmbg(sc.next());
-		if (sc.next().equals("musko")) {
+		if (sc.next().equals("true")) {
 			musterija.setPol(true);
 		}
 		else {
@@ -58,6 +58,7 @@ public class Musterija extends Osoba {
 		musterija.setKorisnickoIme(sc.next());
 		musterija.setLozinka(sc.next());
 		musterija.setTipkorisnika(TipoviKorisnika.musterija);
+		musterija.setDeleted(sc.nextBoolean());
 		musterija.setBrojBodova(sc.nextInt());
 		
 		sc.close();

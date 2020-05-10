@@ -96,7 +96,8 @@ public class LoadDatabase {
 		HashMap<Integer,Admin> sviAdmini=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var admin=Admin.CreateFromString(NewLines[i]);
-			sviAdmini.put(admin.getId(), admin); 
+			if(!(admin.isDeleted() == true))
+				sviAdmini.put(admin.getId(), admin); 
 		}
 		
 		return sviAdmini;
@@ -107,7 +108,8 @@ public class LoadDatabase {
 		HashMap<Integer,Musterija> sveMusterije=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var musterija=Musterija.CreateFromString(NewLines[i]);
-			sveMusterije.put(musterija.getId(), musterija); 
+			if(!(musterija.isDeleted() == true))
+				sveMusterije.put(musterija.getId(), musterija); 
 		}
 		
 		return sveMusterije;
@@ -118,7 +120,8 @@ public class LoadDatabase {
 		HashMap<Integer,Serviser> sviServiseri=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var serviser=Serviser.CreateFromString(NewLines[i]);
-			sviServiseri.put(serviser.getId(), serviser); 
+			if(!(serviser.isDeleted() == true))
+				sviServiseri.put(serviser.getId(), serviser); 
 		}
 		
 		return sviServiseri;
@@ -129,7 +132,8 @@ public class LoadDatabase {
 		HashMap<Integer,Automobil> sviAutomobili=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var auto=Automobil.CreateFromString(NewLines[i]);
-			sviAutomobili.put(auto.getId(), auto);
+			if(!(auto.isDeleted() == true))
+				sviAutomobili.put(auto.getId(), auto);
 		}
 		
 		return sviAutomobili;
@@ -140,7 +144,8 @@ public class LoadDatabase {
 		HashMap<Integer,ServisniDeo> sviServisniDelovi=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var deo=ServisniDeo.CreateFromString(NewLines[i]);
-			sviServisniDelovi.put(deo.getId(), deo);
+			if(!(deo.isDeleted() == true))
+				sviServisniDelovi.put(deo.getId(), deo);
 		}
 		
 		return sviServisniDelovi;
@@ -151,7 +156,8 @@ public class LoadDatabase {
 		HashMap<Integer,ServisAutomobila> sviServisiAutomobila=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var servis=ServisAutomobila.CreateFromString(NewLines[i]);
-			sviServisiAutomobila.put(servis.getId(), servis);
+			if(!(servis.isDeleted() == true))
+				sviServisiAutomobila.put(servis.getId(), servis);
 		}
 		
 		
@@ -163,7 +169,8 @@ public class LoadDatabase {
 		HashMap<Integer,ServisnaKnjizica> sveServisneKnjizice=new HashMap<>();
 		for (int i=0;i<NewLines.length;i++) {
 			var knjizica=ServisnaKnjizica.CreateFromString(NewLines[i]);
-			sveServisneKnjizice.put(knjizica.getId(), knjizica);
+			if(!(knjizica.isDeleted() == true))
+				sveServisneKnjizice.put(knjizica.getId(), knjizica);
 		}
 		
 		

@@ -1,11 +1,4 @@
-0|Josipa|Beganovic|0312999800094|zensko|Kis F 25|(062)-(223)-(4432)|marina2322|marina1234|55
-1|Marina|Marinovic|0312999800094|zensko|Marka Zarka 35|(062)-(223)-(4432)|marina232|marina1234|552
-2|emilija|buncic|0312999800094|musko|Fas123|(222)-(222)-(2222)|emab123|dsaasddas|23
-3|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|emab12|ivancar123.32|44
-6|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarko336632|ivancar123.32|44
-7|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarkoprvi|ivancar123.32|44
-8|aMarkoaaaa|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarko334432|ivancar123.32|44
-9|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarko333552|ivancar123.32|44
-10|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarko333333552|ivancar123.32|44
-11|Marko|Zarko|0312999800094|musko|Neka adresa 25|(062)-(223)-(4432)|markozarko333444444552|ivancar123.32|44
-12|Nebojsa|Cupic|0601998800032|musko|Mladena Stojanovica 49|(062)-(165)-(3293)|sonex|sonecar123|0
+0|Josipa|Beganovic|0312999800094|false|Kis F 25|(062)-(223)-(4432)|marina2322|marina1234|true|55
+1|Marina|Marinovic|0312999800094|false|Marka Zarka 35|(062)-(223)-(4432)|marina232|marina1234|false|552
+2|emilija|buncic|0312999800094|true|Fas123|(222)-(222)-(2222)|emab123|dsaasddas|true|23
+3|Nebojsa|Cupic|0601998800032|true|Mladena Stojanovica 49|(062)-(165)-(3293)|sonex|sonecar123|true|0

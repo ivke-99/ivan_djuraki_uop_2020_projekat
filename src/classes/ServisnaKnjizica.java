@@ -23,8 +23,8 @@ public class ServisnaKnjizica extends Identifiable {
 		this.servisi=new ArrayList<ServisAutomobila>();
 	}
 
-	public ServisnaKnjizica(int id, Automobil auto, ArrayList<ServisAutomobila> servisi) {
-		super(id);
+	public ServisnaKnjizica(int id, Automobil auto, ArrayList<ServisAutomobila> servisi, boolean deleted) {
+		super(id, deleted);
 		this.auto = auto;
 		this.servisi = servisi;
 	}
@@ -49,9 +49,11 @@ public class ServisnaKnjizica extends Identifiable {
 	public String WriteToString() {
 		var line=new StringJoiner("|");
 		line.add(this.getId()+"").add(this.SrediAuto());
+		line.add(this.isDeleted()+"");
 		for(ServisAutomobila s: this.getServisi()) {
 			line.add(s.getId()+"");
 		}
+		
 		return line.toString();
 	}
 	
@@ -66,7 +68,7 @@ public class ServisnaKnjizica extends Identifiable {
 		return servis;
 	}
 	
-	public static ServisnaKnjizica AddServis(ServisnaKnjizica serv,ServisAutomobila s) {
+	public ServisnaKnjizica AddServis(ServisnaKnjizica serv,ServisAutomobila s) {
 		var servisi=serv.getServisi();
 		servisi.add(s);
 		serv.setServisi(servisi);
@@ -98,7 +100,7 @@ public class ServisnaKnjizica extends Identifiable {
 		if(knjiz.getAuto().getId() == s.getAutomobil().getId()) {
 			knjiz.AddServis(knjiz, s);
 			LoadDatabase.sveKnjizice.replace(knjiz.getId(), knjiz);
-			String objekat= knjiz.WriteToString();
+			
 			
 			/*upisi updateovanu u fajl*/
 			String lines = LoadDatabase.LoadLinesFromFile(FileHandling.servisnaKnjizicaPath);
@@ -156,7 +158,7 @@ public class ServisnaKnjizica extends Identifiable {
 		
 		knjizica.setIdFromFile(sc.nextInt());
 		knjizica.setAuto(ServisAutomobila.NadjiAutomobil(sc.nextInt()));
-		
+		knjizica.setDeleted(sc.nextBoolean());
 		try {
 		ArrayList<ServisAutomobila> servisi = new ArrayList<>();
 		while (sc.hasNextInt()) {

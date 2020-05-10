@@ -274,8 +274,12 @@ public class IzmeniAdminePage extends JDialog {
 					}
 					
 					try {
-						var brisanje = cbAdmin.getSelectedItem();
+						var brisanje = (Admin)cbAdmin.getSelectedItem();
+						String oldLine = brisanje.WriteToString();
 						ResetFields(txtBrojTelefona,cbPol);
+						brisanje.setDeleted(true);
+						String newLine = brisanje.WriteToString();
+						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.adminPath);
 						LoadDatabase.sviAdmini.remove(((Identifiable) brisanje).getId());
 						cbAdmin.setSelectedIndex(-1);
 						cbAdmin.removeItem(brisanje);

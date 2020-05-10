@@ -26,8 +26,8 @@ public class Serviser extends Osoba {
 	}
 
 	public Serviser(int id, String ime, String prezime, String jmbg, boolean pol, String adresa, String brtel,
-			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, Specijalizacija spec, int plata) {
-		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika);
+			String korisnickoIme, String lozinka, TipoviKorisnika tipkorisnika, Specijalizacija spec, int plata, boolean deleted) {
+		super(id, ime, prezime, jmbg, pol, adresa, brtel, korisnickoIme, lozinka, tipkorisnika, deleted);
 		this.plata=plata;
 		this.spec=spec;
 	}
@@ -71,6 +71,7 @@ public class Serviser extends Osoba {
 		serviser.setLozinka(sc.next());
 		serviser.setTipkorisnika(TipoviKorisnika.serviser);
 		serviser.setSpec(Specijalizacija.valueOf(sc.next()));
+		serviser.setDeleted(sc.nextBoolean());
 		serviser.setPlata(sc.nextInt());
 		
 		sc.close();
