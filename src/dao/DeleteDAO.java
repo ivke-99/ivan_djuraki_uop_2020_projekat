@@ -64,14 +64,10 @@ public class DeleteDAO {
 		
 		for(Automobil a : LoadDatabase.sviAutomobili.values()) {
 			
-			try {
-				/*ovo ce tek da pravi problem al za sada radi*/
 			if(a.getVlasnik().getId() == brisanje.getId()) {
 				DeleteAutomobil(a);
 			}
-			}catch(Exception programnevalja) {
-				
-			}
+			
 		}
 		/*koristimo gornju funkciju da obrisemo automobile i sve ostalo*/
 		
@@ -83,5 +79,24 @@ public class DeleteDAO {
 		FileHandling.ReplaceLineInFile(old, newl, FileHandling.musterijaPath);
 		
 		}
+	
+	public static void DeleteServisAutomobila(ServisAutomobila brisanje) {
+		String old = brisanje.WriteToString();
+		brisanje.setDeleted(true);
+		String newl = brisanje.WriteToString();
+		LoadDatabase.sviServisi.remove(((Identifiable) brisanje).getId());
+		FileHandling.ReplaceLineInFile(old, newl, FileHandling.servisAutomobilaPath);
+	}
+	
+	public static ServisnaKnjizica FindServisInKnjizica(ServisAutomobila brisanje) {
+		try {
+		ServisnaKnjizica forUpdate = (ServisnaKnjizica)LoadDatabase.sveKnjizice.entrySet().stream().filter(f ->
+		f.getValue().getServisi().contains(brisanje)).map(g -> (ServisnaKnjizica)g.getValue()).findAny().get();
+		return forUpdate;
+		}catch(Exception none) {
+			return null;
+		}
+		
+	}
 	
 }

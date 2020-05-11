@@ -217,7 +217,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		}
 	}
 	
-	public void PopuniListuDelova(JList<ServisniDeo> lista,DefaultListModel<ServisniDeo> listModel,JComboBox<Automobil> cbAuto) {
+	public static void PopuniListuDelova(JList<ServisniDeo> lista,DefaultListModel<ServisniDeo> listModel,JComboBox<Automobil> cbAuto) {
 		for (HashMap.Entry<Integer,ServisniDeo> entry : LoadDatabase.sviDelovi.entrySet()) {
 			
 			var auto=(Automobil)cbAuto.getSelectedItem();

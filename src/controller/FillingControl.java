@@ -1,18 +1,24 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import classes.Admin;
 import classes.Automobil;
 import classes.Automobil.MarkaiModel;
 import classes.Automobil.VrstaGoriva;
+import classes.Identifiable;
 import classes.Musterija;
 import classes.ServisAutomobila;
 import classes.Serviser;
+import classes.ServisniDeo;
 import classes.Serviser.Specijalizacija;
 import dao.LoadDatabase;
 
@@ -102,6 +108,48 @@ public class FillingControl {
 		
 		else {
 			return false;
+		}
+	}
+	
+	public static void PopuniListuDelova(JList<ServisniDeo> lista,DefaultListModel<ServisniDeo> listModel,JComboBox<Automobil> cbAuto) {
+		for (HashMap.Entry<Integer,ServisniDeo> entry : LoadDatabase.sviDelovi.entrySet()) {
+			
+			var auto=(Automobil)cbAuto.getSelectedItem();
+			if (auto.getMarka().equals(entry.getValue().getMarka())) {
+			listModel.addElement(entry.getValue());
+			}
+		}
+		
+	}
+	
+	public static List<ServisniDeo> PopuniListuDelova2(JList<ServisniDeo> lista,DefaultListModel<ServisniDeo> listModel,JComboBox<ServisAutomobila> cbServis) {
+		
+		var servis = (ServisAutomobila)cbServis.getSelectedItem();
+		
+		var listadelova = LoadDatabase.sviDelovi.values().stream().filter(f -> servis.getAutomobil().getMarka().equals(f.getMarka()))
+				.collect(Collectors.toList());
+		listadelova.stream().forEach(d -> listModel.addElement(d));
+		return listadelova;
+		
+		
+		
+	}
+	
+	public static void PopuniNeZakazaneServise(JComboBox<ServisAutomobila> cbServis) {
+		
+		for(HashMap.Entry<Integer,ServisAutomobila> entry : LoadDatabase.sviServisi.entrySet()) {
+				
+				if(entry.getValue().getServiser() == null) {
+					cbServis.addItem(entry.getValue());
+				}
+		}
+	}
+	
+	public static void PopuniSveZakazaneServise(JComboBox<ServisAutomobila> cbServis) {
+		for(HashMap.Entry<Integer,ServisAutomobila> entry : LoadDatabase.sviServisi.entrySet()) {
+			if(entry.getValue().getServiser() != null) {
+			cbServis.addItem((ServisAutomobila) entry.getValue());
+			}
 		}
 	}
 }

@@ -159,9 +159,13 @@ public class ServisAutomobila extends Identifiable {
 		line.add(this.isStatusServisa()+"");
 		line.add(this.isDeleted()+"");
 		try {
-		
+		if(this.getDeoZaServis().isEmpty()) {
+			line.add("null");
+		}
+		else {
 		for(ServisniDeo s: this.getDeoZaServis()) {
 			line.add(s.getId()+"");
+		}
 		}
 		}catch(Exception e4) {
 			line.add("null");

@@ -178,6 +178,7 @@ public class AddAdminPage extends JDialog {
 				txtJMBG.setText("");
 				txtAdresa.setText("");
 				txtkorIme.setText("");
+				txtLozinka.setText("");
 				txtPlata.setText("");
 				txtBrojTelefona.setText("");
 				cbPol.setSelectedIndex(-1);

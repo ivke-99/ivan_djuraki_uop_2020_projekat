@@ -23,6 +23,10 @@ import view.AdminPages.AutomobilTools.PregledajAllAutomobilPage;
 import view.AdminPages.MusterijaTools.AddMusterijaPage;
 import view.AdminPages.MusterijaTools.IzmeniMusterijuPage;
 import view.AdminPages.MusterijaTools.PregledajMusterijePage;
+import view.AdminPages.ServisTools.DodajServisPage;
+import view.AdminPages.ServisTools.IzmeniObrisiServisPage;
+import view.AdminPages.ServisTools.PregledajSveServise;
+import view.AdminPages.ServisTools.ZakaziServisMusterijiPage;
 import view.AdminPages.ServiserTools.AddServiserPage;
 import view.AdminPages.ServiserTools.IzmeniServiserPage;
 import view.AdminPages.ServiserTools.PregledajServiserPage;
@@ -258,6 +262,7 @@ public class AdminMain extends JDialog {
 		mntmNewMenuItem_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PregledajAllAutomobilPage().setVisible(true);
+				dispose();
 			}
 		});
 		mnNewMenu_3.add(mntmNewMenuItem_15);
@@ -266,15 +271,54 @@ public class AdminMain extends JDialog {
 		menuBar.add(mnNewMenu_4);
 		
 		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Dodaj");
+		mntmNewMenuItem_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new DodajServisPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_16);
 		
-		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Izmeni");
+		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Zakazi Musteriji");
+		mntmNewMenuItem_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new ZakaziServisMusterijiPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_17);
 		
-		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Obrisi");
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Izmeni/Obrisi/Zavrsi");
+		mntmNewMenuItem_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniObrisiServisPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_18);
 		
 		JMenuItem mntmNewMenuItem_19 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajSveServise().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_19);
 		
 		JMenu mnNewMenu_6 = new JMenu("Servisna Knjizica");

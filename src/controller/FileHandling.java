@@ -89,6 +89,7 @@ public class FileHandling {
 			FileHandling.OverWriteFile(lines, filePath);
 		
 		}catch(Exception e2) {
+			e2.printStackTrace();
 			return false;
 		}
 		

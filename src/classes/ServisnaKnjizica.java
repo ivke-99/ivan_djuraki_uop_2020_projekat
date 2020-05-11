@@ -50,10 +50,20 @@ public class ServisnaKnjizica extends Identifiable {
 		var line=new StringJoiner("|");
 		line.add(this.getId()+"").add(this.SrediAuto());
 		line.add(this.isDeleted()+"");
+		if(this.getServisi().isEmpty()) {
+			line.add("null");
+		}
+		else {
+			try {
 		for(ServisAutomobila s: this.getServisi()) {
 			line.add(s.getId()+"");
 		}
-		
+			}catch(Exception none) {
+				line.add("null");
+				/*ovde greska*/
+				none.printStackTrace();
+			}
+		}
 		return line.toString();
 	}
 	
@@ -101,25 +111,9 @@ public class ServisnaKnjizica extends Identifiable {
 			knjiz.AddServis(knjiz, s);
 			LoadDatabase.sveKnjizice.replace(knjiz.getId(), knjiz);
 			
-			
+			String newLine = knjiz.WriteToString();
 			/*upisi updateovanu u fajl*/
-			String lines = LoadDatabase.LoadLinesFromFile(FileHandling.servisnaKnjizicaPath);
-			
-			String[] NewLines = lines.split("\n");
-			for( String line : NewLines) {
-	
-				if(line.equals(oldLine)) {
-					line = line + "|" + s.getId()+"";
-					lines = lines.replace(oldLine, line);
-				}
-				
-			}
-			/*za sada cemo da overwritujemo ceo fajl
-			 * medjutim bi bilo mnogo bolje kad bi tacno dirali tu liniju zbog
-			 * brzeg rada programa, no polako
-			 */
-			FileHandling.OverWriteFile(lines, FileHandling.servisnaKnjizicaPath);
-			
+			FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisnaKnjizicaPath);
 			}
 		
 		
