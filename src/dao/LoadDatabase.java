@@ -3,19 +3,13 @@ package dao;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import classes.Admin;
 import classes.Automobil;
-import classes.Identifiable;
 import classes.Musterija;
 import classes.ServisAutomobila;
 import classes.Serviser;

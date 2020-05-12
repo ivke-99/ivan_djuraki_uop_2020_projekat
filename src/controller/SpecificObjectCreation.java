@@ -1,17 +1,10 @@
 package controller;
 
-import java.text.ParseException;
-import java.util.ArrayList;
+
 import java.util.StringJoiner;
-
-import javax.swing.JOptionPane;
-
-import classes.Automobil;
 import classes.ServisAutomobila;
-import classes.Serviser;
-import classes.ServisnaKnjizica;
 import classes.ServisniDeo;
-import dao.LoadDatabase;
+
 
 public class SpecificObjectCreation {
 	/* ova klasa je trenutno potrebna, jer kreiranje objekta iz comboboxa

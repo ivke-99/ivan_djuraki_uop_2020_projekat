@@ -2,9 +2,7 @@ package classes;
 
 import java.util.Scanner;
 import java.util.StringJoiner;
-
 import classes.Automobil.MarkaiModel;
-import classes.Automobil.VrstaGoriva;
 
 public class ServisniDeo extends Identifiable {
 	
@@ -16,7 +14,7 @@ public class ServisniDeo extends Identifiable {
 		super();
 		this.nazivDela="";
 		this.cena=0;
-		this.marka=marka.none;
+		this.marka=MarkaiModel.none;
 	}
 
 	public ServisniDeo(int id, String nazivDela, double cena, MarkaiModel marka, boolean deleted) {
@@ -24,6 +22,15 @@ public class ServisniDeo extends Identifiable {
 		this.nazivDela = nazivDela;
 		this.cena = cena;
 		this.marka = marka;
+	}
+	
+	public ServisniDeo(ServisniDeo original) {
+		if(original.getNazivDela().contains("Leva Strana"))
+			this.nazivDela = original.getNazivDela().replace("Leva Strana", "Desna Strana");
+		else if (original.getNazivDela().contains("Desna Strana"))
+			this.nazivDela = original.getNazivDela().replace("Desna Strana", "Leva strana");
+		this.cena = original.getCena();
+		this.marka = original.getMarka();
 	}
 
 	public String getNazivDela() {
@@ -54,8 +61,8 @@ public class ServisniDeo extends Identifiable {
 	public String WriteToString() {
 		var line = new StringJoiner("|");
 		line.add(this.getId()+"").add(this.getNazivDela()).add(this.getCena()+"");
-		line.add(this.isDeleted()+"");
 		line.add(this.getMarka()+"");
+		line.add(this.isDeleted()+"");
 		return line.toString();
 	}
 	

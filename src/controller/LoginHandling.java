@@ -1,13 +1,9 @@
 package controller;
 import javax.swing.JOptionPane;
 
-import classes.Admin;
 import classes.Osoba;
-import classes.Osoba.TipoviKorisnika;
-import classes.Serviser;
 import dao.LoadDatabase;
 import view.AdminMain;
-import view.MainWindow;
 import view.MusterijaMain;
 import view.ServiserMain;
 
@@ -51,6 +47,7 @@ public class LoginHandling {
 	
 	
 		
+	@SuppressWarnings("incomplete-switch")
 	public static void CheckLogin(String username,String password) throws Exception {
 		
 		trenutniKorisnik=CheckLogin1(username,password);

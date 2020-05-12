@@ -1,11 +1,7 @@
 package classes;
 
-import java.io.IOException;
 import java.util.StringJoiner;
-
-import controller.FileHandling;
 import controller.Validator;
-import dao.LoadDatabase;
 
 public abstract class Osoba extends Identifiable {
 	protected String ime;
@@ -58,7 +54,7 @@ public abstract class Osoba extends Identifiable {
 	}
 
 	public void setIme(String ime) throws Exception {
-		if (ime.matches(super.STRING_PATTERN)) {
+		if (ime.matches(Validator.STRING_PATTERN)) {
 			this.ime=ime;
 		}
 		else {
@@ -71,7 +67,7 @@ public abstract class Osoba extends Identifiable {
 	}
 
 	public void setPrezime(String prezime) throws Exception {
-		if (prezime.matches(super.STRING_PATTERN)) {
+		if (prezime.matches(Validator.STRING_PATTERN)) {
 			this.prezime = prezime;
 		}
 		else {
@@ -83,7 +79,7 @@ public abstract class Osoba extends Identifiable {
 		return jmbg;
 	}
 
-	public void setJmbg(String jmbg) throws Exception {/*za ovo mozda napravim checker ako mi bude dosadno*/
+	public void setJmbg(String jmbg) throws Exception {
 		if (jmbg.length() != 13) {
 			throw new Exception("JMBG mora imati 13 karaktera.");
 	}
@@ -100,7 +96,7 @@ public abstract class Osoba extends Identifiable {
 			return "zensko";
 		}
 	}
-	/*temp setter*/
+	
 	public String isPolTemp() {
 		if (pol == true) {
 			return "true";
@@ -132,7 +128,7 @@ public abstract class Osoba extends Identifiable {
 		return brtel;
 	}
 
-	public void setBrtel(String brtel) {/* za ovo ce se praviti setter prilikom izrade GUIa */
+	public void setBrtel(String brtel) {
 		this.brtel = brtel;
 	}
 
@@ -142,13 +138,11 @@ public abstract class Osoba extends Identifiable {
 	
 
 	public void setKorisnickoIme(String korisnickoIme) throws Exception {
-		if(korisnickoIme.matches(super.USERNAME_PATTERN)) {
+		if(korisnickoIme.matches(Validator.USERNAME_PATTERN)) {
 			
 			if(Validator.CheckForIme(korisnickoIme) == true) {
 				this.korisnickoIme = korisnickoIme;
-				
 			}
-			
 		}
 		
 		else {
@@ -165,14 +159,7 @@ public abstract class Osoba extends Identifiable {
 		return lozinka;
 	}
 
-	public void setLozinka(String lozinka) throws Exception {
-		/*Lozinka mora imati mala i velika slova,jedan broj,min 6 karaktera*/
-		/*if(lozinka.equals(super.PASSWORD_PATTERN)) {
-			
-		}*/
-		/*else {
-			throw new Exception("Lozinka mora sadrzati mala i velika slova,jedan broj,jedan specijalni karakter i mora biti duzine min 6 karaktera.");
-		}*/
+	public void setLozinka(String lozinka) {
 		this.lozinka = lozinka;
 	}
 

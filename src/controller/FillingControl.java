@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-
 import classes.Admin;
 import classes.Automobil;
 import classes.Automobil.MarkaiModel;
 import classes.Automobil.VrstaGoriva;
-import classes.Identifiable;
 import classes.Musterija;
 import classes.ServisAutomobila;
 import classes.Serviser;
@@ -151,5 +148,11 @@ public class FillingControl {
 			cbServis.addItem((ServisAutomobila) entry.getValue());
 			}
 		}
+	}
+	
+	public static void PopuniDeloveSimetrija(JComboBox<ServisniDeo> cbDeo) {
+		var listaDelova = LoadDatabase.sviDelovi.values().stream().filter(f -> f.getNazivDela().contains("Desna Strana") || f.getNazivDela()
+				.contains("Leva Strana")).collect(Collectors.toList());
+		listaDelova.stream().forEach(s -> cbDeo.addItem(s));
 	}
 }

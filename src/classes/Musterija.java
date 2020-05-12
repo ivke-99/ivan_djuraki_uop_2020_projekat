@@ -3,12 +3,8 @@ package classes;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-import classes.Osoba.TipoviKorisnika;
-
 public class Musterija extends Osoba {
 	private int brojBodova;
-	
-	
 	
 	public Musterija() {
 		super();

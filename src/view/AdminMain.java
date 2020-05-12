@@ -6,8 +6,6 @@ import javax.swing.JDialog;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -30,7 +28,10 @@ import view.AdminPages.ServisTools.ZakaziServisMusterijiPage;
 import view.AdminPages.ServiserTools.AddServiserPage;
 import view.AdminPages.ServiserTools.IzmeniServiserPage;
 import view.AdminPages.ServiserTools.PregledajServiserPage;
+import view.AdminPages.ServisniDeoTools.DodajServisniDeoPage;
+import view.AdminPages.ServisniDeoTools.DodajSimetricniDeoPage;
 
+@SuppressWarnings("serial")
 public class AdminMain extends JDialog {
 
 	/**
@@ -341,9 +342,21 @@ public class AdminMain extends JDialog {
 		menuBar.add(mnNewMenu_7);
 		
 		JMenuItem mntmNewMenuItem_28 = new JMenuItem("Dodaj");
+		mntmNewMenuItem_28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DodajServisniDeoPage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_28);
 		
-		JMenuItem mntmNewMenuItem_29 = new JMenuItem("Izmeni");
+		JMenuItem mntmNewMenuItem_29 = new JMenuItem("Dodaj Simetricni Deo");
+		mntmNewMenuItem_29.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DodajSimetricniDeoPage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_29);
 		
 		JMenuItem mntmNewMenuItem_30 = new JMenuItem("Obrisi");

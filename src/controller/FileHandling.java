@@ -1,12 +1,8 @@
 package controller;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.file.Files;
-import java.util.Scanner;
-
 import dao.LoadDatabase;
 
 public class FileHandling {
@@ -25,7 +21,6 @@ public class FileHandling {
 		try {
 			wr = new FileWriter(filePath, true);
 			boolean vr = CheckIfFirstLine(filePath);
-			System.out.println(vr);
 			if( vr == false) {
 			wr.append("\n"+object);
 			}
@@ -46,8 +41,6 @@ public class FileHandling {
 		
 		
 		String line = LoadDatabase.LoadLinesFromFile(filePath);
-		System.out.println(line);
-		System.out.println(line.length());
 		if(line.equals(null)) {
 			
 			return true;

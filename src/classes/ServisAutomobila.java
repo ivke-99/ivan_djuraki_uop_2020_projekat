@@ -1,20 +1,12 @@
 package classes;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-
-import classes.Osoba.TipoviKorisnika;
-import classes.Serviser.Specijalizacija;
 import dao.LoadDatabase;
 
 public class ServisAutomobila extends Identifiable {
@@ -119,7 +111,6 @@ public class ServisAutomobila extends Identifiable {
 	
 	
 	public static String ConvertDateToString(Date date) {
-		/*convert date to string */
 		String stringDate;
 		String pattern = "dd/MM/yyyy HH:mm";
 		DateFormat df = new SimpleDateFormat(pattern);

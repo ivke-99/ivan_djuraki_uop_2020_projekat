@@ -1,9 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.stream.Collectors;
-
 import classes.Automobil;
 import classes.Identifiable;
 import classes.Musterija;

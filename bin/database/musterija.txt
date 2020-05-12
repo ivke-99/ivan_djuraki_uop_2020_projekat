@@ -1,4 +1,4 @@
-0|Josipa|Beganovic|0312999800094|false|Kis F 25|(062)-(223)-(4432)|marina2322|marina1234|false|55
+0|Josipa|Beganovic|0312999800094|false|Kis F 25|(062)-(223)-(4432)|marina2322|marina1234|true|55
 1|Marina|Marinovic|0312999800094|false|Marka Zarka 35|(062)-(223)-(4432)|marina232|marina1234|true|552
 2|emilija|buncic|0312999800094|true|Fas123|(222)-(222)-(2222)|emab123|dsaasddas|true|23
 3|Nebojsa|Cupic|0601998800032|true|Mladena Stojanovica 49|(062)-(165)-(3293)|sonex|sonecar123|true|0

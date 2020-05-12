@@ -3,8 +3,6 @@ package classes;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-import classes.Osoba.TipoviKorisnika;
-
 public class Serviser extends Osoba {
 	
 	public enum Specijalizacija {
