@@ -1,3 +1,4 @@
-0|Bojan|Zarkovic|0312999800094|true|Marka Zarka 35|032122223|marko1|1234567|automehanicar|false|23000
-1|Dejan|Zarkovic|0312999800094|true|Bojana Stojavljevica 23|032122223|marko2|1234567|automehanicar|false|23000
-2|Marko|Djuragin|0312999800094|true|Neke Ulice 23|(123)-(123)-(1233)|markoxx|123456|none|false|50000
+0|Bojan|Zarkovic|0312999800094|true|Marka Zarka 35|032122223|marko1|1234567|false|automehanicar|23000
+1|Dejan|Zarkovic|0312999800094|true|Bojana Stojavljevica 23|032122223|marko2|1234567|false|automehanicar|23000
+2|Marko|Djuragin|0312999800094|true|Neke Ulice 23|(123)-(123)-(1233)|markoxx|123456|false|automehanicar|50000
+3|Bojan|Orlovic|0312999800094|true|Neka Adresa 223|(063)-(756)-(2312)|boki13|boki13boki|false|limar|20000

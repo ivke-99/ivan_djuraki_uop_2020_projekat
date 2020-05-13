@@ -28,8 +28,11 @@ import view.AdminPages.ServisTools.ZakaziServisMusterijiPage;
 import view.AdminPages.ServiserTools.AddServiserPage;
 import view.AdminPages.ServiserTools.IzmeniServiserPage;
 import view.AdminPages.ServiserTools.PregledajServiserPage;
+import view.AdminPages.ServisnaKnjizicaTools.PregledajServisneKnjizicePage;
 import view.AdminPages.ServisniDeoTools.DodajServisniDeoPage;
 import view.AdminPages.ServisniDeoTools.DodajSimetricniDeoPage;
+import view.AdminPages.ServisniDeoTools.IzmeniServisniDeoPage;
+import view.AdminPages.ServisniDeoTools.PregledajDelovePage;
 
 @SuppressWarnings("serial")
 public class AdminMain extends JDialog {
@@ -325,16 +328,16 @@ public class AdminMain extends JDialog {
 		JMenu mnNewMenu_6 = new JMenu("Servisna Knjizica");
 		menuBar.add(mnNewMenu_6);
 		
-		JMenuItem mntmNewMenuItem_24 = new JMenuItem("Dodaj");
-		mnNewMenu_6.add(mntmNewMenuItem_24);
-		
-		JMenuItem mntmNewMenuItem_25 = new JMenuItem("Izmeni");
-		mnNewMenu_6.add(mntmNewMenuItem_25);
-		
 		JMenuItem mntmNewMenuItem_26 = new JMenuItem("Obrisi");
 		mnNewMenu_6.add(mntmNewMenuItem_26);
 		
 		JMenuItem mntmNewMenuItem_27 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajServisneKnjizicePage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_27);
 		
 		JMenu mnNewMenu_7 = new JMenu("Servisni Deo");
@@ -360,9 +363,30 @@ public class AdminMain extends JDialog {
 		mnNewMenu_7.add(mntmNewMenuItem_29);
 		
 		JMenuItem mntmNewMenuItem_30 = new JMenuItem("Obrisi");
+		mntmNewMenuItem_30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new IzmeniServisniDeoPage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_30);
 		
+		JMenuItem mntmNewMenuItem_20 = new JMenuItem("Izmeni");
+		mntmNewMenuItem_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new IzmeniServisniDeoPage().setVisible(true);
+				dispose();
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_20);
+		
 		JMenuItem mntmNewMenuItem_31 = new JMenuItem("Pregledaj");
+		mntmNewMenuItem_31.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PregledajDelovePage().setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_31);
 		getContentPane().setLayout(null);
 		

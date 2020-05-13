@@ -16,6 +16,7 @@ import classes.Musterija;
 import classes.Serviser;
 import classes.Osoba.TipoviKorisnika;
 import classes.Serviser.Specijalizacija;
+import classes.ServisnaKnjizica;
 import controller.FileHandling;
 import controller.FillingControl;
 import dao.LoadDatabase;
@@ -176,6 +177,7 @@ public class AddAutomobilPage extends JDialog {
 							new AdminMain().setVisible(true);
 						}catch(Exception a) {
 							JOptionPane.showMessageDialog(null, "Greska pri upisu.");
+							a.printStackTrace();
 						}
 					}
 					
@@ -198,5 +200,9 @@ public class AddAutomobilPage extends JDialog {
 		wrt = s.WriteToString();
 		FileHandling.WriteToFile(wrt,FileHandling.automobilPath);
 		LoadDatabase.sviAutomobili.put(s.getId() , s);
+		
+		ServisnaKnjizica nova = ServisnaKnjizica.NewKnjizicaForAutomobil(s);
+		LoadDatabase.sveKnjizice.put(nova.getId(), nova);
+		
 	}
 }

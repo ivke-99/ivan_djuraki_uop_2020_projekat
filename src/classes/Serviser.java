@@ -68,8 +68,8 @@ public class Serviser extends Osoba {
 		serviser.setKorisnickoIme(sc.next());
 		serviser.setLozinka(sc.next());
 		serviser.setTipkorisnika(TipoviKorisnika.serviser);
-		serviser.setSpec(Specijalizacija.valueOf(sc.next()));
 		serviser.setDeleted(sc.nextBoolean());
+		serviser.setSpec(Specijalizacija.valueOf(sc.next()));
 		serviser.setPlata(sc.nextInt());
 		
 		sc.close();

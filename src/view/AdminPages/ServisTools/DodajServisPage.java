@@ -14,6 +14,7 @@ import classes.Serviser;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
+import dao.LoadDatabase;
 import view.AdminMain;
 
 import java.awt.Font;
@@ -176,6 +177,7 @@ public class DodajServisPage extends JDialog {
 				delovi=(ArrayList<ServisniDeo>) list.getSelectedValuesList();
 				s.setDeoZaServis(delovi);
 				String wrt=s.WriteToString();
+				LoadDatabase.sviServisi.put(s.getId(), s);
 				FileHandling.WriteToFile(wrt, FileHandling.servisAutomobilaPath);
 				JOptionPane.showMessageDialog(null, "Uspesan upis!");
 				int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);

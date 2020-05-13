@@ -44,19 +44,20 @@ public class ServisnaKnjizica extends Identifiable {
 		var line=new StringJoiner("|");
 		line.add(this.getId()+"").add(this.SrediAuto());
 		line.add(this.isDeleted()+"");
+		
+		try {
 		if(this.getServisi().isEmpty()) {
 			line.add("null");
 		}
 		else {
-			try {
+			
 		for(ServisAutomobila s: this.getServisi()) {
 			line.add(s.getId()+"");
-		}
-			}catch(Exception none) {
-				line.add("null");
-				/*ovde greska*/
-				none.printStackTrace();
 			}
+		}
+		}catch(Exception none) {
+			line.add("null");
+			
 		}
 		return line.toString();
 	}
@@ -120,7 +121,7 @@ public class ServisnaKnjizica extends Identifiable {
 	
 	}
 	
-	public static void NewKnjizicaForAutomobil(Automobil a) throws Exception {
+	public static ServisnaKnjizica NewKnjizicaForAutomobil(Automobil a) throws Exception {
 		
 			/*prilikom kreiranja automobila on automatski dobija svoju servisnu knjizicu
 			 * u kojoj su servisi postavljeni na vrednost null
@@ -131,8 +132,7 @@ public class ServisnaKnjizica extends Identifiable {
 			newk.setServisi(null);
 			String write2=newk.WriteToString();
 			FileHandling.WriteToFile(write2, FileHandling.servisnaKnjizicaPath);
-		
-		
+			return newk;
 	}
 	
 	

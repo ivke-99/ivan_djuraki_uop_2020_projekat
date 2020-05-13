@@ -179,7 +179,7 @@ public class AddServiserPage extends JDialog {
 		cbSpecijalizacija.setBounds(134, 313, 114, 22);
 		getContentPane().add(cbSpecijalizacija);
 		FillingControl.PopuniSpecijalizaciju(cbSpecijalizacija);
-		cbSpecijalizacija.setSelectedItem(Specijalizacija.none);
+		cbSpecijalizacija.setSelectedIndex(-1);
 		
 		JLabel lblSpecijalizacija = new JLabel("Specijalizacija:");
 		lblSpecijalizacija.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -196,7 +196,7 @@ public class AddServiserPage extends JDialog {
 				txtPlata.setText("");
 				txtBrojTelefona.setText("");
 				cbPol.setSelectedIndex(-1);
-				cbSpecijalizacija.setSelectedItem(Specijalizacija.none);
+				cbSpecijalizacija.setSelectedIndex(-1);
 			}
 		});
 		
@@ -210,7 +210,7 @@ public class AddServiserPage extends JDialog {
 							|| txtJMBG.getText().isEmpty() || txtAdresa.getText().isEmpty()
 							|| !(txtBrojTelefona.getText().length() == 18) || txtkorIme.getText().isEmpty()  
 							|| txtLozinka.getText().isEmpty() || txtPlata.getText().isEmpty() || cbPol.getSelectedIndex() == -1
-							|| cbSpecijalizacija.getSelectedItem().equals(Specijalizacija.none))
+							|| cbSpecijalizacija.getSelectedIndex() == -1)
 						{
 							JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
 						}

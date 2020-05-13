@@ -1,2 +1,7 @@
-0|1|2002|benzin|1200|peugot_307|55|true
-1|1|2005|dizel|1250|mercedes_cla|63|true
+0|1|2002|benzin|1200|peugot_307|55|false
+1|1|2005|dizel|1250|mercedes_cla|63|false
+2|1|2019|dizel|1400|peugot_307|66|false
+3|1|2019|dizel|1400|mercedes_cla|66|false
+4|1|2019|benzin|1400|mercedes_cla|66|false
+5|1|1992|voda|1333|volkswagen_golf5|22|false
+6|1|2020|benzin|1400|fiat_punto|66|false

@@ -1,7 +1,9 @@
-0|Zamajac|1000.0|bmw_e39|false
+0|Zamajac|1000.0|fiat_punto|true
 1|Prednji lezaj|2000.0|mercedes_cla|false
 2|Zadnji lezaj|1000.0|mercedes_cla|false
 3|branik|5000.0|mercedes_cla|false
-4|Retrovizor - Leva Strana|3000.0|bmw_e39|false
+4|Retrovizor - Leva Strana|3000.0|fiat_punto|false
 5|Lezaj - Leva Strana|5000.0|volkswagen_golf5|false
 6|Lezaj - Desna Strana|5000.0|volkswagen_golf5|false
+7|Manzetna - Leva Strana|4000.0|mercedes_cla|false
+8|Manzetna - Desna Strana|4000.0|mercedes_cla|false

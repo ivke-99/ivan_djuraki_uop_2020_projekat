@@ -132,6 +132,10 @@ public class FillingControl {
 		
 	}
 	
+	public static void PopuniComboDelovi(JComboBox<ServisniDeo> cbDeo) {
+		LoadDatabase.sviDelovi.values().stream().forEach(f -> cbDeo.addItem(f));
+	}
+	
 	public static void PopuniNeZakazaneServise(JComboBox<ServisAutomobila> cbServis) {
 		
 		for(HashMap.Entry<Integer,ServisAutomobila> entry : LoadDatabase.sviServisi.entrySet()) {
