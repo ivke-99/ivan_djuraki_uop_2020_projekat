@@ -5,3 +5,7 @@
 4|1|2019|benzin|1400|mercedes_cla|66|false
 5|1|1992|voda|1333|volkswagen_golf5|22|false
 6|1|2020|benzin|1400|fiat_punto|66|false
+7|3|2005|dizel|1958|volkswagen_golf5|66|false
+8|3|2019|voda|4000|mercedes_cla|90|false
+9|3|2010|benzin|1400|volkswagen_golf5|100|false
+10|3|2020|dizel|1400|mercedes_cla|66|false

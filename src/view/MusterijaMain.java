@@ -50,7 +50,7 @@ public class MusterijaMain extends JDialog {
 		
 		JLabel lblNewLabel = new JLabel("Dobrodosli" + " "+LoginHandling.trenutniKorisnik.getIme()+" "+
 		LoginHandling.trenutniKorisnik.getPrezime()+"!");
-		lblNewLabel.setBounds(0, 0, 434, 25);
+		lblNewLabel.setBounds(10, 11, 434, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		getContentPane().add(lblNewLabel);
 		

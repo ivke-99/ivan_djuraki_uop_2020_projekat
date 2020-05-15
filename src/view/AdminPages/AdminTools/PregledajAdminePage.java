@@ -11,11 +11,13 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import classes.Admin;
 import classes.ServisAutomobila;
 import controller.LoginHandling;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
 import view.ServiserMain;
@@ -49,6 +51,9 @@ public class PregledajAdminePage extends JDialog {
 		
 		JTable t = new JTable(toTableModel(LoadDatabase.sviAdmini));
 		t.setEnabled(false);
+		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		TableColumnAdjuster tca = new TableColumnAdjuster(t);
+		tca.adjustColumns();
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 748, 242);
 		getContentPane().add(scrollPane);
@@ -80,6 +85,7 @@ public class PregledajAdminePage extends JDialog {
 	        		entry.getValue().getPlata()});
 	    	
 	    }
+	    
 	    return model;
    }
 }

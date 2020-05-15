@@ -84,6 +84,10 @@ public class DodajServisniDeoPage extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				boolean opcija = FillingControl.PrintOpcija();
 				if(opcija != false) {
+					if(cbMarkaiModel.getSelectedIndex() == -1 || txtCena.getText().equals("")|| txtNaziv.getText().equals(""))
+						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
+					
+					else {
 					try {
 						ServisniDeo deo = new ServisniDeo();
 						deo.setId(FileHandling.servisniDeoPath);
@@ -103,6 +107,7 @@ public class DodajServisniDeoPage extends JDialog {
 						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.");
 					}
 				}
+			}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));

@@ -9,18 +9,24 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import classes.Identifiable;
+import classes.Musterija;
 import classes.ServisAutomobila;
+import classes.ServisnaKnjizica;
 import classes.ServisniDeo;
+import controller.CenaHandling;
 import controller.FileHandling;
 import controller.FillingControl;
 import controller.LoginHandling;
 import dao.LoadDatabase;
+import view.AdminMain;
 import view.ServiserMain;
+import view.AdminPages.ServisTools.IzmeniObrisiServisPage;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.HashMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -30,6 +36,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -43,6 +50,7 @@ public class ServiserIzmeniServisPage extends JDialog {
 	private JTextField txtTermin;
 	private JTextField txtCena;
 	private ServisAutomobila servis;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -250,11 +258,82 @@ public class ServiserIzmeniServisPage extends JDialog {
 		getContentPane().add(txtCena);
 		txtCena.setColumns(10);
 		
+		JRadioButton rdZavrsen = new JRadioButton("Zavrsen");
+		rdZavrsen.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdZavrsen.setEnabled(false);
+		buttonGroup.add(rdZavrsen);
+		rdZavrsen.setBounds(134, 321, 86, 28);
+		getContentPane().add(rdZavrsen);
+		
+		JRadioButton rdZapocet = new JRadioButton("Zapocet");
+		rdZapocet.setEnabled(false);
+		rdZapocet.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonGroup.add(rdZapocet);
+		rdZapocet.setBounds(222, 321, 86, 28);
+		getContentPane().add(rdZapocet);
+		
+		
 		JButton btnNewButton_3 = new JButton("Zavrsi");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean opcija = FillingControl.PrintOpcija();
+				if (opcija != false) {
+				if(servis.isStatusServisa() == false) {
+					JOptionPane.showMessageDialog(null, "Servis je zavrsen.");
+				}
+				else {
+					try {
+				String oldLine = servis.WriteToString();
+				servis.setStatusServisa(false);
 				
+				double ukupnaCena = CenaHandling.IzracunajCenu(servis);
+				
+				int opcija3 = JOptionPane.showConfirmDialog(null, "Da li musterija zeli iskoristiti nagradne bodove?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+				
+				if (opcija3 == 0) {
+					Musterija mus = servis.getAutomobil().getVlasnik();
+					if (mus.getBrojBodova() != 0 ) {
+					double novaCena = CenaHandling.SmanjiCenu(ukupnaCena, mus);
+					CenaHandling.NulirajBodove(mus);
+					JOptionPane.showMessageDialog(null, "Cena servisa sa popustom je = " + novaCena);
+					servis.setCena(novaCena);
+					}
+					
+					else {
+						JOptionPane.showMessageDialog(null, "Musterija ima 0 bodova.");
+						CenaHandling.UvecajBodove(servis.getAutomobil().getVlasnik());
+						servis.setCena(ukupnaCena);
+					}
+				}
+				
+				else {
+					CenaHandling.UvecajBodove(servis.getAutomobil().getVlasnik());
+					servis.setCena(ukupnaCena);
+				}
+				
+				
+				String newLine = servis.WriteToString();
+				LoadDatabase.sviServisi.replace(servis.getId(), servis);
+				FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
+				ServisnaKnjizica.UpdateKnjizica(servis);
+				JOptionPane.showMessageDialog(null, "Uspesno zavrsen servis.");
+				
+				int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+				if(opcija2 == 0) {
+					dispose();
+					new IzmeniObrisiServisPage().setVisible(true);
+				}
+				else {
+					dispose();
+					new ServiserMain().setVisible(true);
+				}
+					}catch(Exception not) {
+						JOptionPane.showMessageDialog(null, "Morate odabrati servis.");
+						not.printStackTrace();
+					}
+				}
+				}
 			}
 		});
 		btnNewButton_3.setBounds(276, 356, 89, 23);
@@ -281,6 +360,14 @@ public class ServiserIzmeniServisPage extends JDialog {
 					}
 					textAreaOpis.setText(servis.getOpis());
 					txtCena.setText(servis.getCena()+"");
+					
+					if(servis.isStatusServisa() == true) {
+						rdZapocet.setSelected(true);
+					}
+					else {
+						rdZavrsen.setSelected(true);
+					}
+					
 					}catch(Exception none) {
 						txtID.setText("");
 						txtAuto.setText("");

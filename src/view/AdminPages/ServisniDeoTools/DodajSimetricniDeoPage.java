@@ -7,6 +7,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import classes.Automobil;
+import classes.Automobil.MarkaiModel;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
@@ -17,9 +19,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class DodajSimetricniDeoPage extends JDialog {
-
+	protected MarkaiModel currentAuto = null;
 	/**
 	 * Launch the application.
 	 */
@@ -42,19 +46,35 @@ public class DodajSimetricniDeoPage extends JDialog {
 	 */
 	public DodajSimetricniDeoPage() {
 		setTitle("Kreiraj Simetricni Deo");
-		setBounds(100, 100, 297, 180);
+		setBounds(100, 100, 297, 206);
 		getContentPane().setLayout(null);
 		
 		JComboBox<ServisniDeo> cbDeo = new JComboBox<ServisniDeo>();
 		cbDeo.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cbDeo.setBounds(98, 27, 148, 33);
-		FillingControl.PopuniDeloveSimetrija(cbDeo);
+		cbDeo.setBounds(98, 64, 148, 33);
 		getContentPane().add(cbDeo);
 		cbDeo.setSelectedIndex(-1);
 		
+		JComboBox<MarkaiModel> cbAuto = new JComboBox<MarkaiModel>();
+		cbAuto.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				currentAuto = null;
+				currentAuto = (MarkaiModel) cbAuto.getSelectedItem();
+				cbDeo.removeAllItems();
+				var lista = FillingControl.PopuniDeloveSimetrija();
+				FillingControl.FiltrirajListu(lista, currentAuto, cbDeo);
+				
+			}
+		});
+		cbAuto.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		cbAuto.setBounds(98, 20, 148, 33);
+		getContentPane().add(cbAuto);
+		FillingControl.PopuniComboBoxMarkaiModel(cbAuto);
+		cbAuto.setSelectedIndex(-1);
+		
 		JLabel lblNewLabel = new JLabel("Servisni Deo:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(10, 26, 91, 33);
+		lblNewLabel.setBounds(10, 64, 91, 33);
 		getContentPane().add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("DODAJ");
@@ -72,7 +92,7 @@ public class DodajSimetricniDeoPage extends JDialog {
 				try {
 					ServisniDeo kopija = new ServisniDeo(original);
 					for(ServisniDeo s : LoadDatabase.sviDelovi.values()) {
-						if(s.getNazivDela().equalsIgnoreCase(kopija.getNazivDela())) {
+						if(s.getNazivDela().equalsIgnoreCase(kopija.getNazivDela()) && s.getMarka().equals(kopija.getMarka())) {
 							JOptionPane.showMessageDialog(null, "Simetricni Deo vec postoji.");
 							existence = true;
 						}
@@ -96,7 +116,7 @@ public class DodajSimetricniDeoPage extends JDialog {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton.setBounds(10, 99, 91, 33);
+		btnNewButton.setBounds(10, 123, 91, 33);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnIzadji = new JButton("IZADJI");
@@ -107,8 +127,15 @@ public class DodajSimetricniDeoPage extends JDialog {
 			}
 		});
 		btnIzadji.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnIzadji.setBounds(180, 99, 91, 33);
+		btnIzadji.setBounds(180, 123, 91, 33);
 		getContentPane().add(btnIzadji);
+		
+		JLabel lblIzaberiAuto = new JLabel("Izaberi Auto:");
+		lblIzaberiAuto.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblIzaberiAuto.setBounds(10, 20, 91, 33);
+		getContentPane().add(lblIzaberiAuto);
+		
+		
 
 	}
 }

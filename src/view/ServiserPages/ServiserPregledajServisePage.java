@@ -11,6 +11,7 @@ import javax.swing.table.TableModel;
 
 import classes.ServisAutomobila;
 import controller.LoginHandling;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.ServiserMain;
 
@@ -51,6 +52,10 @@ public class ServiserPregledajServisePage extends JDialog {
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 748, 242);
 		getContentPane().add(scrollPane);
+		t.setEnabled(false);
+		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		TableColumnAdjuster tca = new TableColumnAdjuster(t);
+		tca.adjustColumns();
 		
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -79,7 +84,7 @@ public class ServiserPregledajServisePage extends JDialog {
 	    	if(entry.getValue().getServiser().getId() == LoginHandling.trenutniKorisnik.getId()) 
 	    	{	
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAutomobil().getMarka()
-	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), 
+	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
 	        		entry.getValue().getDeoZaServis()});
 	    	}
 	    	}

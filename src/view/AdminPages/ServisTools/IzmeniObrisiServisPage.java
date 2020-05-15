@@ -23,10 +23,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
 
 import classes.Identifiable;
+import classes.Musterija;
 import classes.ServisAutomobila;
 import classes.Serviser;
 import classes.ServisnaKnjizica;
 import classes.ServisniDeo;
+import controller.CenaHandling;
 import controller.FileHandling;
 import controller.FillingControl;
 import dao.LoadDatabase;
@@ -290,6 +292,31 @@ public class IzmeniObrisiServisPage extends JDialog {
 					try {
 				String oldLine = currentServis.WriteToString();
 				currentServis.setStatusServisa(false);
+				
+				double ukupnaCena = CenaHandling.IzracunajCenu(currentServis);
+				
+				int opcija3 = JOptionPane.showConfirmDialog(null, "Da li musterija zeli iskoristiti nagradne bodove?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+				
+				if (opcija3 == 0) {
+					Musterija mus = currentServis.getAutomobil().getVlasnik();
+					if (mus.getBrojBodova() != 0 ) {
+					double novaCena = CenaHandling.SmanjiCenu(ukupnaCena, mus);
+					CenaHandling.NulirajBodove(mus);
+					JOptionPane.showMessageDialog(null, "Cena servisa sa popustom je = " + novaCena);
+					currentServis.setCena(novaCena);
+					}
+					
+					else {
+						JOptionPane.showMessageDialog(null, "Musterija ima 0 bodova.");
+						CenaHandling.UvecajBodove(currentServis.getAutomobil().getVlasnik());
+					}
+				}
+				
+				else {
+					CenaHandling.UvecajBodove(currentServis.getAutomobil().getVlasnik());
+				}
+				
+				
 				String newLine = currentServis.WriteToString();
 				LoadDatabase.sviServisi.replace(currentServis.getId(), currentServis);
 				FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);

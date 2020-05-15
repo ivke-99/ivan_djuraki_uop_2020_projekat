@@ -9,6 +9,7 @@ import javax.swing.table.TableModel;
 
 import classes.ServisAutomobila;
 import controller.LoginHandling;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -52,6 +53,10 @@ public class PregledajSveServise extends JDialog {
 		t.setEnabled(false);
 		scrollPane.setBounds(10, 11, 771, 317);
 		getContentPane().add(scrollPane);
+		t.setEnabled(false);
+		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		TableColumnAdjuster tca = new TableColumnAdjuster(t);
+		tca.adjustColumns();
 		
 		JButton btnIzadji = new JButton("IZADJI");
 		btnIzadji.addActionListener(new ActionListener() {
@@ -74,9 +79,9 @@ public class PregledajSveServise extends JDialog {
 	   
 	    
 	    for (HashMap.Entry<Integer,ServisAutomobila> entry : map.entrySet()) {
-	
+	    	
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getServiser(),entry.getValue().getAutomobil().getMarka()
-	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), 
+	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(), 
 	        		entry.getValue().getDeoZaServis()});
 	    	
 	        

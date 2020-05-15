@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 
 import classes.Musterija;
 import classes.Serviser;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -50,6 +51,10 @@ public class PregledajServiserPage extends JDialog {
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 714, 247);
 		getContentPane().add(scrollPane);
+		t.setEnabled(false);
+		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		TableColumnAdjuster tca = new TableColumnAdjuster(t);
+		tca.adjustColumns();
 		
 		JButton btnNewButton = new JButton("Izadji");
 		btnNewButton.addActionListener(new ActionListener() {

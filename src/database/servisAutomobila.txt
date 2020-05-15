@@ -1,3 +1,21 @@
 0|0|0|22/05/2020 15:30|Sonee|1000.0|true|false|0|1
 1|1|1|22/03/2019 15:30|sad|3000.0|false|false|1|2
 2|6|1|22/03/2020 15:30|Crko punto|0.0|false|true|4
+3|3|0|13/08/6590 21:45|crko |0.0|false|false|1
+4|3|0|22/03/2020 15:30|asdadasd|0.0|false|false|2|3
+5|5|0|22/03/2020 15:30|asdad|0.0|false|false|5|6
+6|8|3|02/02/2050 10:20|Solja amortizera|0.0|false|true|2|3|7
+7|1|1|06/01/6542 11:45|lololollo|0.0|true|true|2
+8|9|1|11/06/10007 04:39|123123|0.0|true|true|5|6
+9|3|1|22/03/2020 15:30|asdasdasd|0.0|false|false|1|2
+10|3|1|22/03/2020 15:30|sadasdasd|0.0|false|false|1|2
+11|3|1|22/03/2020 15:30|asdsaasd|15680.0|false|false|1|2|3|7|8
+12|10|1|22/03/2020 15:30|asdsadas|0.0|false|false|1|2|3
+13|10|2|22/03/2020 15:30|Manzetne|8000.0|false|false|7|8
+14|10|1|22/03/2020 15:30|Oce taj majstor srediti tu manteznu vise|8000.0|false|false|7|8
+15|10|1|22/03/2020 15:00|asdsadasda|0.0|true|false|2|3
+16|10|1|22/03/2020 15:30|asdsadsa|2940.0|false|false|1|2
+17|10|1|22/03/2020 15:30|asdadasdas|0.0|false|false|1|2
+18|10|0|02/03/2020 15:30|asdasdas|0.0|false|false|1|2
+19|10|0|22/03/2020 15:30|asdsadas|0.0|false|false|1|2|3
+20|10|0|22/02/2222 15:32|sadasd|8000.0|false|false|1|2|3

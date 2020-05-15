@@ -10,6 +10,7 @@ import javax.swing.table.TableModel;
 
 import classes.Automobil;
 import classes.ServisnaKnjizica;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -51,6 +52,10 @@ public class PregledajServisneKnjizicePage extends JDialog {
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 675, 280);
 		getContentPane().add(scrollPane);
+		t.setEnabled(false);
+		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		TableColumnAdjuster tca = new TableColumnAdjuster(t);
+		tca.adjustColumns();
 		
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {

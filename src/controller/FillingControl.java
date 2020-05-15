@@ -22,7 +22,7 @@ import dao.LoadDatabase;
 public class FillingControl {
 	
 	public static void PopuniComboBoxAuto(JComboBox<Automobil> cbAuto) {
-		/*koristi se za musteriju i servisera */
+		/*koristi se za musteriju*/
 		ArrayList<Automobil> automobili = (ArrayList<Automobil>)LoadDatabase.sviAutomobili.entrySet().stream().filter(f -> f.getValue().getVlasnik().getId() == 
 				LoginHandling.trenutniKorisnik.getId()).map(g -> (Automobil)g.getValue()).collect(Collectors.toList());
 		
@@ -30,6 +30,10 @@ public class FillingControl {
 			cbAuto.addItem(automobil);
 		}
 	}
+	
+public static void PopuniComboBoxAuto2(JComboBox<Automobil> cbAuto) {
+		LoadDatabase.sviAutomobili.values().stream().forEach(f -> cbAuto.addItem(f));
+}
 	
 	public static void PopuniComboBoxSviAutomobili(JComboBox<Automobil> cbAuto) {
 		/*koristi se za ispis svih automobila sto su u sistemu*/
@@ -154,9 +158,23 @@ public class FillingControl {
 		}
 	}
 	
-	public static void PopuniDeloveSimetrija(JComboBox<ServisniDeo> cbDeo) {
+	public static List<ServisniDeo> PopuniDeloveSimetrija() {
 		var listaDelova = LoadDatabase.sviDelovi.values().stream().filter(f -> f.getNazivDela().contains("Desna Strana") || f.getNazivDela()
 				.contains("Leva Strana")).collect(Collectors.toList());
-		listaDelova.stream().forEach(s -> cbDeo.addItem(s));
+		
+		return listaDelova;
 	}
+	
+	public static void FiltrirajListu(List<ServisniDeo> listaDelova,MarkaiModel currentAuto,JComboBox<ServisniDeo> cbDeo) {
+		for(ServisniDeo s : listaDelova) {
+			try {
+			if(s.getMarka().equals(currentAuto))
+				cbDeo.addItem(s);
+			}catch(Exception nula) {
+				/*mora biti ovde jer auto moze da nema deo*/
+			}
+		}
+	}
+	
+	
 }

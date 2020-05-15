@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
@@ -83,6 +81,7 @@ public class MainWindow {
 				
 				
 				String username=txtUser.getText();
+				@SuppressWarnings("deprecation")
 				String password=txtPass.getText();
 				try {
 					controller.LoginHandling.CheckLogin(username, password);

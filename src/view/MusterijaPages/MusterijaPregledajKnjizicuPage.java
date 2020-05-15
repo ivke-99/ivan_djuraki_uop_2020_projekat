@@ -16,6 +16,7 @@ import classes.ServisAutomobila;
 import classes.ServisnaKnjizica;
 import controller.FillingControl;
 import controller.LoginHandling;
+import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.MusterijaMain;
 
@@ -55,6 +56,10 @@ public class MusterijaPregledajKnjizicuPage extends JDialog {
 				JScrollPane scrollPane = new JScrollPane(t);
 				scrollPane.setBounds(10, 92, 620, 251);
 				getContentPane().add(scrollPane);
+				t.setEnabled(false);
+				t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				TableColumnAdjuster tca = new TableColumnAdjuster(t);
+				tca.adjustColumns();
 			
 		
 		

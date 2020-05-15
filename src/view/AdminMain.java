@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+import controller.LoginHandling;
 import view.AdminPages.AdminTools.AddAdminPage;
 import view.AdminPages.AdminTools.IzmeniAdminePage;
 import view.AdminPages.AdminTools.PregledajAdminePage;
@@ -33,6 +34,8 @@ import view.AdminPages.ServisniDeoTools.DodajServisniDeoPage;
 import view.AdminPages.ServisniDeoTools.DodajSimetricniDeoPage;
 import view.AdminPages.ServisniDeoTools.IzmeniServisniDeoPage;
 import view.AdminPages.ServisniDeoTools.PregledajDelovePage;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class AdminMain extends JDialog {
@@ -260,6 +263,17 @@ public class AdminMain extends JDialog {
 		mnNewMenu_3.add(mntmNewMenuItem_13);
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Obrisi");
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new IzmeniAutomobilPage().setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_14);
 		
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Pregledaj");
@@ -398,6 +412,12 @@ public class AdminMain extends JDialog {
 		});
 		btnNewButton.setBounds(516, 205, 89, 23);
 		getContentPane().add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Dobrodosli" + " "+LoginHandling.trenutniKorisnik.getIme()+" "+
+				LoginHandling.trenutniKorisnik.getPrezime()+"!");
+				lblNewLabel.setBounds(10, 11, 434, 25);
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				getContentPane().add(lblNewLabel);
 
 	}
 }

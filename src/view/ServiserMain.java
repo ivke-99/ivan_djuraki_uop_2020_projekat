@@ -83,11 +83,13 @@ public class ServiserMain extends JDialog {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
+		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Dobrodosli" + " "+LoginHandling.trenutniKorisnik.getIme()+" "+
 				LoginHandling.trenutniKorisnik.getPrezime()+"!");
+		lblNewLabel.setBounds(10, 11, 434, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+		getContentPane().add(lblNewLabel);
 
 	}
 

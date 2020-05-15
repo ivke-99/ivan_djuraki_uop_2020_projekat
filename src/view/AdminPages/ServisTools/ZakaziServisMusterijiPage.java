@@ -26,6 +26,7 @@ import classes.Serviser;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
+import dao.LoadDatabase;
 import view.AdminMain;
 
 public class ZakaziServisMusterijiPage extends JDialog {
@@ -179,6 +180,7 @@ public class ZakaziServisMusterijiPage extends JDialog {
 				delovi=(ArrayList<ServisniDeo>) list.getSelectedValuesList();
 				s.setDeoZaServis(delovi);
 				String newLine=s.WriteToString();
+				LoadDatabase.sviServisi.replace(currentServis.getId(), s);
 				FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
 				JOptionPane.showMessageDialog(null, "Uspesan upis!");
 				int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
