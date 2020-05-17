@@ -1,5 +1,1 @@
 0|Ivan|Djuraki|0312999800094|true|Kis Ferenca 16|(222)-(222)-(2222)|ivi|123|false|50000
-1|Ivan|Djuraki|0312999800094|true|Kis Ferenca 16|(222)-(222)-(2222)|ivke1|Ivancar123.|true|50000
-2|Dar|Zar|0312999800094|true|asasdsadasd|(222)-(222)-(2222)|asdasdsda|1232131231|true|22222
-3|aaaaaa|aaaaaaaaa|0312999800094|true|aaaaaaaaa|(222)-(222)-(2222)|ssssss|ddddddd|true|22222
-4|Pera|Lukic|0601998800033|true|neka taa 21|(065)-(554)-(8787)|pex|123|false|50000

@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
 public class PregledajServisneKnjizicePage extends JDialog {
@@ -77,8 +78,12 @@ public class PregledajServisneKnjizicePage extends JDialog {
 	    for (HashMap.Entry<Integer,ServisnaKnjizica> entry : map.entrySet()) {
 	    	/* treba jos prepraviti funkciju da ne ispisuje obrisane servise */
 	    	
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(),entry.getValue().getServisi()
+	    	
+	    	
+	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(), entry.getValue().getServisi().stream().filter(f -> f.isDeleted() == false
+	        		).collect(Collectors.toList())
 	        		});
+	       
 	    }
 	    return model;
 	}

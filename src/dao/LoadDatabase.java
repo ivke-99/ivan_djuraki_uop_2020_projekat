@@ -100,73 +100,90 @@ public class LoadDatabase {
 	public static HashMap<Integer,Musterija> CreateAllMusterijaFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,Musterija> sveMusterije=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var musterija=Musterija.CreateFromString(NewLines[i]);
 			if(!(musterija.isDeleted() == true))
 				sveMusterije.put(musterija.getId(), musterija); 
 		}
-		
+		}catch(Exception none) {
+			return sveMusterije;
+		}
 		return sveMusterije;
 	}
 	
 	public static HashMap<Integer,Serviser> CreateAllServiserFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,Serviser> sviServiseri=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var serviser=Serviser.CreateFromString(NewLines[i]);
 			if(!(serviser.isDeleted() == true))
 				sviServiseri.put(serviser.getId(), serviser); 
 		}
-		
+		}catch(Exception none) {
+			return sviServiseri;
+		}
 		return sviServiseri;
 	}
 	
 	public static HashMap<Integer,Automobil> CreateAllAutomobilFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,Automobil> sviAutomobili=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var auto=Automobil.CreateFromString(NewLines[i]);
 			if(!(auto.isDeleted() == true))
 				sviAutomobili.put(auto.getId(), auto);
 		}
-		
+		}catch(Exception none) {
+			return sviAutomobili;
+		}
 		return sviAutomobili;
 	}
 	
 	public static HashMap<Integer,ServisniDeo> CreateAllServisniDeoFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,ServisniDeo> sviServisniDelovi=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var deo=ServisniDeo.CreateFromString(NewLines[i]);
 			if(!(deo.isDeleted() == true))
 				sviServisniDelovi.put(deo.getId(), deo);
 		}
-		
+		}catch(Exception none) {
+			return sviServisniDelovi;
+		}
 		return sviServisniDelovi;
 	}
 	
 	public static HashMap<Integer,ServisAutomobila> CreateAllServisAutomobilaFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,ServisAutomobila> sviServisiAutomobila=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var servis=ServisAutomobila.CreateFromString(NewLines[i]);
 			if(!(servis.isDeleted() == true))
 				sviServisiAutomobila.put(servis.getId(), servis);
 		}
-		
-		
+		}catch(Exception none) {
+			return sviServisiAutomobila;
+		}
 		return sviServisiAutomobila;
 	}
 	
 	public static HashMap<Integer,ServisnaKnjizica> CreateAllServisnaKnjizicaFromFile(String lines) throws Exception {
 		String[] NewLines = lines.split("\n");
 		HashMap<Integer,ServisnaKnjizica> sveServisneKnjizice=new HashMap<>();
+		try {
 		for (int i=0;i<NewLines.length;i++) {
 			var knjizica=ServisnaKnjizica.CreateFromString(NewLines[i]);
 			if(!(knjizica.isDeleted() == true))
 				sveServisneKnjizice.put(knjizica.getId(), knjizica);
 		}
-		
+		}catch(Exception none) {
+			return sveServisneKnjizice;
+		}
 		
 		return sveServisneKnjizice;
 	}

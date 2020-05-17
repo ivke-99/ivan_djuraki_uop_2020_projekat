@@ -92,7 +92,6 @@ public class DodajServisniDeoPage extends JDialog {
 						ServisniDeo deo = new ServisniDeo();
 						deo.setId(FileHandling.servisniDeoPath);
 						deo.setCena(Double.parseDouble(txtCena.getText()));
-						deo.setMarka((MarkaiModel) cbMarkaiModel.getSelectedItem());
 						deo.setNazivDela(txtNaziv.getText());
 						LoadDatabase.sviDelovi.put(deo.getId(), deo);
 						String write = deo.WriteToString();

@@ -1,6 +1,7 @@
 package view.AdminPages.ServisTools;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JDialog;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import classes.ServisAutomobila;
+import classes.ServisniDeo;
 import controller.LoginHandling;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
@@ -73,16 +75,24 @@ public class PregledajSveServise extends JDialog {
 	
 	public static TableModel toTableModel(HashMap<Integer,ServisAutomobila> map) {
 	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id Servisa","Serviser", "Automobil", "Termin", "Opis", "Status servisa", "Delovi za servis"}, 0
+	        new Object[] { "Id Servisa","Serviser", "Automobil", "Termin", "Opis", "Status servisa", "Cena", "Delovi"}, 0
 	    );
 	    
 	   
 	    
 	    for (HashMap.Entry<Integer,ServisAutomobila> entry : map.entrySet()) {
-	    	
+	    	String lista="";
+	    	for (ServisniDeo deo : entry.getValue().getDeoZaServis()) {
+	    		
+	    		try {
+	    		lista = lista + ","+deo.getNazivDela()+" ";
+	    		}catch(Exception e1) {
+	    			e1.printStackTrace();
+	    		}
+	    	}
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getServiser(),entry.getValue().getAutomobil().getMarka()
 	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(), 
-	        		entry.getValue().getDeoZaServis()});
+	        		lista});
 	    	
 	        
 	    }

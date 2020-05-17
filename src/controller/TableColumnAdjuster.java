@@ -145,6 +145,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 	/*
 	 *  Update the TableColumn with the newly calculated width
 	 */
+	@SuppressWarnings("deprecation")
 	private void updateTableColumn(int column, int width)
 	{
 		final TableColumn tableColumn = table.getColumnModel().getColumn(column);
