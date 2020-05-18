@@ -15,11 +15,13 @@ import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.ServiserMain;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ServiserPregledajServisePage extends JDialog {
 
 	/**
@@ -48,9 +50,12 @@ public class ServiserPregledajServisePage extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JTable t = new JTable(toTableModel(LoadDatabase.sviServisi));
+		t.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		t.setEnabled(false);
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 748, 242);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.setViewportBorder(BorderFactory.createEmptyBorder());
 		getContentPane().add(scrollPane);
 		t.setEnabled(false);
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -72,7 +77,7 @@ public class ServiserPregledajServisePage extends JDialog {
 	
 	public static TableModel toTableModel(HashMap<Integer,ServisAutomobila> map) {
 	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id Servisa", "Automobil", "Termin", "Opis", "Status servisa", "Delovi za servis"}, 0
+	        new Object[] { "Id Servisa", "Automobil", "Termin", "Opis", "Status servisa", "Cena", "Delovi za servis"}, 0
 	    );
 	    
 	   
@@ -85,7 +90,7 @@ public class ServiserPregledajServisePage extends JDialog {
 	    	{	
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAutomobil().getMarka()
 	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
-	        		entry.getValue().getDeoZaServis()});
+	        		entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "")});
 	    	}
 	    	}
 	    }

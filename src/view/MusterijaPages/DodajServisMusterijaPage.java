@@ -11,22 +11,17 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
 import classes.Automobil;
-import classes.Musterija;
 import classes.ServisAutomobila;
 import controller.FileHandling;
 import controller.FillingControl;
-import controller.LoginHandling;
 import dao.LoadDatabase;
 import view.MusterijaMain;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class DodajServisMusterijaPage extends JDialog {
 
 	/**

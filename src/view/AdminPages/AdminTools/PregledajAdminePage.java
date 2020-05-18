@@ -11,17 +11,14 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import classes.Admin;
-import classes.ServisAutomobila;
-import controller.LoginHandling;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
-import view.ServiserMain;
 
+@SuppressWarnings("serial")
 public class PregledajAdminePage extends JDialog {
 
 	/**

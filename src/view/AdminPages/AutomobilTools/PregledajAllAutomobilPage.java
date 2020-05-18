@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import classes.Automobil;
-import classes.Musterija;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
@@ -20,6 +19,7 @@ import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class PregledajAllAutomobilPage extends JDialog {
 
 	/**

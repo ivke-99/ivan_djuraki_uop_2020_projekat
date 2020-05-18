@@ -10,17 +10,14 @@ import javax.swing.JMenuItem;
 import controller.LoginHandling;
 import view.MusterijaPages.MusterijaPregledajKnjizicuPage;
 import view.MusterijaPages.MusterijaPregledajServisePage;
-import view.ServiserPages.DodajServisAutomobilaPage;
 
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class MusterijaMain extends JDialog {
 
 	/**
@@ -33,6 +30,7 @@ public class MusterijaMain extends JDialog {
 					MusterijaMain dialog = new MusterijaMain();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
+					dialog.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

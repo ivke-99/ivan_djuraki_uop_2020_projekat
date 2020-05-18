@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -36,6 +35,7 @@ import view.AdminMain;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+@SuppressWarnings("serial")
 public class IzmeniObrisiServisPage extends JDialog {
 	private JTextField txtOpis;
 	private ServisAutomobila currentServis;

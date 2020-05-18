@@ -1,0 +1,3 @@
+0|Sajla|2000.0|peugot_307|false
+1|Lezaj - Leva Strana|3000.0|peugot_307|false
+2|Lezaj - Desna Strana|3000.0|peugot_307|false

@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import classes.Automobil;
 import classes.ServisAutomobila;
 import classes.Serviser;
 import classes.ServisniDeo;
@@ -29,6 +28,7 @@ import controller.FillingControl;
 import dao.LoadDatabase;
 import view.AdminMain;
 
+@SuppressWarnings("serial")
 public class ZakaziServisMusterijiPage extends JDialog {
 	private JTextField txtOpis;
 	private ServisAutomobila currentServis;

@@ -8,7 +8,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import classes.Automobil;
 import classes.ServisnaKnjizica;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
@@ -78,12 +77,16 @@ public class PregledajServisneKnjizicePage extends JDialog {
 	    for (HashMap.Entry<Integer,ServisnaKnjizica> entry : map.entrySet()) {
 	    	/* treba jos prepraviti funkciju da ne ispisuje obrisane servise */
 	    	
-	    	
+	    	try {
 	    	
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(), entry.getValue().getServisi().stream().filter(f -> f.isDeleted() == false
 	        		).collect(Collectors.toList())
 	        		});
 	       
+	    	}catch(Exception noServis) {
+	    		model.addRow(new Object[] { entry.getKey() , entry.getValue().getAuto(), entry.getValue().getServisi().toString().replace("[", "").replace("]", "")});
+	    	}
+	    		
 	    }
 	    return model;
 	}

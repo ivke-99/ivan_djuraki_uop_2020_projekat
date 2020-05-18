@@ -14,13 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import classes.Admin;
 import classes.Automobil;
-import classes.Identifiable;
 import classes.Musterija;
 import classes.Automobil.MarkaiModel;
 import classes.Automobil.VrstaGoriva;
-import classes.Osoba.TipoviKorisnika;
 import controller.FileHandling;
 import controller.FillingControl;
 import dao.DeleteDAO;
@@ -30,6 +27,7 @@ import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.awt.event.ItemEvent;
 
+@SuppressWarnings("serial")
 public class IzmeniAutomobilPage extends JDialog {
 	protected JComboBox<Automobil.MarkaiModel> cbMarkaiModel;
 	protected JComboBox<Musterija> cbMusterija;

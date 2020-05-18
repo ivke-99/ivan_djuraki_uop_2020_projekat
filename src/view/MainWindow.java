@@ -30,6 +30,7 @@ public class MainWindow {
 				try {
 					MainWindow window = new MainWindow();
 					window.LoginPage.setVisible(true);
+					window.LoginPage.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

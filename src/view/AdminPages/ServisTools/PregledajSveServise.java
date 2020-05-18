@@ -1,7 +1,6 @@
 package view.AdminPages.ServisTools;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JDialog;
@@ -9,8 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import classes.ServisAutomobila;
-import classes.ServisniDeo;
-import controller.LoginHandling;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
@@ -22,6 +19,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class PregledajSveServise extends JDialog {
 
 	/**
@@ -81,19 +79,10 @@ public class PregledajSveServise extends JDialog {
 	   
 	    
 	    for (HashMap.Entry<Integer,ServisAutomobila> entry : map.entrySet()) {
-	    	String lista="";
-	    	for (ServisniDeo deo : entry.getValue().getDeoZaServis()) {
-	    		
-	    		try {
-	    		lista = lista + ","+deo.getNazivDela()+" ";
-	    		}catch(Exception e1) {
-	    			e1.printStackTrace();
-	    		}
-	    	}
+	  
 	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getServiser(),entry.getValue().getAutomobil().getMarka()
 	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(), 
-	        		lista});
-	    	
+	        		entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "")});
 	        
 	    }
 	    return model;

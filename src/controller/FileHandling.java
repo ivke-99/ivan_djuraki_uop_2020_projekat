@@ -41,7 +41,7 @@ public class FileHandling {
 		
 		
 		String line = LoadDatabase.LoadLinesFromFile(filePath);
-		if(line.equals(null)) {
+		if(line.equals("")) {
 			
 			return true;
 		}

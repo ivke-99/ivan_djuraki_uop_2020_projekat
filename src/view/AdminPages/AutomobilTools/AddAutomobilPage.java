@@ -13,9 +13,6 @@ import classes.Automobil;
 import classes.Automobil.MarkaiModel;
 import classes.Automobil.VrstaGoriva;
 import classes.Musterija;
-import classes.Serviser;
-import classes.Osoba.TipoviKorisnika;
-import classes.Serviser.Specijalizacija;
 import classes.ServisnaKnjizica;
 import controller.FileHandling;
 import controller.FillingControl;
@@ -30,6 +27,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class AddAutomobilPage extends JDialog {
 		protected JComboBox<Automobil.MarkaiModel> cbMarkaiModel;
 		protected JComboBox<Musterija> cbMusterija;

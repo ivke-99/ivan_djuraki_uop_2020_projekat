@@ -17,11 +17,11 @@ import dao.LoadDatabase;
 import view.AdminMain;
 
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class DodajServisniDeoPage extends JDialog {
 	private JTextField txtNaziv;
 	private JTextField txtCena;
@@ -93,6 +93,7 @@ public class DodajServisniDeoPage extends JDialog {
 						deo.setId(FileHandling.servisniDeoPath);
 						deo.setCena(Double.parseDouble(txtCena.getText()));
 						deo.setNazivDela(txtNaziv.getText());
+						deo.setMarka((MarkaiModel) cbMarkaiModel.getSelectedItem());
 						LoadDatabase.sviDelovi.put(deo.getId(), deo);
 						String write = deo.WriteToString();
 						FileHandling.WriteToFile(write, FileHandling.servisniDeoPath);

@@ -16,9 +16,9 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class ServiserMain extends JDialog {
 
 	/**
@@ -31,6 +31,7 @@ public class ServiserMain extends JDialog {
 					ServiserMain dialog = new ServiserMain();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
+					dialog.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

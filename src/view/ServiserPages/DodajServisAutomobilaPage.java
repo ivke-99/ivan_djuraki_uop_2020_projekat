@@ -2,8 +2,6 @@ package view.ServiserPages;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.StringJoiner;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -15,20 +13,15 @@ import javax.swing.JOptionPane;
 import classes.Automobil;
 import classes.ServisAutomobila;
 import classes.Serviser;
-import classes.ServisnaKnjizica;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
 import controller.LoginHandling;
-import controller.SpecificObjectCreation;
 import dao.LoadDatabase;
 import view.ServiserMain;
 
-import javax.swing.JScrollBar;
 import javax.swing.text.MaskFormatter;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -37,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class DodajServisAutomobilaPage extends JDialog {
 	private JTextField textField;
 

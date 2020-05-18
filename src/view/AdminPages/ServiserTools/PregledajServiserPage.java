@@ -13,12 +13,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import classes.Musterija;
 import classes.Serviser;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
 import view.AdminMain;
 
+@SuppressWarnings("serial")
 public class PregledajServiserPage extends JDialog {
 
 	/**

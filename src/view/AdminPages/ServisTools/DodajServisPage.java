@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+@SuppressWarnings("serial")
 public class DodajServisPage extends JDialog {
 	private JTextField txtOpis;
 

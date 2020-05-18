@@ -3,47 +3,35 @@ package view.ServiserPages;
 import java.awt.EventQueue;
 
 import javax.swing.JDialog;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import classes.Identifiable;
 import classes.Musterija;
 import classes.ServisAutomobila;
 import classes.ServisnaKnjizica;
-import classes.ServisniDeo;
 import controller.CenaHandling;
 import controller.FileHandling;
 import controller.FillingControl;
-import controller.LoginHandling;
 import dao.LoadDatabase;
-import view.AdminMain;
 import view.ServiserMain;
 import view.AdminPages.ServisTools.IzmeniObrisiServisPage;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+@SuppressWarnings("serial")
 public class ServiserIzmeniServisPage extends JDialog {
 	private JTextField txtID;
 	private JTextField txtAuto;
@@ -159,25 +147,8 @@ public class ServiserIzmeniServisPage extends JDialog {
 				
 				LoadDatabase.sviServisi.replace(servis.getId(), noviObjekat);
 				String writing = noviObjekat.WriteToString();
+				FileHandling.ReplaceLineInFile(oldLine, writing, FileHandling.servisAutomobilaPath);
 				
-				String lines="";
-				try {
-					lines = LoadDatabase.LoadLinesFromFile(FileHandling.servisAutomobilaPath);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				String[] NewLines = lines.split("\n");
-				for( String line : NewLines) {
-						
-					if(line.equals(oldLine)) {
-						
-						lines = lines.replace(oldLine, writing);
-					}
-				}
-				
-				FileHandling.OverWriteFile(lines, FileHandling.servisAutomobilaPath);
 				}
 				}
 				else {
@@ -200,9 +171,7 @@ public class ServiserIzmeniServisPage extends JDialog {
 		JButton btnNewButton_2 = new JButton("Otkazi");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*ovo radi,ne pitatajte me kako radi,
-				 * ni zasto tako radi
-				 */
+				
 				
 				int opcija=JOptionPane.showConfirmDialog(null, "Da li ste sigurni?","Izaberite opciju",JOptionPane.YES_NO_OPTION);
 				if (opcija != 1) {

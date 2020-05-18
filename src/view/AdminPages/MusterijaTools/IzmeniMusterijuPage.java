@@ -8,12 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.HeadlessException;
 
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import classes.Identifiable;
 import classes.Musterija;
 import classes.Osoba.TipoviKorisnika;
 import controller.FileHandling;
@@ -26,14 +24,13 @@ import view.AdminMain;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
 import java.awt.event.ItemListener;
-import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ItemEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
 
+@SuppressWarnings("serial")
 public class IzmeniMusterijuPage extends JDialog {
 	protected JTextField txtIme;
 	protected JTextField txtPrezime;
@@ -107,10 +104,10 @@ public class IzmeniMusterijuPage extends JDialog {
 		getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
 		
-		JComboBox cbPol = new JComboBox();
+		JComboBox<String> cbPol = new JComboBox<String>();
 		cbPol.setBounds(134, 165, 96, 22);
 		getContentPane().add(cbPol);
-		cbPol.setModel(new DefaultComboBoxModel(new String[] {"musko", "zensko"}));
+		cbPol.setModel(new DefaultComboBoxModel<String>(new String[] {"musko", "zensko"}));
 		cbPol.setSelectedIndex(-1);
 		
 		txtkorIme = new JTextField();
@@ -218,6 +215,7 @@ public class IzmeniMusterijuPage extends JDialog {
 		
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean validateMe = false;
 				int opcija=JOptionPane.showConfirmDialog(null, "Da li ste sigurni?","Izaberite opciju",JOptionPane.YES_NO_OPTION);
 				if (opcija != 1 ) {
 					
@@ -229,48 +227,49 @@ public class IzmeniMusterijuPage extends JDialog {
 							|| txtLozinka.getText().isEmpty() || txtBrBod.getText().isEmpty() || cbMusterija.getSelectedIndex() == -1)
 						{
 						JOptionPane.showMessageDialog(null,"Neka polja nisu dobro unesena. Pokusajte ponovo.");
-						} else
-						try {
-							
-							if (!(currentMusterija.getKorisnickoIme().equals(txtkorIme.getText()))) {
-								
-							if (Validator.CheckForIme(txtkorIme.getText()) == false) {
-								JOptionPane.showMessageDialog(null, "Korisnicko ime vec postoji.");
-							}
-							}
-							else {
-								try {
-									IzmeniMusteriju(currentMusterija,txtBrojTelefona,cbPol);
+						} else {
+							try {
+								if (!(txtkorIme.getText().equals(currentMusterija.getKorisnickoIme()))) {
+									if (Validator.CheckForIme(txtkorIme.getText()) == false) {
+										validateMe = true;
+									}
+
+									else {
+										validateMe = false;
+									}
+								}
+
+								if (validateMe == false) {
+									IzmeniMusteriju(currentMusterija, txtBrojTelefona, cbPol);
 									JOptionPane.showMessageDialog(null, "Uspesna izmena!");
-									int opcija2=JOptionPane.showConfirmDialog(null, "Da li zelite jos neku operaciju?","Izaberite Opciju",JOptionPane.YES_NO_OPTION);
+									int opcija2 = JOptionPane.showConfirmDialog(null, "Da li zelite jos neku operaciju?",
+											"Izaberite Opciju", JOptionPane.YES_NO_OPTION);
 									if (opcija2 == 1) {
 										dispose();
 										new AdminMain().setVisible(true);
 									}
-									
-									if(opcija2 == 0) {
+
+									if (opcija2 == 0) {
 										dispose();
 										new IzmeniMusterijuPage().setVisible(true);
 									}
-								} catch (Exception e1) {
-									JOptionPane.showMessageDialog(null, "Greska pri izmeni.Proverite da li ste uneli sva polja.");
-									e1.printStackTrace();
 								}
-								
-								
+
+								else {
+									JOptionPane.showMessageDialog(null, "Korisnicko ime vec postoji.");
+								}
+
+							} catch (Exception e1) {
+								JOptionPane.showMessageDialog(null,
+										"Greska pri izmeni.Proverite da li ste uneli sva polja.");
+								e1.printStackTrace();
 							}
-						} catch (HeadlessException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+
 						}
-					
-					
+
+					}
 				}
-			}
-		});
+			});
 		
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -282,12 +281,6 @@ public class IzmeniMusterijuPage extends JDialog {
 					
 					try {
 						var brisanje = (Musterija) cbMusterija.getSelectedItem();
-						/*String oldLine = brisanje.WriteToString();
-						ResetFields(txtBrojTelefona,cbPol);
-						brisanje.setDeleted(true);
-						String newLine = brisanje.WriteToString();
-						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.musterijaPath);
-						LoadDatabase.sveMusterije.remove(((Identifiable) brisanje).getId());*/
 						DeleteDAO.DeleteMusterija(brisanje);
 						ResetFields(txtBrojTelefona,cbPol);
 						cbMusterija.setSelectedIndex(-1);
@@ -307,7 +300,7 @@ public class IzmeniMusterijuPage extends JDialog {
 	}
 	
 	
-	public void IzmeniMusteriju(Musterija old,JFormattedTextField txtBrojTelefona,JComboBox cbPol) throws Exception {
+	public void IzmeniMusteriju(Musterija old,JFormattedTextField txtBrojTelefona,JComboBox<String> cbPol) throws Exception {
 		
 		String oldLine = old.WriteToString();
 		
@@ -332,7 +325,7 @@ public class IzmeniMusterijuPage extends JDialog {
 		FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.musterijaPath);
 	}
 	
-	public void ResetFields(JFormattedTextField txtBrojTelefona,JComboBox cbPol) {
+	public void ResetFields(JFormattedTextField txtBrojTelefona,JComboBox<String> cbPol) {
 		txtIme.setText("");
 		txtPrezime.setText("");
 		txtJMBG.setText("");

@@ -7,7 +7,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import classes.Automobil;
 import classes.Automobil.MarkaiModel;
 import classes.ServisniDeo;
 import controller.FileHandling;
@@ -22,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+@SuppressWarnings("serial")
 public class DodajSimetricniDeoPage extends JDialog {
 	protected MarkaiModel currentAuto = null;
 	/**

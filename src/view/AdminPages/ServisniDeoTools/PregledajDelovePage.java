@@ -8,7 +8,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import classes.ServisAutomobila;
 import classes.ServisniDeo;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
@@ -20,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class PregledajDelovePage extends JDialog {
 
 	/**

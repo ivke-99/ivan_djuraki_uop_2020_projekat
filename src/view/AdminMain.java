@@ -21,7 +21,6 @@ import view.AdminPages.AutomobilTools.IzmeniAutomobilPage;
 import view.AdminPages.AutomobilTools.PregledajAllAutomobilPage;
 import view.AdminPages.MusterijaTools.AddMusterijaPage;
 import view.AdminPages.MusterijaTools.IzmeniMusterijuPage;
-import view.AdminPages.MusterijaTools.PregledajMusterijePage;
 import view.AdminPages.ServisTools.DodajServisPage;
 import view.AdminPages.ServisTools.IzmeniObrisiServisPage;
 import view.AdminPages.ServisTools.PregledajSveServise;
@@ -50,6 +49,7 @@ public class AdminMain extends JDialog {
 					AdminMain dialog = new AdminMain();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
+					dialog.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

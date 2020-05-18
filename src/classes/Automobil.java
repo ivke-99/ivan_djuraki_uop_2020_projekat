@@ -162,6 +162,6 @@ public class Automobil extends Identifiable {
 	
 	@Override
 	public String toString() {
-		return "[" + marka + ", id=" + id + "]";
+		return "" + marka + ", id=" + id + "";
 	}
 }

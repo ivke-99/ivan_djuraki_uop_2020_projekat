@@ -21,6 +21,8 @@ import dao.LoadDatabase;
 
 public class FillingControl {
 	
+	
+
 	public static void PopuniComboBoxAuto(JComboBox<Automobil> cbAuto) {
 		/*koristi se za musteriju*/
 		ArrayList<Automobil> automobili = (ArrayList<Automobil>)LoadDatabase.sviAutomobili.entrySet().stream().filter(f -> f.getValue().getVlasnik().getId() == 

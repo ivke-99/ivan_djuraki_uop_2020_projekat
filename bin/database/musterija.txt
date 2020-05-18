@@ -1,0 +1,3 @@
+0|asdas|dasdasd|0312999800094|true|asdasdasd|(222)-(222)-(2222)|asdasdasd|2222|false|2
+1|asdas|asdasdasds|0312999800094|false|asdasda|(222)-(222)-(2222)|sasdasd|222|false|22
+2|asdasd|asdasda|0312999800094|true|sss|(222)-(222)-(2222)|sssaaa|sss|false|1

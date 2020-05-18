@@ -17,14 +17,12 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import classes.Admin;
-import classes.Musterija;
 import classes.Osoba.TipoviKorisnika;
 import controller.FileHandling;
-import controller.FillingControl;
-import controller.Validator;
 import dao.LoadDatabase;
 import view.AdminMain;
 
+@SuppressWarnings("serial")
 public class AddAdminPage extends JDialog {
 	protected JTextField txtIme;
 	protected JTextField txtPrezime;
@@ -86,10 +84,10 @@ public class AddAdminPage extends JDialog {
 		getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
 		
-		JComboBox cbPol = new JComboBox();
+		JComboBox<String> cbPol = new JComboBox<String>();
 		cbPol.setBounds(134, 123, 96, 22);
 		getContentPane().add(cbPol);
-		cbPol.setModel(new DefaultComboBoxModel(new String[] {"musko", "zensko"}));
+		cbPol.setModel(new DefaultComboBoxModel<String>(new String[] {"musko", "zensko"}));
 		cbPol.setSelectedIndex(-1);
 		
 		txtkorIme = new JTextField();
@@ -208,7 +206,16 @@ public class AddAdminPage extends JDialog {
 						try {
 							KreirajAdmina(pol,txtBrojTelefona);
 							JOptionPane.showMessageDialog(null, "Uspesan upis.");
-							dispose();
+							
+							txtIme.setText("");
+							txtPrezime.setText("");
+							txtJMBG.setText("");
+							txtAdresa.setText("");
+							txtkorIme.setText("");
+							txtLozinka.setText("");
+							txtPlata.setText("");
+							txtBrojTelefona.setText("");
+							cbPol.setSelectedIndex(-1);
 						}catch(Exception u) {
 							JOptionPane.showMessageDialog(null, "Neuspesan upis.Korisnicko ime vec postoji, ili format nekog polja"
 									+ "nije dobro unesen.");

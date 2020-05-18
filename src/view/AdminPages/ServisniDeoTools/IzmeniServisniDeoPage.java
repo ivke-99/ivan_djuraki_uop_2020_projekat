@@ -19,11 +19,11 @@ import controller.FileHandling;
 import controller.FillingControl;
 import dao.LoadDatabase;
 import view.AdminMain;
-import view.AdminPages.ServisTools.IzmeniObrisiServisPage;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+@SuppressWarnings("serial")
 public class IzmeniServisniDeoPage extends JDialog {
 	private JTextField txtNaziv;
 	private JTextField txtCena;
