@@ -88,7 +88,6 @@ public class ServisnaKnjizica extends Identifiable {
 		 * vec se moze samo obrisati
 		 */
 		
-		LoadDatabase.UcitajCeluBazu();
 		ServisnaKnjizica knjiz = null;
 		
 		/*trazimo knjizicu u hash mapi */

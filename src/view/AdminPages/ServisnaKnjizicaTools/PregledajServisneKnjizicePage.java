@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import classes.ServisAutomobila;
 import classes.ServisnaKnjizica;
 import controller.TableColumnAdjuster;
 import dao.LoadDatabase;
@@ -16,10 +17,11 @@ import view.AdminMain;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class PregledajServisneKnjizicePage extends JDialog {
 
 	/**
@@ -46,7 +48,7 @@ public class PregledajServisneKnjizicePage extends JDialog {
 		setTitle("Pregledaj Sve Servisne Knjizice");
 		setBounds(100, 100, 711, 445);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sveKnjizice));
 		t.setEnabled(false);
 		JScrollPane scrollPane = new JScrollPane(t);
@@ -56,7 +58,7 @@ public class PregledajServisneKnjizicePage extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,25 +71,21 @@ public class PregledajServisneKnjizicePage extends JDialog {
 		getContentPane().add(btnNewButton);
 
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,ServisnaKnjizica> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id", "Automobil", "Servisi"}, 0
-	    );
-	    for (HashMap.Entry<Integer,ServisnaKnjizica> entry : map.entrySet()) {
-	    	/* treba jos prepraviti funkciju da ne ispisuje obrisane servise */
-	    	
-	    	try {
-	    	
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(), entry.getValue().getServisi().stream().filter(f -> f.isDeleted() == false
-	        		).collect(Collectors.toList())
-	        		});
-	       
-	    	}catch(Exception noServis) {
-	    		model.addRow(new Object[] { entry.getKey() , entry.getValue().getAuto(), entry.getValue().getServisi().toString().replace("[", "").replace("]", "")});
-	    	}
-	    		
-	    }
-	    return model;
+
+	public static TableModel toTableModel(HashMap<Integer, ServisnaKnjizica> map) {
+		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id", "Automobil", "Servisi" }, 0);
+		for (HashMap.Entry<Integer, ServisnaKnjizica> entry : map.entrySet()) {
+			ArrayList<ServisAutomobila> filtriraniServisi = new ArrayList<ServisAutomobila>();
+			for (ServisAutomobila k : entry.getValue().getServisi()) {
+				if (k != null && k.isDeleted() != true) {
+					filtriraniServisi.add(k);
+				}
+
+			}
+			model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(),
+					filtriraniServisi.toString().replace("[", "").replace("]", "") });
+
+		}
+		return model;
 	}
 }

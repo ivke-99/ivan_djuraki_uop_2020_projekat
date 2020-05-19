@@ -73,7 +73,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		JComboBox<Automobil> cbAuto = new JComboBox<Automobil>();
 		cbAuto.setBounds(86, 20, 197, 22);
 		getContentPane().add(cbAuto);
-		FillingControl.PopuniComboBoxAuto2(cbAuto);
+		FillingControl.PopuniComboBoxSviAutomobili(cbAuto);
 		cbAuto.setSelectedIndex(-1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Izaberi delove:");

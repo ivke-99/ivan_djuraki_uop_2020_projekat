@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import classes.ServisAutomobila;
 import classes.ServisnaKnjizica;
 import controller.LoginHandling;
 import controller.TableColumnAdjuster;
@@ -16,6 +17,7 @@ import view.MusterijaMain;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
@@ -71,10 +73,17 @@ public class MusterijaPregledajKnjizicuPage extends JDialog {
 		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id Knjizice", "Lista Servisa" }, 0);
 
 		for (HashMap.Entry<Integer, ServisnaKnjizica> entry : map.entrySet()) {
-
+			ArrayList<ServisAutomobila> filtriraniServisi = new ArrayList<ServisAutomobila>();
 			if (entry.getValue().getAuto().getVlasnik().getId() == LoginHandling.trenutniKorisnik.getId()) {
-				model.addRow(new Object[] { entry.getKey(),
-						entry.getValue().getServisi().toString().replace("[", "").replace("]", "") });
+				for (ServisAutomobila k : entry.getValue().getServisi()) {
+					if (k != null && k.isDeleted() != true) {
+						filtriraniServisi.add(k);
+					}
+
+				}
+				model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(),
+						filtriraniServisi.toString().replace("[", "").replace("]", "") });
+
 			}
 
 		}

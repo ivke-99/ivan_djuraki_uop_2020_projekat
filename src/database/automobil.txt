@@ -1,1 +1,1 @@
-0|2|2020|dizel|1400|peugot_307|1200|false
+0|0|2020|benzin|222|fiat_punto|222|false
