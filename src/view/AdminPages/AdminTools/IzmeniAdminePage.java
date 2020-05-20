@@ -282,16 +282,20 @@ public class IzmeniAdminePage extends JDialog {
 
 					try {
 						var brisanje = (Admin) cbAdmin.getSelectedItem();
-						String oldLine = brisanje.WriteToString();
-						ResetFields(txtBrojTelefona, cbPol);
-						brisanje.setDeleted(true);
-						String newLine = brisanje.WriteToString();
-						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.adminPath);
-						LoadDatabase.sviAdmini.remove(((Identifiable) brisanje).getId());
-						cbAdmin.setSelectedIndex(-1);
-						cbAdmin.removeItem(brisanje);
-						cbAdmin.setSelectedIndex(-1);
-						JOptionPane.showMessageDialog(null, "Uspesno brisanje!");
+						if (LoadDatabase.sviAdmini.size() == 1) {
+							JOptionPane.showMessageDialog(null, "Mora postojati barem jedan admin.");
+						} else {
+							String oldLine = brisanje.WriteToString();
+							ResetFields(txtBrojTelefona, cbPol);
+							brisanje.setDeleted(true);
+							String newLine = brisanje.WriteToString();
+							FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.adminPath);
+							LoadDatabase.sviAdmini.remove(((Identifiable) brisanje).getId());
+							cbAdmin.setSelectedIndex(-1);
+							cbAdmin.removeItem(brisanje);
+							cbAdmin.setSelectedIndex(-1);
+							JOptionPane.showMessageDialog(null, "Uspesno brisanje!");
+						}
 					} catch (Exception unknown) {
 						JOptionPane.showMessageDialog(null, "Neuspelo brisanje.");
 						unknown.printStackTrace();
