@@ -301,11 +301,13 @@ public class IzmeniObrisiServisPage extends JDialog {
 								else {
 									JOptionPane.showMessageDialog(null, "Musterija ima 0 bodova.");
 									CenaHandling.UvecajBodove(currentServis.getAutomobil().getVlasnik());
+									currentServis.setCena(ukupnaCena);
 								}
 							}
 
 							else {
 								CenaHandling.UvecajBodove(currentServis.getAutomobil().getVlasnik());
+								currentServis.setCena(ukupnaCena);
 							}
 
 							String newLine = currentServis.WriteToString();
@@ -325,7 +327,6 @@ public class IzmeniObrisiServisPage extends JDialog {
 							}
 						} catch (Exception not) {
 							JOptionPane.showMessageDialog(null, "Morate odabrati servis.");
-							not.printStackTrace();
 						}
 					}
 				}

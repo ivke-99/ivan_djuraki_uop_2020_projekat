@@ -11,73 +11,76 @@ import controller.FileHandling;
 
 public class DeleteDAO {
 	protected static ArrayList<Automobil> sviAutiMusterije = null;
-	/*hijerarhija brisanja objekata(veze) === Automobil -> Servis automobila ->Servisna Knjizica
-	 * 										  Musterija -> Automobil -> Servis Automobila -> Servisna Knjizica
-	 * Sve instance klasa se mogu manipulisati sem servisne knjizice, koja se moze samo pregledati 									  
-	 * Obrisati zavrsen servis moze samo admin, ne zavrsen moze i serviser
-	 * Sve ostale instance klasa ne bi trebalo da imaju nikakvu vezu ni sa cim drugim
+	/*
+	 * hijerarhija brisanja objekata(veze) === Automobil -> Servis automobila
+	 * ->Servisna Knjizica Musterija -> Automobil -> Servis Automobila -> Servisna
+	 * Knjizica Sve instance klasa se mogu manipulisati sem servisne knjizice, koja
+	 * se moze samo pregledati Obrisati zavrsen servis moze samo admin, ne zavrsen
+	 * moze i serviser Sve ostale instance klasa ne bi trebalo da imaju nikakvu vezu
+	 * ni sa cim drugim
 	 */
-	
-	public static void DeleteAutomobil (Automobil brisanje) {
+
+	public static void DeleteAutomobil(Automobil brisanje) {
 		try {
 			LoadDatabase.UcitajCeluBazu();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*brisanje servisne knjizice vezane za automobil*/
-		ServisnaKnjizica knjizZaBrisanje =  (ServisnaKnjizica) LoadDatabase.sveKnjizice.entrySet().stream().filter(f -> f.getValue().getAuto().getId()
-				== brisanje.getId()).map(gb -> (ServisnaKnjizica)gb.getValue()).findAny().get();
-	
+		/* brisanje servisne knjizice vezane za automobil */
+		ServisnaKnjizica knjizZaBrisanje = (ServisnaKnjizica) LoadDatabase.sveKnjizice.entrySet().stream()
+				.filter(f -> f.getValue().getAuto().getId() == brisanje.getId())
+				.map(gb -> (ServisnaKnjizica) gb.getValue()).findAny().get();
+
 		String oldLine = knjizZaBrisanje.WriteToString();
 		knjizZaBrisanje.setDeleted(true);
 		String newLine = knjizZaBrisanje.WriteToString();
 		LoadDatabase.sveKnjizice.remove(((Identifiable) knjizZaBrisanje).getId());
 		FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisnaKnjizicaPath);
-		
-		/*obrisi sve servise vezane za izabrani auto*/
-		ArrayList<ServisAutomobila> servisiZaBrisanje = (ArrayList<ServisAutomobila>) LoadDatabase.sviServisi.entrySet().stream()
-				.filter(f -> f.getValue().getAutomobil().getId() == brisanje.getId())
-				.map(g -> (ServisAutomobila)g.getValue()).collect(Collectors.toList());
-		
+
+		/* obrisi sve servise vezane za izabrani auto */
+		ArrayList<ServisAutomobila> servisiZaBrisanje = (ArrayList<ServisAutomobila>) LoadDatabase.sviServisi.entrySet()
+				.stream().filter(f -> f.getValue().getAutomobil().getId() == brisanje.getId())
+				.map(g -> (ServisAutomobila) g.getValue()).collect(Collectors.toList());
+
 		if (!(servisiZaBrisanje.isEmpty())) {
-		for(ServisAutomobila s : servisiZaBrisanje) {
-			String o = s.WriteToString();
-			s.setDeleted(true);
-			String n = s.WriteToString();
-			LoadDatabase.sviServisi.remove(((Identifiable) s).getId());
-			FileHandling.ReplaceLineInFile(o, n, FileHandling.servisAutomobilaPath);
+			for (ServisAutomobila s : servisiZaBrisanje) {
+				String o = s.WriteToString();
+				s.setDeleted(true);
+				String n = s.WriteToString();
+				LoadDatabase.sviServisi.remove(((Identifiable) s).getId());
+				FileHandling.ReplaceLineInFile(o, n, FileHandling.servisAutomobilaPath);
+			}
 		}
-		}
-		
-		/*i tek na kraju brisanje automobila*/
+
+		/* i tek na kraju brisanje automobila */
 		String old = brisanje.WriteToString();
 		brisanje.setDeleted(true);
 		String newl = brisanje.WriteToString();
 		LoadDatabase.sviAutomobili.remove(((Identifiable) brisanje).getId());
 		FileHandling.ReplaceLineInFile(old, newl, FileHandling.automobilPath);
 	}
-	
-	public static void DeleteMusterija (Musterija brisanje) {
-		
-		for(Automobil a : LoadDatabase.sviAutomobili.values()) {
-			
-			if(a.getVlasnik().getId() == brisanje.getId()) {
+
+	public static void DeleteMusterija(Musterija brisanje) {
+
+		for (Automobil a : LoadDatabase.sviAutomobili.values()) {
+
+			if (a.getVlasnik().getId() == brisanje.getId()) {
 				DeleteAutomobil(a);
 			}
-			
+
 		}
-		/*koristimo gornju funkciju da obrisemo automobile i sve ostalo*/
-		
-		/*brisemo musteriju*/
+		/* koristimo gornju funkciju da obrisemo automobile i sve ostalo */
+
+		/* brisemo musteriju */
 		String old = brisanje.WriteToString();
 		brisanje.setDeleted(true);
 		String newl = brisanje.WriteToString();
 		LoadDatabase.sveMusterije.remove(((Identifiable) brisanje).getId());
 		FileHandling.ReplaceLineInFile(old, newl, FileHandling.musterijaPath);
-		
-		}
-	
+
+	}
+
 	public static void DeleteServisAutomobila(ServisAutomobila brisanje) {
 		String old = brisanje.WriteToString();
 		brisanje.setDeleted(true);
@@ -85,16 +88,17 @@ public class DeleteDAO {
 		LoadDatabase.sviServisi.remove(((Identifiable) brisanje).getId());
 		FileHandling.ReplaceLineInFile(old, newl, FileHandling.servisAutomobilaPath);
 	}
-	
+
 	public static ServisnaKnjizica FindServisInKnjizica(ServisAutomobila brisanje) {
 		try {
-		ServisnaKnjizica forUpdate = (ServisnaKnjizica)LoadDatabase.sveKnjizice.entrySet().stream().filter(f ->
-		f.getValue().getServisi().contains(brisanje)).map(g -> (ServisnaKnjizica)g.getValue()).findAny().get();
-		return forUpdate;
-		}catch(Exception none) {
+			ServisnaKnjizica forUpdate = (ServisnaKnjizica) LoadDatabase.sveKnjizice.entrySet().stream()
+					.filter(f -> f.getValue().getServisi().contains(brisanje)).map(g -> (ServisnaKnjizica) g.getValue())
+					.findAny().get();
+			return forUpdate;
+		} catch (Exception none) {
 			return null;
 		}
-		
+
 	}
-	
+
 }

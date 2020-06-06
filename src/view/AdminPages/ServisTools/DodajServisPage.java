@@ -54,73 +54,73 @@ public class DodajServisPage extends JDialog {
 
 	/**
 	 * Create the dialog.
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public DodajServisPage() throws ParseException {
 		setTitle("Dodaj Servis Automobila");
 		setBounds(100, 100, 466, 483);
 		getContentPane().setLayout(null);
-		
+
 		MaskFormatter dateMask = new MaskFormatter("##/##/#### ##:##");
 		dateMask.setValidCharacters("0123456789");
 		dateMask.setPlaceholderCharacter('_');
-		
+
 		JComboBox<Automobil> cbAuto = new JComboBox<Automobil>();
 		cbAuto.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cbAuto.setBounds(165, 38, 177, 30);
 		getContentPane().add(cbAuto);
 		FillingControl.PopuniComboBoxSviAutomobili(cbAuto);
 		cbAuto.setSelectedIndex(-1);
-		
+
 		JLabel lblNewLabel = new JLabel("Izaberi auto:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(10, 36, 106, 30);
 		getContentPane().add(lblNewLabel);
-		
+
 		JComboBox<Serviser> cbServiser = new JComboBox<Serviser>();
 		cbServiser.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cbServiser.setBounds(165, 81, 177, 30);
 		getContentPane().add(cbServiser);
 		FillingControl.PopuniComboBoxSviServiseri(cbServiser);
 		cbServiser.setSelectedIndex(-1);
-		
+
 		JLabel lblIzaberiServisera = new JLabel("Izaberi servisera:");
 		lblIzaberiServisera.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIzaberiServisera.setBounds(10, 79, 145, 30);
 		getContentPane().add(lblIzaberiServisera);
-		
+
 		JLabel lblIzaberiDatum = new JLabel("Izaberi datum:");
 		lblIzaberiDatum.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIzaberiDatum.setBounds(10, 122, 145, 28);
 		getContentPane().add(lblIzaberiDatum);
-		
+
 		JFormattedTextField txtDatum = new JFormattedTextField(dateMask);
 		txtDatum.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtDatum.setBounds(165, 122, 177, 28);
 		getContentPane().add(txtDatum);
-		
+
 		JLabel lblKratakOpis = new JLabel("Kratak opis:");
 		lblKratakOpis.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblKratakOpis.setBounds(10, 163, 111, 26);
 		getContentPane().add(lblKratakOpis);
-		
+
 		txtOpis = new JTextField();
 		txtOpis.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtOpis.setBounds(165, 161, 253, 29);
 		getContentPane().add(txtOpis);
 		txtOpis.setColumns(10);
-		
+
 		JLabel lblIzaberiDelove = new JLabel("Izaberi delove:");
 		lblIzaberiDelove.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIzaberiDelove.setBounds(10, 200, 111, 26);
 		getContentPane().add(lblIzaberiDelove);
-		
-		DefaultListModel<ServisniDeo> listModel=new DefaultListModel<ServisniDeo>();
+
+		DefaultListModel<ServisniDeo> listModel = new DefaultListModel<ServisniDeo>();
 		JList<ServisniDeo> list = new JList<ServisniDeo>(listModel);
 		list.setBounds(165, 201, 253, 141);
 		getContentPane().add(list);
-		
-		
+
 		JButton btnIzadji = new JButton("IZADJI");
 		btnIzadji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,24 +131,24 @@ public class DodajServisPage extends JDialog {
 		btnIzadji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzadji.setBounds(339, 408, 101, 30);
 		getContentPane().add(btnIzadji);
-		
+
 		JButton btnDodaj = new JButton("DODAJ");
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDodaj.setBounds(10, 408, 101, 30);
 		getContentPane().add(btnDodaj);
-		
+
 		JButton btnReset = new JButton("RESET");
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnReset.setBounds(121, 408, 101, 30);
 		getContentPane().add(btnReset);
-		
+
 		cbAuto.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				listModel.removeAllElements();
 				FillingControl.PopuniListuDelova(list, listModel, cbAuto);
 			}
 		});
-		
+
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cbAuto.setSelectedIndex(-1);
@@ -158,47 +158,45 @@ public class DodajServisPage extends JDialog {
 				listModel.removeAllElements();
 			}
 		});
-		
+
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				boolean opcija = FillingControl.PrintOpcija();
 				if (opcija != false) {
-					
-					
-				try {
-				ServisAutomobila s = new ServisAutomobila();
-				s.setId(FileHandling.servisAutomobilaPath);
-				s.setAutomobil((Automobil) cbAuto.getSelectedItem());
-				s.setServiser((Serviser) cbServiser.getSelectedItem());
-				s.setStatusServisa(true);
-				s.setTermin(ServisAutomobila.ConvertStringToDate(txtDatum.getText()));
-				s.setOpis(txtOpis.getText());
-				ArrayList<ServisniDeo> delovi = null;
-				delovi=(ArrayList<ServisniDeo>) list.getSelectedValuesList();
-				s.setDeoZaServis(delovi);
-				String wrt=s.WriteToString();
-				LoadDatabase.sviServisi.put(s.getId(), s);
-				FileHandling.WriteToFile(wrt, FileHandling.servisAutomobilaPath);
-				JOptionPane.showMessageDialog(null, "Uspesan upis!");
-				int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-				if(opcija2 == 0) {
-					dispose();
-					new DodajServisPage().setVisible(true);
+
+					try {
+						ServisAutomobila s = new ServisAutomobila();
+						s.setId(FileHandling.servisAutomobilaPath);
+						s.setAutomobil((Automobil) cbAuto.getSelectedItem());
+						s.setServiser((Serviser) cbServiser.getSelectedItem());
+						s.setStatusServisa(true);
+						s.setTermin(ServisAutomobila.ConvertStringToDate(txtDatum.getText()));
+						s.setOpis(txtOpis.getText());
+						ArrayList<ServisniDeo> delovi = null;
+						delovi = (ArrayList<ServisniDeo>) list.getSelectedValuesList();
+						s.setDeoZaServis(delovi);
+						String wrt = s.WriteToString();
+						LoadDatabase.sviServisi.put(s.getId(), s);
+						FileHandling.WriteToFile(wrt, FileHandling.servisAutomobilaPath);
+						JOptionPane.showMessageDialog(null, "Uspesan upis!");
+						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju",
+								JOptionPane.YES_NO_OPTION);
+						if (opcija2 == 0) {
+							dispose();
+							new DodajServisPage().setVisible(true);
+						} else {
+							dispose();
+							new AdminMain().setVisible(true);
+						}
+
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+					}
+
 				}
-				else {
-					dispose();
-					new AdminMain().setVisible(true);
-				}
-				
-				}catch(Exception e1) {
-				JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
-				}
-				
-				
-			}	
-		}
+			}
 		});
 	}
-	
+
 }

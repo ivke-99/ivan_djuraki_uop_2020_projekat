@@ -47,7 +47,7 @@ public class PregledajSveServise extends JDialog {
 		setTitle("Pregledaj Sve Servise");
 		setBounds(100, 100, 807, 476);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sviServisi));
 		JScrollPane scrollPane = new JScrollPane(t);
 		t.setEnabled(false);
@@ -57,7 +57,7 @@ public class PregledajSveServise extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnIzadji = new JButton("IZADJI");
 		btnIzadji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,22 +70,20 @@ public class PregledajSveServise extends JDialog {
 		getContentPane().add(btnIzadji);
 
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,ServisAutomobila> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id Servisa","Serviser", "Automobil", "Termin", "Opis", "Status servisa", "Cena", "Delovi"}, 0
-	    );
-	    
-	   
-	    
-	    for (HashMap.Entry<Integer,ServisAutomobila> entry : map.entrySet()) {
-	  
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getServiser(),entry.getValue().getAutomobil().getMarka()
-	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(), 
-	        		entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "")});
-	        
-	    }
-	    return model;
-	  
-   }
+
+	public static TableModel toTableModel(HashMap<Integer, ServisAutomobila> map) {
+		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id Servisa", "Serviser", "Automobil", "Termin",
+				"Opis", "Status servisa", "Cena", "Delovi" }, 0);
+
+		for (HashMap.Entry<Integer, ServisAutomobila> entry : map.entrySet()) {
+
+			model.addRow(new Object[] { entry.getKey(), entry.getValue().getServiser(),
+					entry.getValue().getAutomobil().getMarka(), entry.getValue().getTermin(),
+					entry.getValue().getOpis(), entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
+					entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "") });
+
+		}
+		return model;
+
+	}
 }

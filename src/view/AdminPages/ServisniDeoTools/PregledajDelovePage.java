@@ -46,7 +46,7 @@ public class PregledajDelovePage extends JDialog {
 		setTitle("Pregledaj Sve Servisne Delove");
 		setBounds(100, 100, 708, 457);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sviDelovi));
 		t.setEnabled(false);
 		JScrollPane scrollPane = new JScrollPane(t);
@@ -56,7 +56,7 @@ public class PregledajDelovePage extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,22 +69,18 @@ public class PregledajDelovePage extends JDialog {
 		getContentPane().add(btnNewButton);
 
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,ServisniDeo> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id Dela","Naziv Dela", "Marka i Model", "Cena"}, 0
-	    );
-	    
-	   
-	    
-	    for (HashMap.Entry<Integer,ServisniDeo> entry : map.entrySet()) {
-	
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getNazivDela(),entry.getValue().getMarka(),
-	        		entry.getValue().getCena()});
-	    	
-	        
-	    }
-	    return model;
-	  
-   }
+
+	public static TableModel toTableModel(HashMap<Integer, ServisniDeo> map) {
+		DefaultTableModel model = new DefaultTableModel(
+				new Object[] { "Id Dela", "Naziv Dela", "Marka i Model", "Cena" }, 0);
+
+		for (HashMap.Entry<Integer, ServisniDeo> entry : map.entrySet()) {
+
+			model.addRow(new Object[] { entry.getKey(), entry.getValue().getNazivDela(), entry.getValue().getMarka(),
+					entry.getValue().getCena() });
+
+		}
+		return model;
+
+	}
 }

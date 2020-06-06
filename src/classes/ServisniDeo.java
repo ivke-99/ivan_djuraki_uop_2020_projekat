@@ -28,7 +28,7 @@ public class ServisniDeo extends Identifiable {
 		if(original.getNazivDela().contains("Leva Strana"))
 			this.nazivDela = original.getNazivDela().replace("Leva Strana", "Desna Strana");
 		else if (original.getNazivDela().contains("Desna Strana"))
-			this.nazivDela = original.getNazivDela().replace("Desna Strana", "Leva strana");
+			this.nazivDela = original.getNazivDela().replace("Desna Strana", "Leva Strana");
 		this.cena = original.getCena();
 		this.marka = original.getMarka();
 	}

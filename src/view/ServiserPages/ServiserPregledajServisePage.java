@@ -48,7 +48,7 @@ public class ServiserPregledajServisePage extends JDialog {
 		setTitle("Vasi Servisi");
 		setBounds(100, 100, 784, 423);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sviServisi));
 		t.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		t.setEnabled(false);
@@ -61,7 +61,7 @@ public class ServiserPregledajServisePage extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,27 +74,24 @@ public class ServiserPregledajServisePage extends JDialog {
 		getContentPane().add(btnNewButton);
 
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,ServisAutomobila> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id Servisa", "Automobil", "Termin", "Opis", "Status servisa", "Cena", "Delovi za servis"}, 0
-	    );
-	    
-	   
-	    
-	    for (HashMap.Entry<Integer,ServisAutomobila> entry : map.entrySet()) {
-	    	
-	    	if (!(entry.getValue().getServiser() == null)) {	
-	    	
-	    	if(entry.getValue().getServiser().getId() == LoginHandling.trenutniKorisnik.getId()) 
-	    	{	
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getAutomobil().getMarka()
-	        		,entry.getValue().getTermin(),entry.getValue().getOpis(),entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
-	        		entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "")});
-	    	}
-	    	}
-	    }
-	    return model;
-   }
+
+	public static TableModel toTableModel(HashMap<Integer, ServisAutomobila> map) {
+		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id Servisa", "Automobil", "Termin", "Opis",
+				"Status servisa", "Cena", "Delovi za servis" }, 0);
+
+		for (HashMap.Entry<Integer, ServisAutomobila> entry : map.entrySet()) {
+
+			if (!(entry.getValue().getServiser() == null)) {
+
+				if (entry.getValue().getServiser().getId() == LoginHandling.trenutniKorisnik.getId()) {
+					model.addRow(new Object[] { entry.getKey(), entry.getValue().getAutomobil().getMarka(),
+							entry.getValue().getTermin(), entry.getValue().getOpis(),
+							entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
+							entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "") });
+				}
+			}
+		}
+		return model;
+	}
 
 }

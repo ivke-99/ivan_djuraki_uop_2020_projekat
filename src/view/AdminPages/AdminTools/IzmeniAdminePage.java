@@ -29,7 +29,6 @@ import view.AdminMain;
 
 @SuppressWarnings("serial")
 public class IzmeniAdminePage extends JDialog {
-	/* napravi funkcionalnost da ako obrise sebe gasi se ceo program */
 	protected JTextField txtIme;
 	protected JTextField txtPrezime;
 	protected JTextField txtJMBG;

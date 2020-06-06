@@ -54,29 +54,29 @@ public class IzmeniServisniDeoPage extends JDialog {
 		setTitle("Dodaj Servisni Deo");
 		setBounds(100, 100, 342, 336);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Naziv dela:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(10, 66, 84, 35);
 		getContentPane().add(lblNewLabel);
-		
+
 		JComboBox<MarkaiModel> cbMarkaiModel = new JComboBox<MarkaiModel>();
 		cbMarkaiModel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cbMarkaiModel.setBounds(154, 112, 137, 31);
 		FillingControl.PopuniComboBoxMarkaiModel(cbMarkaiModel);
 		getContentPane().add(cbMarkaiModel);
 		cbMarkaiModel.setSelectedIndex(-1);
-		
+
 		JLabel lblMarkaIModel = new JLabel("Marka i Model:");
 		lblMarkaIModel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblMarkaIModel.setBounds(10, 112, 108, 31);
 		getContentPane().add(lblMarkaIModel);
-		
+
 		JLabel lblCena = new JLabel("Cena dela:");
 		lblCena.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCena.setBounds(10, 154, 108, 31);
 		getContentPane().add(lblCena);
-		
+
 		JComboBox<ServisniDeo> cbDeo = new JComboBox<ServisniDeo>();
 		cbDeo.setSelectedIndex(-1);
 		cbDeo.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -84,18 +84,18 @@ public class IzmeniServisniDeoPage extends JDialog {
 		getContentPane().add(cbDeo);
 		FillingControl.PopuniComboDelovi(cbDeo);
 		cbDeo.setSelectedIndex(-1);
-		
+
 		txtNaziv = new JTextField();
 		txtNaziv.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtNaziv.setBounds(154, 66, 137, 31);
 		getContentPane().add(txtNaziv);
 		txtNaziv.setColumns(10);
-		
+
 		JButton btnIzmeni = new JButton("IZMENI");
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean opcija = FillingControl.PrintOpcija();
-				if(opcija != false) {
+				if (opcija != false) {
 					try {
 						String stari = currentDeo.WriteToString();
 						ServisniDeo novi = new ServisniDeo();
@@ -107,19 +107,18 @@ public class IzmeniServisniDeoPage extends JDialog {
 						String write = novi.WriteToString();
 						FileHandling.ReplaceLineInFile(stari, write, FileHandling.servisniDeoPath);
 						JOptionPane.showMessageDialog(null, "Uspesna izmena!");
-						
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-						if(opcija2 == 0) {
+
+						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
+								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+						if (opcija2 == 0) {
 							dispose();
 							new IzmeniServisniDeoPage().setVisible(true);
-						}
-						else {
+						} else {
 							dispose();
 							new AdminMain().setVisible(true);
 						}
-						
-						
-					}catch(Exception cena) {
+
+					} catch (Exception cena) {
 						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.");
 					}
 				}
@@ -128,12 +127,12 @@ public class IzmeniServisniDeoPage extends JDialog {
 		btnIzmeni.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzmeni.setBounds(10, 255, 97, 31);
 		getContentPane().add(btnIzmeni);
-		
+
 		JButton btnReset = new JButton("RESET");
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnReset.setBounds(117, 255, 97, 31);
 		getContentPane().add(btnReset);
-		
+
 		JButton btnIzadji = new JButton("IZADJI");
 		btnIzadji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -144,51 +143,50 @@ public class IzmeniServisniDeoPage extends JDialog {
 		btnIzadji.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnIzadji.setBounds(219, 255, 97, 31);
 		getContentPane().add(btnIzadji);
-		
+
 		txtCena = new JTextField();
 		txtCena.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCena.setColumns(10);
 		txtCena.setBounds(154, 154, 139, 31);
 		getContentPane().add(txtCena);
-		
+
 		JLabel lblDeo = new JLabel("Deo:");
 		lblDeo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDeo.setBounds(10, 20, 84, 35);
 		getContentPane().add(lblDeo);
-		
-	
+
 		JButton btnObrisi = new JButton("OBRISI");
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean opcija = FillingControl.PrintOpcija();
 				if (opcija != false) {
 					try {
-					String oldLine = currentDeo.WriteToString();
-					currentDeo.setDeleted(true);
-					String newLine = currentDeo.WriteToString();
-					LoadDatabase.sviDelovi.remove(((Identifiable) currentDeo).getId());
-					FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisniDeoPath);
-					JOptionPane.showMessageDialog(null, "Uspesno obrisan deo.");
-					int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?", "Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-					if(opcija2 == 0) {
-						dispose();
-						new IzmeniServisniDeoPage().setVisible(true);
-					}
-					else {
-						dispose();
-						new AdminMain().setVisible(true);
-					}
-					}catch(Exception none) {
+						String oldLine = currentDeo.WriteToString();
+						currentDeo.setDeleted(true);
+						String newLine = currentDeo.WriteToString();
+						LoadDatabase.sviDelovi.remove(((Identifiable) currentDeo).getId());
+						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisniDeoPath);
+						JOptionPane.showMessageDialog(null, "Uspesno obrisan deo.");
+						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
+								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+						if (opcija2 == 0) {
+							dispose();
+							new IzmeniServisniDeoPage().setVisible(true);
+						} else {
+							dispose();
+							new AdminMain().setVisible(true);
+						}
+					} catch (Exception none) {
 						JOptionPane.showMessageDialog(null, "Izaberite deo.");
 					}
 				}
-			
+
 			}
 		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnObrisi.setBounds(117, 213, 97, 31);
 		getContentPane().add(btnObrisi);
-		
+
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cbDeo.setSelectedIndex(-1);
@@ -197,16 +195,16 @@ public class IzmeniServisniDeoPage extends JDialog {
 				txtNaziv.setText("");
 			}
 		});
-		
+
 		cbDeo.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				currentDeo = null;
 				currentDeo = (ServisniDeo) cbDeo.getSelectedItem();
 				cbMarkaiModel.setSelectedItem(currentDeo.getMarka());
-				txtCena.setText(currentDeo.getCena()+"");
+				txtCena.setText(currentDeo.getCena() + "");
 				txtNaziv.setText(currentDeo.getNazivDela());
 			}
 		});
-		
+
 	}
 }

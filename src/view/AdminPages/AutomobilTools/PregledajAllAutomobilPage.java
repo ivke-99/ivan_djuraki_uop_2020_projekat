@@ -46,7 +46,7 @@ public class PregledajAllAutomobilPage extends JDialog {
 		setTitle("Pregledaj sve automobile");
 		setBounds(100, 100, 744, 427);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sviAutomobili));
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 708, 306);
@@ -55,7 +55,7 @@ public class PregledajAllAutomobilPage extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnNewButton = new JButton("IZADJI");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,17 +68,15 @@ public class PregledajAllAutomobilPage extends JDialog {
 		getContentPane().add(btnNewButton);
 
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,Automobil> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id", "Marka i Model" , "Vlasnik", "Gorivo", "Kubikaza Motora" , "Snaga Motora" , "Godiste"}, 0
-	    );
-	    for (HashMap.Entry<Integer,Automobil> entry : map.entrySet()) {
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getMarka(), entry.getValue().getVlasnik()
-	        		,entry.getValue().getGorivo(),entry.getValue().getKubikazaMotora(),entry.getValue().getSnagaMotora(),
-	        		entry.getValue().getGodinaProizvodnje()
-	        		});
-	    }
-	    return model;
+
+	public static TableModel toTableModel(HashMap<Integer, Automobil> map) {
+		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id", "Marka i Model", "Vlasnik", "Gorivo",
+				"Kubikaza Motora", "Snaga Motora", "Godiste" }, 0);
+		for (HashMap.Entry<Integer, Automobil> entry : map.entrySet()) {
+			model.addRow(new Object[] { entry.getKey(), entry.getValue().getMarka(), entry.getValue().getVlasnik(),
+					entry.getValue().getGorivo(), entry.getValue().getKubikazaMotora(),
+					entry.getValue().getSnagaMotora(), entry.getValue().getGodinaProizvodnje() });
+		}
+		return model;
 	}
 }

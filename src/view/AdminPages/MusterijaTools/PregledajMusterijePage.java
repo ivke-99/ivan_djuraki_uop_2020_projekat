@@ -72,7 +72,7 @@ public class PregledajMusterijePage extends JDialog {
 
 	public static TableModel toTableModel(HashMap<Integer, Musterija> map) {
 		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id", "Ime", "Prezime", "JMBG", "Pol", "Adresa",
-				"Broj telefona", "Korisnicko ime, ", "Lozinka", "Tip Korisnika", "Broj bodova" }, 0);
+				"Broj telefona", "Korisnicko ime", "Lozinka", "Tip Korisnika", "Broj bodova" }, 0);
 		for (HashMap.Entry<Integer, Musterija> entry : map.entrySet()) {
 			model.addRow(new Object[] { entry.getKey(), entry.getValue().getIme(), entry.getValue().getPrezime(),
 					entry.getValue().getJmbg(), entry.getValue().isPol(), entry.getValue().getAdresa(),

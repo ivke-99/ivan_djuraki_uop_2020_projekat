@@ -69,7 +69,7 @@ public class FillingControl {
 	public static void PopuniComboBoxAdmin(JComboBox<Admin> cbAdmin) {
 		LoadDatabase.sviAdmini.values().stream().forEach(f -> cbAdmin.addItem(f));
 	}
-	
+
 	public static void PopuniComboBoxSviServiseri(JComboBox<Serviser> cbServiser) {
 		LoadDatabase.sviServiseri.values().stream().forEach(f -> cbServiser.addItem(f));
 	}
@@ -80,7 +80,6 @@ public class FillingControl {
 				cbSpecijalizacija.addItem(s);
 			}
 	}
-
 
 	public static boolean PrintOpcija() {
 		int opcija = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Izaberite opciju",
@@ -144,7 +143,6 @@ public class FillingControl {
 		var listaDelova = LoadDatabase.sviDelovi.values().stream()
 				.filter(f -> f.getNazivDela().contains("Desna Strana") || f.getNazivDela().contains("Leva Strana"))
 				.collect(Collectors.toList());
-
 		return listaDelova;
 	}
 

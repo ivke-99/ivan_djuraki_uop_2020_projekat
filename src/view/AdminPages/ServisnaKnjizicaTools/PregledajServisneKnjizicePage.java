@@ -76,11 +76,15 @@ public class PregledajServisneKnjizicePage extends JDialog {
 		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id", "Automobil", "Servisi" }, 0);
 		for (HashMap.Entry<Integer, ServisnaKnjizica> entry : map.entrySet()) {
 			ArrayList<ServisAutomobila> filtriraniServisi = new ArrayList<ServisAutomobila>();
-			for (ServisAutomobila k : entry.getValue().getServisi()) {
-				if (k != null && k.isDeleted() != true) {
-					filtriraniServisi.add(k);
-				}
+			try {
+				for (ServisAutomobila k : entry.getValue().getServisi()) {
+					if (k != null && k.isDeleted() != true) {
+						filtriraniServisi.add(k);
+					}
 
+				}
+			} catch (Exception none) {
+				/* null handling catch, desice se kada ne postoji servis */
 			}
 			model.addRow(new Object[] { entry.getKey(), entry.getValue().getAuto(),
 					filtriraniServisi.toString().replace("[", "").replace("]", "") });

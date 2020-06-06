@@ -46,7 +46,7 @@ public class PregledajServiserPage extends JDialog {
 		setTitle("Prikaz svih servisera");
 		setBounds(100, 100, 750, 436);
 		getContentPane().setLayout(null);
-		
+
 		JTable t = new JTable(toTableModel(LoadDatabase.sviServiseri));
 		JScrollPane scrollPane = new JScrollPane(t);
 		scrollPane.setBounds(10, 11, 714, 247);
@@ -55,7 +55,7 @@ public class PregledajServiserPage extends JDialog {
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		TableColumnAdjuster tca = new TableColumnAdjuster(t);
 		tca.adjustColumns();
-		
+
 		JButton btnNewButton = new JButton("Izadji");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,18 +67,16 @@ public class PregledajServiserPage extends JDialog {
 		btnNewButton.setBounds(612, 346, 112, 40);
 		getContentPane().add(btnNewButton);
 	}
-	
-	public static TableModel toTableModel(HashMap<Integer,Serviser> map) {
-	    DefaultTableModel model = new DefaultTableModel(
-	        new Object[] { "Id", "Ime" , "Prezime", "JMBG", "Pol" , "Adresa" , "Broj telefona" , "Korisnicko ime, "
-	        		, "Lozinka", "Tip Korisnika" , "Plata" , "Specijalizacija"}, 0
-	    );
-	    for (HashMap.Entry<Integer,Serviser> entry : map.entrySet()) {
-	        model.addRow(new Object[] { entry.getKey(), entry.getValue().getIme(), entry.getValue().getPrezime()
-	        		,entry.getValue().getJmbg(),entry.getValue().isPol(),entry.getValue().getAdresa(),entry.getValue().getBrtel(),
-	        		entry.getValue().getKorisnickoIme(),entry.getValue().getLozinka(),entry.getValue().getTipkorisnika(),
-	        		entry.getValue().getPlata(), entry.getValue().getSpec()});
-	    }
-	    return model;
+
+	public static TableModel toTableModel(HashMap<Integer, Serviser> map) {
+		DefaultTableModel model = new DefaultTableModel(new Object[] { "Id", "Ime", "Prezime", "JMBG", "Pol", "Adresa",
+				"Broj telefona", "Korisnicko ime", "Lozinka", "Tip Korisnika", "Plata", "Specijalizacija" }, 0);
+		for (HashMap.Entry<Integer, Serviser> entry : map.entrySet()) {
+			model.addRow(new Object[] { entry.getKey(), entry.getValue().getIme(), entry.getValue().getPrezime(),
+					entry.getValue().getJmbg(), entry.getValue().isPol(), entry.getValue().getAdresa(),
+					entry.getValue().getBrtel(), entry.getValue().getKorisnickoIme(), entry.getValue().getLozinka(),
+					entry.getValue().getTipkorisnika(), entry.getValue().getPlata(), entry.getValue().getSpec() });
+		}
+		return model;
 	}
 }
