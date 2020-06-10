@@ -213,7 +213,7 @@ public class AddServiserPage extends JDialog {
 							|| txtkorIme.getText().isEmpty() || txtLozinka.getText().isEmpty()
 							|| txtPlata.getText().isEmpty() || cbPol.getSelectedIndex() == -1
 							|| cbSpecijalizacija.getSelectedIndex() == -1) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja nisu dobrog formata.Pokusajte ponovo.");
 					}
 
 					else {
@@ -231,9 +231,7 @@ public class AddServiserPage extends JDialog {
 							}
 
 						} catch (Exception u) {
-							JOptionPane.showMessageDialog(null,
-									"Neuspesan upis.Korisnicko ime vec postoji, ili format nekog polja"
-											+ "nije dobro unesen.");
+							JOptionPane.showMessageDialog(null, u.getMessage());
 						}
 					}
 

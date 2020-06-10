@@ -76,7 +76,7 @@ public class DodajServisMusterijaPage extends JDialog {
 						JOptionPane.YES_NO_OPTION);
 				if (opcija != 1) {
 					if (cbAuto.getSelectedIndex() == -1 || textArea.getText().equals("")) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna.");
 					}
 
 					else {
@@ -102,7 +102,7 @@ public class DodajServisMusterijaPage extends JDialog {
 							FileHandling.WriteToFile(writing, FileHandling.servisAutomobilaPath);
 							JOptionPane.showMessageDialog(null, "Uspesan upis");
 						} catch (Exception upis) {
-							JOptionPane.showMessageDialog(null, "Neuspesan upis.");
+							JOptionPane.showMessageDialog(null, upis.getMessage());
 						}
 					}
 				}

@@ -234,7 +234,7 @@ public class IzmeniServiserPage extends JDialog {
 							|| txtkorIme.getText().isEmpty() || txtLozinka.getText().isEmpty()
 							|| txtPlata.getText().isEmpty() || cbServiser.getSelectedIndex() == -1
 							|| cbSpecijalizacija.getSelectedItem().equals(Specijalizacija.none)) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena. Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili nisu dobrog formata. Pokusajte ponovo.");
 					} else {
 						try {
 							if (!(txtkorIme.getText().equals(currentServiser.getKorisnickoIme()))) {
@@ -268,9 +268,7 @@ public class IzmeniServiserPage extends JDialog {
 							}
 
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null,
-									"Greska pri izmeni.Proverite da li ste uneli sva polja.");
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, e1.getMessage());
 						}
 
 					}

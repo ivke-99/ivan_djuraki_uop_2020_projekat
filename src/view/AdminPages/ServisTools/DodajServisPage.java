@@ -14,6 +14,7 @@ import classes.Serviser;
 import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
+import controller.Validator;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -164,7 +165,15 @@ public class DodajServisPage extends JDialog {
 
 				boolean opcija = FillingControl.PrintOpcija();
 				if (opcija != false) {
-
+					if(cbAuto.getSelectedIndex() == -1 || cbServiser.getSelectedIndex() == -1 || txtDatum.getText().isEmpty() || 
+							txtOpis.getText().isEmpty() || list.getSelectedIndex() == -1 ) {
+						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
+					}
+					
+					else if(Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy") == false) {
+						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
+					}
+					else {
 					try {
 						ServisAutomobila s = new ServisAutomobila();
 						s.setId(FileHandling.servisAutomobilaPath);
@@ -180,23 +189,34 @@ public class DodajServisPage extends JDialog {
 						LoadDatabase.sviServisi.put(s.getId(), s);
 						FileHandling.WriteToFile(wrt, FileHandling.servisAutomobilaPath);
 						JOptionPane.showMessageDialog(null, "Uspesan upis!");
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju",
-								JOptionPane.YES_NO_OPTION);
-						if (opcija2 == 0) {
-							dispose();
-							new DodajServisPage().setVisible(true);
-						} else {
-							dispose();
-							new AdminMain().setVisible(true);
-						}
+						DajIzlazneOpcije();
 
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
 					}
 
 				}
 			}
 		});
+	}
+	
+	public void DajIzlazneOpcije() {
+		int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite dodati jos?", "Izaberi Opciju",
+				JOptionPane.YES_NO_OPTION);
+		if (opcija2 == 0) {
+			dispose();
+			try {
+				new DodajServisPage().setVisible(true);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			dispose();
+			new AdminMain().setVisible(true);
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ import javax.swing.text.MaskFormatter;
 import classes.Admin;
 import classes.Osoba.TipoviKorisnika;
 import controller.FileHandling;
+import controller.Validator;
 import dao.LoadDatabase;
 import view.AdminMain;
 
@@ -197,13 +198,19 @@ public class AddAdminPage extends JDialog {
 							|| txtAdresa.getText().isEmpty() || !(txtBrojTelefona.getText().length() == 18)
 							|| txtkorIme.getText().isEmpty() || txtLozinka.getText().isEmpty()
 							|| txtPlata.getText().isEmpty() || cbPol.getSelectedIndex() == -1) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili nisu dobrog formata.Pokusajte ponovo.");
 					}
+					
 
 					else {
 						String pol = (String) cbPol.getSelectedItem();
 
 						try {
+							if (Validator.CheckForIme(txtkorIme.getText()) == false) {
+								JOptionPane.showMessageDialog(null, "Korisnicko ime vec postoji.");
+							}
+							
+							else {
 							KreirajAdmina(pol, txtBrojTelefona);
 							JOptionPane.showMessageDialog(null, "Uspesan upis.");
 
@@ -216,10 +223,9 @@ public class AddAdminPage extends JDialog {
 							txtPlata.setText("");
 							txtBrojTelefona.setText("");
 							cbPol.setSelectedIndex(-1);
+							}
 						} catch (Exception u) {
-							JOptionPane.showMessageDialog(null,
-									"Neuspesan upis.Korisnicko ime vec postoji, ili format nekog polja"
-											+ "nije dobro unesen.");
+							JOptionPane.showMessageDialog(null,u.getMessage());
 						}
 					}
 
@@ -254,4 +260,5 @@ public class AddAdminPage extends JDialog {
 		LoadDatabase.sviAdmini.put(a.getId(), a);
 
 	}
+
 }

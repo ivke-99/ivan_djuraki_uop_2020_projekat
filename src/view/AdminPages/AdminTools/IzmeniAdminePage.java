@@ -223,7 +223,7 @@ public class IzmeniAdminePage extends JDialog {
 							|| txtAdresa.getText().isEmpty() || !(txtBrojTelefona.getText().length() == 18)
 							|| txtkorIme.getText().isEmpty() || txtLozinka.getText().isEmpty()
 							|| txtPlata.getText().isEmpty() || cbAdmin.getSelectedIndex() == -1) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena. Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili nisu dobrog formata. Pokusajte ponovo.");
 					}
 
 					else {
@@ -259,9 +259,7 @@ public class IzmeniAdminePage extends JDialog {
 							}
 
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null,
-									"Greska pri izmeni.Proverite da li ste uneli sva polja.");
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, e1.getMessage());
 						}
 
 					}

@@ -164,7 +164,7 @@ public class AddAutomobilPage extends JDialog {
 					if (cbMusterija.getSelectedIndex() == -1 || cbTipGoriva.getSelectedIndex() == -1
 							|| cbMarkaiModel.getSelectedIndex() == -1 || txtKubikaza.getText().equals("")
 							|| txtSnaga.getText().equals("") || txtGodiste.getText().equals("")) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna.Pokusajte ponovo.");
 					}
 
 					else {
@@ -175,8 +175,7 @@ public class AddAutomobilPage extends JDialog {
 							dispose();
 							new AdminMain().setVisible(true);
 						} catch (Exception a) {
-							JOptionPane.showMessageDialog(null, "Greska pri upisu.");
-							a.printStackTrace();
+							JOptionPane.showMessageDialog(null, a.getMessage());
 						}
 					}
 

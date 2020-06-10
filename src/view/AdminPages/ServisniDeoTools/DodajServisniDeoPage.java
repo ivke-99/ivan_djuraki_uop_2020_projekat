@@ -105,7 +105,7 @@ public class DodajServisniDeoPage extends JDialog {
 							txtNaziv.setText("");
 
 						} catch (Exception cena) {
-							JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.");
+							JOptionPane.showMessageDialog(null, cena.getMessage());
 						}
 					}
 				}

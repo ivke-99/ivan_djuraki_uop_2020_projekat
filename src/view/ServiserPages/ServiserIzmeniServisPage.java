@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import java.awt.event.ItemListener;
+import java.text.ParseException;
 import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
@@ -121,18 +122,18 @@ public class ServiserIzmeniServisPage extends JDialog {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int opcija = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Izaberite opciju",
-						JOptionPane.YES_NO_OPTION);
+				boolean opcija = FillingControl.PrintOpcija();
 
-				if (opcija != 1) {
+				if (opcija != false) {
 
 					if (!(textAreaOpis.getText().equals("") || txtCena.getText().equals(""))) {
 
 						if (textAreaOpis.isEditable() == false || txtCena.isEditable() == false) {
 							JOptionPane.showMessageDialog(null, "Servis je zavrsen, nije ga moguce izmeniti.");
 						}
-
+						
 						else {
+							try {
 							ServisAutomobila noviObjekat = new ServisAutomobila();
 							String oldLine = servis.WriteToString();
 							noviObjekat.setIdFromFile(servis.getId());
@@ -146,10 +147,13 @@ public class ServiserIzmeniServisPage extends JDialog {
 							LoadDatabase.sviServisi.replace(servis.getId(), noviObjekat);
 							String writing = noviObjekat.WriteToString();
 							FileHandling.ReplaceLineInFile(oldLine, writing, FileHandling.servisAutomobilaPath);
-
+							DajOpcije();
+							}catch(Exception e3) {
+								JOptionPane.showMessageDialog(null, e3.getMessage());
+							}
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna.");
 					}
 
 				}
@@ -169,9 +173,8 @@ public class ServiserIzmeniServisPage extends JDialog {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int opcija = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Izaberite opciju",
-						JOptionPane.YES_NO_OPTION);
-				if (opcija != 1) {
+				boolean opcija = FillingControl.PrintOpcija();
+				if (opcija != false) {
 					if (textAreaOpis.isEditable() == false || txtCena.isEditable() == false) {
 						JOptionPane.showMessageDialog(null, "Servis je zavrsen, nije ga moguce otkazati.");
 					}
@@ -279,19 +282,11 @@ public class ServiserIzmeniServisPage extends JDialog {
 							FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
 							ServisnaKnjizica.UpdateKnjizica(servis);
 							JOptionPane.showMessageDialog(null, "Uspesno zavrsen servis.");
-
-							int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-									"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-							if (opcija2 == 0) {
-								dispose();
-								new IzmeniObrisiServisPage().setVisible(true);
-							} else {
-								dispose();
-								new ServiserMain().setVisible(true);
-							}
+							
+							DajOpcije();
+							
 						} catch (Exception not) {
 							JOptionPane.showMessageDialog(null, "Morate odabrati servis.");
-							not.printStackTrace();
 						}
 					}
 				}
@@ -337,5 +332,22 @@ public class ServiserIzmeniServisPage extends JDialog {
 			}
 		});
 
+	}
+	
+	public void DajOpcije() {
+		int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
+				"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+		if (opcija2 == 0) {
+			dispose();
+			try {
+				new IzmeniObrisiServisPage().setVisible(true);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			dispose();
+			new ServiserMain().setVisible(true);
+		}
 	}
 }

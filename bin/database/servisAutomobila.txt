@@ -1,2 +1,4 @@
-0|1|0|22/03/2020 15:30|asdsadasdas|0.0|false|false|0
-1|1|0|02/03/2020 15:30|asdadasd|2177.56|false|false|0
+0|1|0|22/03/2020 15:30|asdsadasdas|0.0|false|true|0
+1|1|0|02/03/2020 15:30|asdadasd|2177.56|false|true|0
+2|2|0|null||0.0|true|false|0
+3|2|1|03/12/1999 15:30|aaaa|0.0|true|false|0

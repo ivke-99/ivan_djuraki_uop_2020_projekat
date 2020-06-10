@@ -258,9 +258,7 @@ public class IzmeniMusterijuPage extends JDialog {
 							}
 
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null,
-									"Greska pri izmeni.Proverite da li ste uneli sva polja.");
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, e1.getMessage());
 						}
 
 					}

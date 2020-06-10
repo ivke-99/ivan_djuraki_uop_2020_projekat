@@ -17,6 +17,7 @@ import classes.ServisniDeo;
 import controller.FileHandling;
 import controller.FillingControl;
 import controller.LoginHandling;
+import controller.Validator;
 import dao.LoadDatabase;
 import view.ServiserMain;
 
@@ -105,15 +106,16 @@ public class DodajServisAutomobilaPage extends JDialog {
 		JButton btnNewButton = new JButton("Dodaj");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int opcija = JOptionPane.showConfirmDialog(null, "Da li ste sigurni?", "Izaberite opciju",
-						JOptionPane.YES_NO_OPTION);
+				boolean opcija = FillingControl.PrintOpcija();
 
-				if (opcija != 1) {
+				if (opcija != false) {
 					if (cbAuto.getSelectedIndex() == -1 || !(formattedTextField.getText().length() == 16)
 							|| textField.getText().equals("") || list.getSelectedIndex() == -1) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena. Probajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili servis nije izabran.");
 					}
-
+					else if(Validator.isThisDateValid(formattedTextField.getText(), "dd/MM/yyyy") == false) {
+						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
+					}
 					else {
 
 						try {
@@ -136,7 +138,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 
 							JOptionPane.showMessageDialog(null, "Uspesan upis ! ");
 						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Proverite da li ste dobro uneli polja.");
+							JOptionPane.showMessageDialog(null, e2.getMessage());
 						}
 
 					}

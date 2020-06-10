@@ -96,6 +96,10 @@ public class IzmeniServisniDeoPage extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				boolean opcija = FillingControl.PrintOpcija();
 				if (opcija != false) {
+					if(txtCena.getText().isEmpty() || cbMarkaiModel.getSelectedIndex() == -1 || txtNaziv.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
+					}
+					else {
 					try {
 						String stari = currentDeo.WriteToString();
 						ServisniDeo novi = new ServisniDeo();
@@ -108,18 +112,11 @@ public class IzmeniServisniDeoPage extends JDialog {
 						FileHandling.ReplaceLineInFile(stari, write, FileHandling.servisniDeoPath);
 						JOptionPane.showMessageDialog(null, "Uspesna izmena!");
 
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-						if (opcija2 == 0) {
-							dispose();
-							new IzmeniServisniDeoPage().setVisible(true);
-						} else {
-							dispose();
-							new AdminMain().setVisible(true);
-						}
+						DajOpcije();
 
 					} catch (Exception cena) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.");
+						JOptionPane.showMessageDialog(null, cena.getMessage());
+					}
 					}
 				}
 			}
@@ -167,15 +164,7 @@ public class IzmeniServisniDeoPage extends JDialog {
 						LoadDatabase.sviDelovi.remove(((Identifiable) currentDeo).getId());
 						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisniDeoPath);
 						JOptionPane.showMessageDialog(null, "Uspesno obrisan deo.");
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-						if (opcija2 == 0) {
-							dispose();
-							new IzmeniServisniDeoPage().setVisible(true);
-						} else {
-							dispose();
-							new AdminMain().setVisible(true);
-						}
+						DajOpcije();
 					} catch (Exception none) {
 						JOptionPane.showMessageDialog(null, "Izaberite deo.");
 					}
@@ -206,5 +195,17 @@ public class IzmeniServisniDeoPage extends JDialog {
 			}
 		});
 
+	}
+	
+	public void DajOpcije() {
+		int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
+				"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
+		if (opcija2 == 0) {
+			dispose();
+			new IzmeniServisniDeoPage().setVisible(true);
+		} else {
+			dispose();
+			new AdminMain().setVisible(true);
+		}
 	}
 }

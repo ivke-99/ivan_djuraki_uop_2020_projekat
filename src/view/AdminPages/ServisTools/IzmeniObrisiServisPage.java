@@ -30,6 +30,7 @@ import classes.ServisniDeo;
 import controller.CenaHandling;
 import controller.FileHandling;
 import controller.FillingControl;
+import controller.Validator;
 import dao.LoadDatabase;
 import view.AdminMain;
 import javax.swing.JRadioButton;
@@ -234,39 +235,36 @@ public class IzmeniObrisiServisPage extends JDialog {
 
 				boolean opcija = FillingControl.PrintOpcija();
 				if (opcija != false) {
+					if (cbServiser.getSelectedIndex() == -1 || txtDatum.getText().isEmpty()
+							|| txtOpis.getText().isEmpty() || list.getSelectedIndex() == -1) {
+						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
+					} else if (Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy") == false) {
+						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
+					} else {
+						try {
+							String oldLine = currentServis.WriteToString();
+							ServisAutomobila s = new ServisAutomobila();
+							s.setIdFromFile(currentServis.getId());
+							s.setAutomobil(currentServis.getAutomobil());
+							s.setServiser((Serviser) cbServiser.getSelectedItem());
+							s.setStatusServisa(true);
+							s.setTermin(ServisAutomobila.ConvertStringToDate(txtDatum.getText()));
+							s.setOpis(txtOpis.getText());
+							s.setCena(0);
+							ArrayList<ServisniDeo> delovi = null;
+							delovi = (ArrayList<ServisniDeo>) list.getSelectedValuesList();
+							s.setDeoZaServis(delovi);
+							String newLine = s.WriteToString();
+							LoadDatabase.sviServisi.replace(currentServis.getId(), s);
+							FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
+							JOptionPane.showMessageDialog(null, "Uspesan upis!");
+							DajIzlazneOpcije();
 
-					try {
-						String oldLine = currentServis.WriteToString();
-						ServisAutomobila s = new ServisAutomobila();
-						s.setIdFromFile(currentServis.getId());
-						s.setAutomobil(currentServis.getAutomobil());
-						s.setServiser((Serviser) cbServiser.getSelectedItem());
-						s.setStatusServisa(true);
-						s.setTermin(ServisAutomobila.ConvertStringToDate(txtDatum.getText()));
-						s.setOpis(txtOpis.getText());
-						s.setCena(0);
-						ArrayList<ServisniDeo> delovi = null;
-						delovi = (ArrayList<ServisniDeo>) list.getSelectedValuesList();
-						s.setDeoZaServis(delovi);
-						String newLine = s.WriteToString();
-						LoadDatabase.sviServisi.replace(currentServis.getId(), s);
-						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
-						JOptionPane.showMessageDialog(null, "Uspesan upis!");
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-						if (opcija2 == 0) {
-							dispose();
-							new IzmeniObrisiServisPage().setVisible(true);
-						} else {
-							dispose();
-							new AdminMain().setVisible(true);
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
+							JOptionPane.showMessageDialog(null, e1.getMessage());
 						}
-
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena.Pokusajte ponovo.");
-						e1.printStackTrace();
 					}
-
 				}
 			}
 		});
@@ -316,15 +314,7 @@ public class IzmeniObrisiServisPage extends JDialog {
 							ServisnaKnjizica.UpdateKnjizica(currentServis);
 							JOptionPane.showMessageDialog(null, "Uspesno zavrsen servis.");
 
-							int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-									"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-							if (opcija2 == 0) {
-								dispose();
-								new IzmeniObrisiServisPage().setVisible(true);
-							} else {
-								dispose();
-								new AdminMain().setVisible(true);
-							}
+							DajIzlazneOpcije();
 						} catch (Exception not) {
 							JOptionPane.showMessageDialog(null, "Morate odabrati servis.");
 						}
@@ -344,15 +334,7 @@ public class IzmeniObrisiServisPage extends JDialog {
 						LoadDatabase.sviServisi.remove(((Identifiable) currentServis).getId());
 						FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.servisAutomobilaPath);
 						JOptionPane.showMessageDialog(null, "Uspesno obrisan servis.");
-						int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?",
-								"Izaberi Opciju", JOptionPane.YES_NO_OPTION);
-						if (opcija2 == 0) {
-							dispose();
-							new IzmeniObrisiServisPage().setVisible(true);
-						} else {
-							dispose();
-							new AdminMain().setVisible(true);
-						}
+						DajIzlazneOpcije();
 					} catch (Exception none) {
 						JOptionPane.showMessageDialog(null, "Izaberite servis.");
 					}
@@ -360,5 +342,22 @@ public class IzmeniObrisiServisPage extends JDialog {
 			}
 		});
 
+	}
+
+	public void DajIzlazneOpcije() {
+		int opcija2 = JOptionPane.showConfirmDialog(null, "Zelite da izvrsite jos neku operaciju?", "Izaberi Opciju",
+				JOptionPane.YES_NO_OPTION);
+		if (opcija2 == 0) {
+			dispose();
+			try {
+				new IzmeniObrisiServisPage().setVisible(true);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			dispose();
+			new AdminMain().setVisible(true);
+		}
 	}
 }

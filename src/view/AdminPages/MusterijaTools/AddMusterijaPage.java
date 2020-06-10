@@ -205,7 +205,7 @@ public class AddMusterijaPage extends JDialog {
 							|| textField_2.getText().isEmpty() || textField_3.getText().isEmpty()
 							|| !(txtPhone.getText().length() == 18) || textField_5.getText().isEmpty()
 							|| textField_6.getText().isEmpty() || textField_7.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Neka polja nisu dobro unesena. Pokusajte ponovo.");
+						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili nisu dobrog formata. Pokusajte ponovo.");
 					}
 
 					else {
@@ -221,7 +221,7 @@ public class AddMusterijaPage extends JDialog {
 								new AdminMain().setVisible(true);
 							}
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, "Neuspesan upis.");
+							JOptionPane.showMessageDialog(null, e1.getMessage());
 
 						}
 
