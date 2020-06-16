@@ -1,3 +1,0 @@
-0|Bojan|Zeljanic|0312999800094|true|Neka Adresa 23|(063)-(232)-(1234)|bokiboki|123456|true|0
-1|Zora|Zokic|0312999800094|true|Adresa 2333|(063)-(232)-(1234)|asdasd|123456|true|0
-2|Marko|Zonjic|0312999800094|true|Marka Laza 3|(063)-(123)-(1234)|marko1|marko123|false|0

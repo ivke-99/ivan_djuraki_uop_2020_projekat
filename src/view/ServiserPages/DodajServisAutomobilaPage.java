@@ -113,7 +113,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 							|| textField.getText().equals("") || list.getSelectedIndex() == -1) {
 						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili servis nije izabran.");
 					}
-					else if(Validator.isThisDateValid(formattedTextField.getText(), "dd/MM/yyyy") == false) {
+					else if(Validator.isThisDateValid(formattedTextField.getText(), "dd/MM/yyyy hh:mm") == false) {
 						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
 					}
 					else {

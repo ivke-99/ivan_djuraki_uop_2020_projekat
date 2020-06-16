@@ -1,2 +1,0 @@
-0|Bojan|Pezovic|0312999800094|true|Adresa adresa 23|(111)-(111)-(1111)|asdasdasd|123456|false|automehanicar|2222
-1|Bojan|Perovic|0312999800094|true|Adresa|(063)-(223)-(2123)|boki|1234|false|automehanicar|222

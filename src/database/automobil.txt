@@ -1,3 +1,0 @@
-0|0|2020|benzin|1300|volkswagen_golf5|66|true
-1|1|2020|dizel|400|peugot_307|123|true
-2|2|2019|benzin|1400|peugot_307|66|false

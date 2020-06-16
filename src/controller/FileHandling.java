@@ -7,7 +7,7 @@ import dao.LoadDatabase;
 
 public class FileHandling {
 
-	public static String defaultPath = ".\\src\\database\\";
+	public static String defaultPath = ".\\database\\";
 	public static String musterijaPath = defaultPath + "\\musterija.txt";
 	public static String adminPath = defaultPath + "\\admin.txt";
 	public static String automobilPath = defaultPath + "\\automobil.txt";
