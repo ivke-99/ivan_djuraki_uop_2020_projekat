@@ -329,7 +329,7 @@ public class IzmeniServiserPage extends JDialog {
 		LoadDatabase.sviServiseri.replace(currentServiser.getId(), novi);
 
 		String newLine = novi.WriteToString();
-		FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.musterijaPath);
+		FileHandling.ReplaceLineInFile(oldLine, newLine, FileHandling.serviserPath);
 	}
 
 	public void ResetFields(JFormattedTextField txtBrojTelefona, JComboBox<String> cbPol,

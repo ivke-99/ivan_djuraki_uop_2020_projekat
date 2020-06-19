@@ -170,8 +170,8 @@ public class DodajServisPage extends JDialog {
 						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
 					}
 					
-					else if(Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy") == false) {
-						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
+					else if(Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy HH:mm") == false) {
+						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy hh:mm");
 					}
 					else {
 					try {

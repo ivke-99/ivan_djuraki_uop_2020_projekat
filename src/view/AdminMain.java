@@ -342,9 +342,6 @@ public class AdminMain extends JDialog {
 		JMenu mnNewMenu_6 = new JMenu("Servisna Knjizica");
 		menuBar.add(mnNewMenu_6);
 		
-		JMenuItem mntmNewMenuItem_26 = new JMenuItem("Obrisi");
-		mnNewMenu_6.add(mntmNewMenuItem_26);
-		
 		JMenuItem mntmNewMenuItem_27 = new JMenuItem("Pregledaj");
 		mntmNewMenuItem_27.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -1,1 +1,4 @@
-0|Deo|2222.0|peugot_307|false
+0|Tocak - Leva Strana|3000.0|peugot_307|false
+1|Lezaj|3000.0|peugot_307|false
+2|Manzetna|3000.0|mercedes_cla|false
+3|Tocak - Desna Strana|3000.0|peugot_307|false

@@ -170,7 +170,7 @@ public class ZakaziServisMusterijiPage extends JDialog {
 							txtOpis.getText().isEmpty() || list.getSelectedIndex() == -1) {
 						JOptionPane.showMessageDialog(null, "Polja ne mogu biti prazna.");
 					}
-					else if(Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy") == false) {
+					else if(Validator.isThisDateValid(txtDatum.getText(), "dd/MM/yyyy HH:mm") == false) {
 						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
 					}
 					else {

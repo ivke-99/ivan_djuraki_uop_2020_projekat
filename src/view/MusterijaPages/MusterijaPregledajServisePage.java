@@ -79,11 +79,14 @@ public class MusterijaPregledajServisePage extends JDialog {
 		for (HashMap.Entry<Integer, ServisAutomobila> entry : map.entrySet()) {
 
 			if (entry.getValue().getAutomobil().getVlasnik().getId() == LoginHandling.trenutniKorisnik.getId()) {
-
+				try {
 				model.addRow(new Object[] { entry.getKey(), entry.getValue().getAutomobil().getMarka(),
 						entry.getValue().getTermin(), entry.getValue().getOpis(),
 						entry.getValue().isStatusServisaString(), entry.getValue().getCena(),
 						entry.getValue().getDeoZaServis().toString().replace("[", "").replace("]", "") });
+				}catch(Exception e) {
+				/**/
+				}
 			}
 
 		}

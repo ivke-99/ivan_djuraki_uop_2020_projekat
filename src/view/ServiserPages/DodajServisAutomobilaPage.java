@@ -113,7 +113,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 							|| textField.getText().equals("") || list.getSelectedIndex() == -1) {
 						JOptionPane.showMessageDialog(null, "Neka polja su prazna ili servis nije izabran.");
 					}
-					else if(Validator.isThisDateValid(formattedTextField.getText(), "dd/MM/yyyy hh:mm") == false) {
+					else if(Validator.isThisDateValid(formattedTextField.getText(), "dd/MM/yyyy HH:mm") == false) {
 						JOptionPane.showMessageDialog(null, "Date nije pravilno unesen. Mora biti tipa dd/MM/yyyy");
 					}
 					else {
@@ -155,7 +155,7 @@ public class DodajServisAutomobilaPage extends JDialog {
 		btnNewButton_1.setBounds(123, 281, 89, 23);
 		getContentPane().add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Main Page");
+		JButton btnNewButton_2 = new JButton("NAZAD");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
